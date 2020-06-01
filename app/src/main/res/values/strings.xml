@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MLTDRanking</string>
+
+    <string name="service_error">service error</string>
+</resources>
