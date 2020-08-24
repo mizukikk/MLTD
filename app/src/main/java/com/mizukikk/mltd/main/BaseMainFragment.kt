@@ -1,5 +1,6 @@
 package com.mizukikk.mltd.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,11 +19,17 @@ abstract class BaseMainFragment<VM : BaseMainViewModel, B : ViewDataBinding>(@La
     private var _binding: B? = null
     protected val binding get() = _binding!!
     protected val viewModel get() = _viewModel
+    protected var parentActivity: InteractiveMainActivity? = null
 
     abstract fun viewModelClass(): Class<VM>
     abstract fun initBinding(view: View): B
     abstract fun init()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is InteractiveMainActivity)
+            this.parentActivity = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
