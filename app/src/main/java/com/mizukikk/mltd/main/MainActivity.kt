@@ -1,13 +1,13 @@
 package com.mizukikk.mltd.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.mizukikk.mltd.Inject
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.api.ResponseCallBack
-import com.mizukikk.mltd.api.response.EventResponse
+import com.mizukikk.mltd.api.response.Event
 import com.mizukikk.mltd.databinding.ActivityMainBinding
 import retrofit2.Call
 
@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
         )
         binding.aaa3.setOnClickListener {
             Inject.providerMLTDRepository()
-                .getAllEvent(object : ResponseCallBack<List<EventResponse>>() {
+                .getAllEvent(object : ResponseCallBack<List<Event.EventResponse>>() {
                     override fun success(
-                        response: List<EventResponse>,
-                        call: Call<List<EventResponse>>
+                        response: List<Event.EventResponse>,
+                        call: Call<List<Event.EventResponse>>
                     ) {
                         Log.d(TAG, "success: aaa3$response")
                     }
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                     override fun fail(
                         errorMessage: String,
                         errorCode: Int?,
-                        call: Call<List<EventResponse>>
+                        call: Call<List<Event.EventResponse>>
                     ) {
                         Log.d(TAG, "fail: aaa3")
                     }
