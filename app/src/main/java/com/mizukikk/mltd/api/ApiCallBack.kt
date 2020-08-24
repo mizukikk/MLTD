@@ -1,8 +1,8 @@
-package com.mizukikk.mltdranking.api
+package com.mizukikk.mltd.api
 
-import com.mizukikk.mltdranking.BuildConfig
-import com.mizukikk.mltdranking.MLTDApplication
-import com.mizukikk.mltdranking.R
+import com.mizukikk.mltd.BuildConfig
+import com.mizukikk.mltd.MLTDApplication
+import com.mizukikk.mltd.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

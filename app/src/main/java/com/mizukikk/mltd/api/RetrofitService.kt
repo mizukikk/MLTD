@@ -1,6 +1,6 @@
-package com.mizukikk.mltdranking.api
+package com.mizukikk.mltd.api
 
-import com.mizukikk.mltdranking.api.response.EventResponse
+import com.mizukikk.mltd.api.response.EventResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

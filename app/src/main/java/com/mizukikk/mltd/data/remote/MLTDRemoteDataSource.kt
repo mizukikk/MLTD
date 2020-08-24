@@ -1,10 +1,10 @@
-package com.mizukikk.mltdranking.data.remote
+package com.mizukikk.mltd.data.remote
 
-import com.mizukikk.mltdranking.api.ApiCallBack
-import com.mizukikk.mltdranking.api.ResponseCallBack
-import com.mizukikk.mltdranking.api.RetrofitProvider
-import com.mizukikk.mltdranking.api.RetrofitService
-import com.mizukikk.mltdranking.api.response.EventResponse
+import com.mizukikk.mltd.api.ApiCallBack
+import com.mizukikk.mltd.api.ResponseCallBack
+import com.mizukikk.mltd.api.RetrofitProvider
+import com.mizukikk.mltd.api.RetrofitService
+import com.mizukikk.mltd.api.response.EventResponse
 import retrofit2.Call
 
 object MLTDRemoteDataSource : RemoteDataSource {

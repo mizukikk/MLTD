@@ -1,4 +1,4 @@
-package com.mizukikk.mltdranking.api.response
+package com.mizukikk.mltd.api.response
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

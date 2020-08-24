@@ -1,14 +1,14 @@
-package com.mizukikk.mltdranking.main
+package com.mizukikk.mltd.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
-import com.mizukikk.mltdranking.Inject
-import com.mizukikk.mltdranking.R
-import com.mizukikk.mltdranking.api.ResponseCallBack
-import com.mizukikk.mltdranking.api.response.EventResponse
-import com.mizukikk.mltdranking.databinding.ActivityMainBinding
+import com.mizukikk.mltd.Inject
+import com.mizukikk.mltd.R
+import com.mizukikk.mltd.api.ResponseCallBack
+import com.mizukikk.mltd.api.response.EventResponse
+import com.mizukikk.mltd.databinding.ActivityMainBinding
 import retrofit2.Call
 
 class MainActivity : AppCompatActivity() {

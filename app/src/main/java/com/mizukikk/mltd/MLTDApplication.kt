@@ -1,7 +1,6 @@
-package com.mizukikk.mltdranking
+package com.mizukikk.mltd
 
 import android.app.Application
-import android.content.Context
 
 class MLTDApplication : Application() {
 

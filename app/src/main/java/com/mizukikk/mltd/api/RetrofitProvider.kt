@@ -1,8 +1,7 @@
-package com.mizukikk.mltdranking.api
+package com.mizukikk.mltd.api
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.mizukikk.mltdranking.BuildConfig
+import com.mizukikk.mltd.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

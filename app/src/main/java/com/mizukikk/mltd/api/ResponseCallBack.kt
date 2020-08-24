@@ -1,4 +1,4 @@
-package com.mizukikk.mltdranking.api
+package com.mizukikk.mltd.api
 
 import retrofit2.Call
 
