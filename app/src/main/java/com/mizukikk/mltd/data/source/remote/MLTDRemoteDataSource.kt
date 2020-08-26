@@ -4,6 +4,7 @@ import com.mizukikk.mltd.api.ApiCallBack
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.RetrofitProvider
 import com.mizukikk.mltd.api.RetrofitService
+import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.api.response.Event
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import retrofit2.Call
@@ -13,22 +14,24 @@ object MLTDRemoteDataSource : RemoteDataSource {
     private val eventService by lazy {
         RetrofitProvider.instance.create(RetrofitService.EventService::class.java)
     }
+    private val cardService by lazy {
+        RetrofitProvider.instance.create(RetrofitService.CardService::class.java)
+    }
 
-
-    override fun getAllEvent(callBack: ResponseCallBack<List<Event.EventResponse>>) {
-        val call = eventService.getAllEvent(PreferencesHelper.apiLanguage)
-        call.enqueue(object : ApiCallBack<List<Event.EventResponse>>() {
+    override fun getAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
+        val call = cardService.getAllCard(PreferencesHelper.apiLanguage)
+        call.enqueue(object : ApiCallBack<List<Card.CardResponse>>() {
             override fun apiSuccess(
-                response: List<Event.EventResponse>,
-                call: Call<List<Event.EventResponse>>
+                response: List<Card.CardResponse>,
+                call: Call<List<Card.CardResponse>>
             ) {
-                callBack.success(response, call)
+                callBack.success(response)
             }
 
             override fun apiFail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Event.EventResponse>>
+                call: Call<List<Card.CardResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }

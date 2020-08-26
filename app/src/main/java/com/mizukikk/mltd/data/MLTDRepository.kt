@@ -1,7 +1,7 @@
 package com.mizukikk.mltd.data
 
 import com.mizukikk.mltd.api.ResponseCallBack
-import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.data.source.remote.MLTDRemoteDataSource
 import com.mizukikk.mltd.data.source.remote.RemoteDataSource
 
@@ -16,7 +16,7 @@ class MLTDRepository private constructor(private val remoteDataSource: RemoteDat
             }
     }
 
-    override fun getAllEvent(callBack: ResponseCallBack<List<Event.EventResponse>>) {
-        remoteDataSource.getAllEvent(callBack)
+    override fun getAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
+        remoteDataSource.getAllCard(callBack)
     }
 }

@@ -37,7 +37,7 @@ abstract class BaseMainFragment<VM : BaseMainViewModel, B : ViewDataBinding>(@La
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(layoutRes, container, false)
-        initBinding(view)
+        _binding = initBinding(view)
         return view
     }
 

@@ -12,6 +12,7 @@
         tools:context=".main.idol.IdolListFragment">
 
         <TextView
+            android:id="@+id/tvTitle"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
