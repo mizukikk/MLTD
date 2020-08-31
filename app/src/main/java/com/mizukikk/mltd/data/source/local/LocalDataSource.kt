@@ -1,3 +1,7 @@
 package com.mizukikk.mltd.data.source.local
 
-interface LocalDataSource
+import com.mizukikk.mltd.room.entity.IdolEntity
+
+interface LocalDataSource {
+    fun saveAll(count: () -> Unit, vararg idols: IdolEntity)
+}

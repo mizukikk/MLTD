@@ -3,14 +3,22 @@ package com.mizukikk.mltd.api.response
 import com.google.gson.annotations.SerializedName
 
 import com.google.gson.annotations.Expose
+import com.mizukikk.mltd.room.entity.IdolEntity
+import com.mizukikk.mltd.utils.GsonUtils
 
 
 class Card {
 
     data class CardResponse(
         @Expose
+        @SerializedName("addDate")
+        val addDate: String,
+        @Expose
         @SerializedName("awakeningText")
         val awakeningText: String,
+        @Expose
+        @SerializedName("bonusCostume")
+        val bonusCostume: BonusCostume,
         @Expose
         @SerializedName("category")
         val category: String,
@@ -20,6 +28,9 @@ class Card {
         @Expose
         @SerializedName("centerEffectName")
         val centerEffectName: String,
+        @Expose
+        @SerializedName("costume")
+        val costume: Costume,
         @Expose
         @SerializedName("danceMasterBonus")
         val danceMasterBonus: Int,
@@ -69,11 +80,17 @@ class Card {
         @SerializedName("name")
         val name: String,
         @Expose
+        @SerializedName("rank5Costume")
+        val rank5Costume: Rank5Costume,
+        @Expose
         @SerializedName("rarity")
         val rarity: Int,
         @Expose
         @SerializedName("resourceId")
         val resourceId: String,
+        @Expose
+        @SerializedName("skill")
+        val skill: List<Skill>,
         @Expose
         @SerializedName("skillLevelMax")
         val skillLevelMax: Int,
@@ -113,6 +130,33 @@ class Card {
         @Expose
         @SerializedName("vocalMinAwakened")
         val vocalMinAwakened: Int
+    ) {
+        fun toDBEntity(): IdolEntity? {
+            val jsonStr = GsonUtils.toJsonString(this)
+
+            return GsonUtils.toDataObj(jsonStr, IdolEntity::class.java)
+        }
+    }
+
+    data class BonusCostume(
+        @Expose
+        @SerializedName("description")
+        val description: String,
+        @Expose
+        @SerializedName("id")
+        val id: Int,
+        @Expose
+        @SerializedName("modelId")
+        val modelId: String,
+        @Expose
+        @SerializedName("name")
+        val name: String,
+        @Expose
+        @SerializedName("resourceId")
+        val resourceId: String,
+        @Expose
+        @SerializedName("sortId")
+        val sortId: Int
     )
 
     data class CenterEffect(
@@ -131,6 +175,78 @@ class Card {
         @Expose
         @SerializedName("value")
         val value: Int
+    )
+
+    data class Costume(
+        @Expose
+        @SerializedName("description")
+        val description: String,
+        @Expose
+        @SerializedName("id")
+        val id: Int,
+        @Expose
+        @SerializedName("modelId")
+        val modelId: String,
+        @Expose
+        @SerializedName("name")
+        val name: String,
+        @Expose
+        @SerializedName("resourceId")
+        val resourceId: String,
+        @Expose
+        @SerializedName("sortId")
+        val sortId: Int
+    )
+
+    data class Rank5Costume(
+        @Expose
+        @SerializedName("description")
+        val description: String,
+        @Expose
+        @SerializedName("id")
+        val id: Int,
+        @Expose
+        @SerializedName("modelId")
+        val modelId: String,
+        @Expose
+        @SerializedName("name")
+        val name: String,
+        @Expose
+        @SerializedName("resourceId")
+        val resourceId: String,
+        @Expose
+        @SerializedName("sortId")
+        val sortId: Int
+    )
+
+    data class Skill(
+        @Expose
+        @SerializedName("description")
+        val description: String,
+        @Expose
+        @SerializedName("duration")
+        val duration: Int,
+        @Expose
+        @SerializedName("effectId")
+        val effectId: Int,
+        @Expose
+        @SerializedName("evaluation")
+        val evaluation: Int,
+        @Expose
+        @SerializedName("evaluation2")
+        val evaluation2: Int,
+        @Expose
+        @SerializedName("id")
+        val id: Int,
+        @Expose
+        @SerializedName("interval")
+        val interval: Int,
+        @Expose
+        @SerializedName("probability")
+        val probability: Int,
+        @Expose
+        @SerializedName("value")
+        val value: List<Int>
     )
 
 
