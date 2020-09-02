@@ -1,6 +1,7 @@
 package com.mizukikk.mltd.data.source.local
 
 import android.util.Log
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.room.DBExecutor
 import com.mizukikk.mltd.room.dao.IdolDao
 import com.mizukikk.mltd.room.entity.IdolEntity
@@ -25,6 +26,8 @@ class MLTDLocalDataSource private constructor(
         dbExecutor.dbIOThread.execute {
             idols.forEach { entity ->
                 if (idolDao.searckById(entity.id).isEmpty()) {
+                    if (entity.lang == null || entity.lang!!.isEmpty())
+                        entity.lang = PreferencesHelper.apiLanguage
                     idolDao.insert(entity)
                 }
             }

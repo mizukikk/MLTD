@@ -91,7 +91,9 @@ data class IdolEntity(
     @ColumnInfo(name = "vocalMin")
     val vocalMin: Int,
     @ColumnInfo(name = "vocalMinAwakened")
-    val vocalMinAwakened: Int
+    val vocalMinAwakened: Int,
+    @ColumnInfo(name = "lang")
+    var lang: String?
 )
 
 data class BonusCostume(

@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.main.model.BaseMainViewModel
 import com.mizukikk.mltd.room.entity.IdolEntity
 import retrofit2.Call
