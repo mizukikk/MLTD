@@ -1,6 +1,7 @@
 package com.mizukikk.mltd
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 
 class MLTDApplication : Application() {
 
@@ -13,5 +14,7 @@ class MLTDApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        if (BuildConfig.DEBUG)
+            Stetho.initializeWithDefaults(this)
     }
 }

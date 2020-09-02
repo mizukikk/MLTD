@@ -1,5 +1,7 @@
 package com.mizukikk.mltd.api
 
+import com.facebook.stetho.Stetho
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
 import com.mizukikk.mltd.BuildConfig
 import okhttp3.OkHttpClient
@@ -21,13 +23,15 @@ object RetrofitProvider {
 
     }
     private val okHttpClient by lazy {
-        val builder = OkHttpClient.Builder()
-            .connectTimeout(API_TIME_OUT, TimeUnit.SECONDS)
-            .writeTimeout(API_TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(API_TIME_OUT, TimeUnit.SECONDS)
-        if (BuildConfig.DEBUG)
-            builder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        builder.build()
+        OkHttpClient.Builder().apply {
+            connectTimeout(API_TIME_OUT, TimeUnit.SECONDS)
+            writeTimeout(API_TIME_OUT, TimeUnit.SECONDS)
+            readTimeout(API_TIME_OUT, TimeUnit.SECONDS)
+            if (BuildConfig.DEBUG) {
+//                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                addNetworkInterceptor(StethoInterceptor())
+            }
+        }.build()
     }
 
     private val retrofit by lazy {
