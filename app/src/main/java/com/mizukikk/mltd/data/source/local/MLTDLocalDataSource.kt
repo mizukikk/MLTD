@@ -22,12 +22,15 @@ class MLTDLocalDataSource private constructor(
             }
     }
 
-    override fun saveAll(count: () -> Unit, vararg idols: IdolEntity) {
+    override fun saveAll(count: (progress: Int) -> Unit, vararg idols: IdolEntity) {
         dbExecutor.dbIOThread.execute {
+            var progress = 0
             idols.forEach { entity ->
                 if (idolDao.searckById(entity.id).isEmpty()) {
+                    progress++
                     if (entity.lang == null || entity.lang!!.isEmpty())
                         entity.lang = PreferencesHelper.apiLanguage
+                    count.invoke(progress)
                     idolDao.insert(entity)
                 }
             }

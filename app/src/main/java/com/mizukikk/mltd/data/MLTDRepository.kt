@@ -24,7 +24,7 @@ class MLTDRepository private constructor(
         remoteDataSource.getAllCard(callBack)
     }
 
-    override fun saveAll(count: () -> Unit, vararg idols: IdolEntity) {
+    override fun saveAll(count: (progress: Int) -> Unit, vararg idols: IdolEntity) {
         localDataSource.saveAll(count, *idols)
     }
 }
