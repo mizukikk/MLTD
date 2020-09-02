@@ -11,6 +11,8 @@ import com.mizukikk.mltd.room.convert.IdolTypeConvert
 @TypeConverters(IdolTypeConvert::class)
 @Entity(tableName = "idol")
 data class IdolEntity(
+    @PrimaryKey(autoGenerate = true)
+    val primaryKey: Int,
     @ColumnInfo(name = "addDate")
     val addDate: String?,
     @ColumnInfo(name = "awakeningText")
@@ -41,7 +43,6 @@ data class IdolEntity(
     val flavorText: String,
     @ColumnInfo(name = "flavorTextAwakened")
     val flavorTextAwakened: String,
-    @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "idolId")
