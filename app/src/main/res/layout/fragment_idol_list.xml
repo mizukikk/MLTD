@@ -18,7 +18,7 @@
             android:layout_height="match_parent" />
 
         <include
-            android:id="load"
+            android:id="@+id/load"
             layout="@layout/content_idol_list_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
