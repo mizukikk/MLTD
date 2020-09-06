@@ -1,6 +1,5 @@
 package com.mizukikk.mltd.data.source.local
 
-import android.util.Log
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.room.DBExecutor
 import com.mizukikk.mltd.room.dao.IdolDao
@@ -26,7 +25,11 @@ class MLTDLocalDataSource private constructor(
         dbExecutor.dbIOThread.execute {
             var progress = 0
             idols.forEach { entity ->
-                if (idolDao.searckById(entity.id).isEmpty()) {
+                val searchList = idolDao.searchById(entity.id)
+                val filterList = searchList.filter {
+                    it.id == entity.id && it.rarity == entity.rarity
+                }
+                if (filterList.isEmpty()) {
                     progress++
                     if (entity.lang == null || entity.lang!!.isEmpty())
                         entity.lang = PreferencesHelper.apiLanguage

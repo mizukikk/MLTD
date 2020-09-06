@@ -20,8 +20,8 @@ class MLTDRepository private constructor(
             }
     }
 
-    override fun getAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
-        remoteDataSource.getAllCard(callBack)
+    override fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
+        remoteDataSource.downloadAllCard(callBack)
     }
 
     override fun saveAll(count: (progress: Int) -> Unit, vararg idols: IdolEntity) {

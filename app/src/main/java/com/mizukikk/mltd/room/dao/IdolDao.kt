@@ -9,7 +9,7 @@ import com.mizukikk.mltd.room.entity.IdolEntity
 interface IdolDao {
 
     @Query("SELECT * FROM idol WHERE idol.id = :id")
-    fun searckById(id: Int): List<IdolEntity>
+    fun searchById(id: Int): List<IdolEntity>
 
     @Insert
     fun insert(idol: IdolEntity)

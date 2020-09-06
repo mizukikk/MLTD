@@ -18,7 +18,7 @@ object MLTDRemoteDataSource : RemoteDataSource {
         RetrofitProvider.instance.create(RetrofitService.CardService::class.java)
     }
 
-    override fun getAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
+    override fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
         val call = cardService.getAllCard(PreferencesHelper.apiLanguage)
         call.enqueue(object : ApiCallBack<List<Card.CardResponse>>() {
             override fun apiSuccess(

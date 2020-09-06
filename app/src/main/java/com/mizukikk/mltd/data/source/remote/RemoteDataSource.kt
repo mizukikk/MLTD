@@ -4,5 +4,5 @@ import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
 
 interface RemoteDataSource {
-    fun getAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>)
+    fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>)
 }

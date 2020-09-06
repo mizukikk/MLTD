@@ -1,10 +1,8 @@
 package com.mizukikk.mltd.main.idol.model
 
 import android.app.Application
-import android.util.Log
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
-import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.main.model.BaseMainViewModel
 import com.mizukikk.mltd.room.entity.IdolEntity
 import retrofit2.Call
@@ -12,7 +10,7 @@ import retrofit2.Call
 class IdolListViewModel(application: Application) : BaseMainViewModel(application) {
     private val TAG = IdolListViewModel::class.java.simpleName
     fun getAllCard() {
-        repository.getAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
+        repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
             override fun success(response: List<Card.CardResponse>) {
                 val idolEntityList = mutableListOf<IdolEntity>()
                 response.forEach {
