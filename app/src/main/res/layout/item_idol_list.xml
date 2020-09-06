@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <ImageView
+            android:id="@+id/ivIdolIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline20"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_preview_idol_icon" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="tvTitle,tvName,tvCenterSkill,flowAppeal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline20"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/H7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:text="CHALLENGE FOR GLOW-RY DAYS" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/H5B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="342dp"
+            tools:text="最上静香" />
+
+        <TextView
+            android:id="@+id/tvCenterSkill"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:text="9s スコアアップ" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowAppeal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="tvLife,tvVocal,tvVisual,tvDance"
+            app:flow_maxElementsWrap="1"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tvLife"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/life"
+            app:layout_constraintHorizontal_weight="1"
+            tools:ignore="MissingConstraints"
+            tools:text="99" />
+
+        <TextView
+            android:id="@+id/tvVocal"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/vocal"
+            app:layout_constraintHorizontal_weight="1"
+            tools:ignore="MissingConstraints"
+            tools:text="9999" />
+
+        <TextView
+            android:id="@+id/tvVisual"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/visual"
+            app:layout_constraintHorizontal_weight="1"
+            tools:ignore="MissingConstraints"
+            tools:text="9999" />
+
+        <TextView
+            android:id="@+id/tvDance"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/dance"
+            app:layout_constraintHorizontal_weight="1"
+            tools:ignore="MissingConstraints"
+            tools:text="9999" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

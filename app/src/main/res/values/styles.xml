@@ -7,4 +7,72 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--  text  -->
+    <style name="bastTextStyle">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="H1" parent="bastTextStyle">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="H2" parent="bastTextStyle">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="H3" parent="bastTextStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="H4" parent="bastTextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="H5" parent="bastTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="H6" parent="bastTextStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="H7" parent="bastTextStyle">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="H1B" parent="bastTextStyle">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H2B" parent="bastTextStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H3B" parent="bastTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H4B" parent="bastTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H5B" parent="bastTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H6B" parent="bastTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H7B" parent="bastTextStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
