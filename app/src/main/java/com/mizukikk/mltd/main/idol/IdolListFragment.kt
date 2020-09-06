@@ -28,8 +28,5 @@ class IdolListFragment :
         FragmentIdolListBinding.bind(view)
 
     override fun init() {
-        binding.tvTitle.setOnClickListener {
-            viewModel.getAllCard()
-        }
     }
 }

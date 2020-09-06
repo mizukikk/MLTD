@@ -11,12 +11,17 @@
         android:layout_height="match_parent"
         tools:context=".main.idol.IdolListFragment">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:gravity="center"
+        <include
+            android:id="@+id/idol"
+            layout="@layout/content_idol_list_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="idol list" />
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="load"
+            layout="@layout/content_idol_list_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 </layout>
