@@ -1,9 +1,13 @@
 package com.mizukikk.mltd.api.response
 
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.google.gson.annotations.SerializedName
 
 import com.google.gson.annotations.Expose
-import com.mizukikk.mltd.room.entity.IdolEntity
+import com.google.gson.reflect.TypeToken
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
+import com.mizukikk.mltd.room.entity.*
 import com.mizukikk.mltd.utils.GsonUtils
 
 
@@ -18,19 +22,19 @@ class Card {
         val awakeningText: String,
         @Expose
         @SerializedName("bonusCostume")
-        val bonusCostume: BonusCostume,
+        val bonusCostume: BonusCostume?,
         @Expose
         @SerializedName("category")
         val category: String,
         @Expose
         @SerializedName("centerEffect")
-        val centerEffect: CenterEffect,
+        val centerEffect: CenterEffect?,
         @Expose
         @SerializedName("centerEffectName")
         val centerEffectName: String,
         @Expose
         @SerializedName("costume")
-        val costume: Costume,
+        val costume: Costume?,
         @Expose
         @SerializedName("danceMasterBonus")
         val danceMasterBonus: Int,
@@ -81,7 +85,7 @@ class Card {
         val name: String,
         @Expose
         @SerializedName("rank5Costume")
-        val rank5Costume: Rank5Costume,
+        val rank5Costume: Rank5Costume?,
         @Expose
         @SerializedName("rarity")
         val rarity: Int,
@@ -90,7 +94,7 @@ class Card {
         val resourceId: String,
         @Expose
         @SerializedName("skill")
-        val skill: List<Skill>,
+        val skill: List<Skill>?,
         @Expose
         @SerializedName("skillLevelMax")
         val skillLevelMax: Int,
@@ -131,11 +135,81 @@ class Card {
         @SerializedName("vocalMinAwakened")
         val vocalMinAwakened: Int
     ) {
-        fun toDBEntity(): IdolEntity? {
-            val jsonStr = GsonUtils.toJsonString(this)
 
-            return GsonUtils.toDataObj(jsonStr, IdolEntity::class.java)
-        }
+        val toIdolEntity
+            get() = try {
+                val json = GsonUtils.toJsonString(this)
+                val idolEntity = GsonUtils.toDataObj(json, IdolEntity::class.java)
+                idolEntity?.bonusCostumeId = bonusCostume?.id
+                idolEntity?.centerEffectId = centerEffect?.id
+                idolEntity?.costumeId = costume?.id
+                idolEntity?.rank5CostumeId = rank5Costume?.id
+                val skillIds = skill?.map { it.id }
+                idolEntity?.skillIds = skillIds
+                idolEntity?.lang = PreferencesHelper.apiLanguage
+                idolEntity
+            } catch (e: JsonSyntaxException) {
+                null
+            }
+        val toBonusCostumeEntity
+            get() = try {
+                if (bonusCostume != null) {
+                    val json = GsonUtils.toJsonString(bonusCostume)
+                    GsonUtils.toDataObj(json, BonusCostumeEntity::class.java)
+                } else {
+                    null
+                }
+            } catch (e: JsonSyntaxException) {
+                null
+            }
+        val toCenterEffectEntity
+            get() = try {
+                if (centerEffect != null) {
+                    val json = GsonUtils.toJsonString(centerEffect)
+                    GsonUtils.toDataObj(json, CenterEffectEntity::class.java)
+                } else {
+                    null
+                }
+            } catch (e: JsonSyntaxException) {
+                null
+            }
+        val toCostumeEntity
+            get() = try {
+                if (costume != null) {
+                    val json = GsonUtils.toJsonString(costume)
+                    GsonUtils.toDataObj(json, CostumeEntity::class.java)
+                } else {
+                    null
+                }
+            } catch (e: JsonSyntaxException) {
+                null
+            }
+
+        val toRank5CostumeEntity
+            get() = try {
+                if (rank5Costume != null) {
+                    val json = GsonUtils.toJsonString(rank5Costume)
+                    GsonUtils.toDataObj(json, Rank5CostumeEntity::class.java)
+                } else {
+                    null
+                }
+            } catch (e: JsonSyntaxException) {
+                null
+            }
+        val toSkillEntity
+            get() = try {
+                if (skill != null) {
+                    val json = GsonUtils.toJsonString(skill)
+                    Gson().fromJson<List<SkillEntity>>(
+                        json,
+                        object : TypeToken<List<SkillEntity>>() {}.type
+                    )
+                } else {
+                    null
+                }
+            } catch (e: JsonSyntaxException) {
+                null
+            }
     }
 
     data class BonusCostume(

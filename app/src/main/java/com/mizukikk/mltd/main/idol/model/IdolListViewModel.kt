@@ -1,6 +1,7 @@
 package com.mizukikk.mltd.main.idol.model
 
 import android.app.Application
+import android.util.Log
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.main.model.BaseMainViewModel
@@ -12,13 +13,9 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     fun getAllCard() {
         repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
             override fun success(response: List<Card.CardResponse>) {
-                val idolEntityList = mutableListOf<IdolEntity>()
-                response.forEach {
-                    it.toDBEntity()?.let { entity ->
-                        idolEntityList.add(entity)
-                    }
-                }
-                repository.saveAll({}, *idolEntityList.toTypedArray())
+                repository.saveAll({
+                    Log.d(TAG, "success: aaa3 $it")
+                }, *response.toTypedArray())
             }
 
             override fun fail(

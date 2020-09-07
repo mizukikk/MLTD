@@ -5,7 +5,6 @@ import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.data.source.local.LocalDataSource
 import com.mizukikk.mltd.data.source.remote.MLTDRemoteDataSource
 import com.mizukikk.mltd.data.source.remote.RemoteDataSource
-import com.mizukikk.mltd.room.entity.IdolEntity
 
 class MLTDRepository private constructor(
     private val localDataSource: LocalDataSource,
@@ -24,7 +23,7 @@ class MLTDRepository private constructor(
         remoteDataSource.downloadAllCard(callBack)
     }
 
-    override fun saveAll(count: (progress: Int) -> Unit, vararg idols: IdolEntity) {
-        localDataSource.saveAll(count, *idols)
+    override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
+        localDataSource.saveAll(count, *cards)
     }
 }

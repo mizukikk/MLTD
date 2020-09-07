@@ -1,5 +1,6 @@
 package com.mizukikk.mltd.room.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -13,11 +14,8 @@ data class IdolEntity(
     val primaryKey: Int,
     val addDate: String?,
     val awakeningText: String,
-    val bonusCostume: BonusCostume?,
     val category: String,
-    val centerEffect: CenterEffect?,
     val centerEffectName: String,
-    val costume: Costume?,
     val danceMasterBonus: Int,
     val danceMax: Int,
     val danceMaxAwakened: Int,
@@ -34,10 +32,9 @@ data class IdolEntity(
     val life: Int,
     val masterRankMax: Int,
     val name: String,
-    val rank5Costume: Rank5Costume?,
     val rarity: Int,
+    @ColumnInfo(name = "IdolResId")
     val resourceId: String,
-    val skill: List<Skill>?,
     val skillLevelMax: Int,
     val skillName: String,
     val sortId: Int,
@@ -51,50 +48,69 @@ data class IdolEntity(
     val vocalMaxAwakened: Int,
     val vocalMin: Int,
     val vocalMinAwakened: Int,
+    var bonusCostumeId: Int?,
+    var centerEffectId: Int?,
+    var costumeId: Int?,
+    var rank5CostumeId: Int?,
+    var skillIds: List<Int>?,
     var lang: String?
 )
 
-data class BonusCostume(
+@Entity(tableName = "bonusCostume")
+data class BonusCostumeEntity(
     val description: String,
+    @PrimaryKey
     val id: Int,
     val modelId: String,
     val name: String,
+    @ColumnInfo(name = "bonusCostumeResId")
     val resourceId: String,
     val sortId: Int
 )
 
-data class CenterEffect(
+@Entity(tableName = "centerEffect")
+data class CenterEffectEntity(
     val attribute: Int,
     val description: String,
+    @PrimaryKey
     val id: Int,
     val idolType: Int,
     val value: Int
 )
 
-data class Costume(
+@Entity(tableName = "costume")
+data class CostumeEntity(
     val description: String,
+    @PrimaryKey
     val id: Int,
     val modelId: String,
     val name: String,
+    @ColumnInfo(name = "costumeResId")
     val resourceId: String,
     val sortId: Int
 )
 
-data class Rank5Costume(
+@Entity(tableName = "rank5Costume")
+data class Rank5CostumeEntity(
     val description: String,
+    @PrimaryKey
     val id: Int,
     val modelId: String,
     val name: String,
+    @ColumnInfo(name = "rank5CostumeResId")
     val resourceId: String,
     val sortId: Int
 )
 
-data class Skill(
+@TypeConverters(IdolTypeConvert::class)
+@Entity(tableName = "skill")
+data class SkillEntity(
     val description: String,
     val duration: Int,
     val effectId: Int,
     val evaluation: Int,
     val evaluation2: Int,
+    @PrimaryKey
     val id: Int,
     val interval: Int,
     val probability: Int,

@@ -1,9 +1,8 @@
 package com.mizukikk.mltd.data.source.local
 
-import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
+import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.room.DBExecutor
 import com.mizukikk.mltd.room.dao.IdolDao
-import com.mizukikk.mltd.room.entity.IdolEntity
 
 class MLTDLocalDataSource private constructor(
     private val dbExecutor: DBExecutor,
@@ -21,21 +20,32 @@ class MLTDLocalDataSource private constructor(
             }
     }
 
-    override fun saveAll(count: (progress: Int) -> Unit, vararg idols: IdolEntity) {
+    override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
         dbExecutor.dbIOThread.execute {
             var progress = 0
-            idols.forEach { entity ->
-                val searchList = idolDao.searchById(entity.id)
-                val filterList = searchList.filter {
-                    it.id == entity.id && it.rarity == entity.rarity
+            cards.forEach { card ->
+                card.toIdolEntity?.let { entity ->
+                    idolDao.insertIdol(entity)
                 }
-                if (filterList.isEmpty()) {
-                    progress++
-                    if (entity.lang == null || entity.lang!!.isEmpty())
-                        entity.lang = PreferencesHelper.apiLanguage
-                    count.invoke(progress)
-                    idolDao.insert(entity)
+                card.toBonusCostumeEntity?.let { entity ->
+                    idolDao.insertBonusCostume(entity)
                 }
+                card.toCenterEffectEntity?.let { entity ->
+                    idolDao.insertCenterEffect(entity)
+                }
+                card.toCostumeEntity?.let { entity ->
+                    idolDao.insertCostume(entity)
+                }
+                card.toRank5CostumeEntity?.let { entity ->
+                    idolDao.insertRank5Costume(entity)
+                }
+                card.toSkillEntity?.let { skillList ->
+                    skillList.forEach { entity ->
+                        idolDao.insertSkill(entity)
+                    }
+                }
+                progress++
+                count.invoke(progress)
             }
         }
     }
