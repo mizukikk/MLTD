@@ -52,20 +52,8 @@ data class IdolEntity(
     var centerEffectId: Int?,
     var costumeId: Int?,
     var rank5CostumeId: Int?,
-    var skillIds: List<Int>?,
+    var skillId: Int?,
     var lang: String?
-)
-
-@Entity(tableName = "bonusCostume")
-data class BonusCostumeEntity(
-    val description: String,
-    @PrimaryKey
-    val id: Int,
-    val modelId: String,
-    val name: String,
-    @ColumnInfo(name = "bonusCostumeResId")
-    val resourceId: String,
-    val sortId: Int
 )
 
 @Entity(tableName = "centerEffect")
@@ -73,33 +61,10 @@ data class CenterEffectEntity(
     val attribute: Int,
     val description: String,
     @PrimaryKey
+    @ColumnInfo(name = "centerEffectId")
     val id: Int,
     val idolType: Int,
     val value: Int
-)
-
-@Entity(tableName = "costume")
-data class CostumeEntity(
-    val description: String,
-    @PrimaryKey
-    val id: Int,
-    val modelId: String,
-    val name: String,
-    @ColumnInfo(name = "costumeResId")
-    val resourceId: String,
-    val sortId: Int
-)
-
-@Entity(tableName = "rank5Costume")
-data class Rank5CostumeEntity(
-    val description: String,
-    @PrimaryKey
-    val id: Int,
-    val modelId: String,
-    val name: String,
-    @ColumnInfo(name = "rank5CostumeResId")
-    val resourceId: String,
-    val sortId: Int
 )
 
 @TypeConverters(IdolTypeConvert::class)
@@ -111,8 +76,48 @@ data class SkillEntity(
     val evaluation: Int,
     val evaluation2: Int,
     @PrimaryKey
+    @ColumnInfo(name = "skillId")
     val id: Int,
     val interval: Int,
     val probability: Int,
     val value: List<Int>
+)
+
+@Entity(tableName = "costume")
+data class CostumeEntity(
+    val description: String,
+    @PrimaryKey
+    @ColumnInfo(name = "costumeId")
+    val id: Int,
+    val modelId: String,
+    val name: String,
+    @ColumnInfo(name = "costumeResId")
+    val resourceId: String,
+    val sortId: Int
+)
+
+@Entity(tableName = "bonusCostume")
+data class BonusCostumeEntity(
+    val description: String,
+    @PrimaryKey
+    @ColumnInfo(name = "bonusCostumeId")
+    val id: Int,
+    val modelId: String,
+    val name: String,
+    @ColumnInfo(name = "bonusCostumeResId")
+    val resourceId: String,
+    val sortId: Int
+)
+
+@Entity(tableName = "rank5Costume")
+data class Rank5CostumeEntity(
+    val description: String,
+    @PrimaryKey
+    @ColumnInfo(name = "rank5CostumeId")
+    val id: Int,
+    val modelId: String,
+    val name: String,
+    @ColumnInfo(name = "rank5CostumeResId")
+    val resourceId: String,
+    val sortId: Int
 )

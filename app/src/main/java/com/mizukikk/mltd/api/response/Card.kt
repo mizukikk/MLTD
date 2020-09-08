@@ -145,7 +145,7 @@ class Card {
                 idolEntity?.costumeId = costume?.id
                 idolEntity?.rank5CostumeId = rank5Costume?.id
                 val skillIds = skill?.map { it.id }
-                idolEntity?.skillIds = skillIds
+                idolEntity?.skillId = skillIds?.get(0) ?: null
                 idolEntity?.lang = PreferencesHelper.apiLanguage
                 idolEntity
             } catch (e: JsonSyntaxException) {

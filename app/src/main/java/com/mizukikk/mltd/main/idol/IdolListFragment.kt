@@ -28,6 +28,6 @@ class IdolListFragment :
         FragmentIdolListBinding.bind(view)
 
     override fun init() {
-        viewModel.getAllCard()
+
     }
 }

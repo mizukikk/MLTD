@@ -1,8 +1,12 @@
 package com.mizukikk.mltd.data.source.local
 
 import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.DBExecutor
 import com.mizukikk.mltd.room.dao.IdolDao
+import com.mizukikk.mltd.room.entity.IdolEntity
+import com.mizukikk.mltd.room.query.IdolItem
+import java.lang.Exception
 
 class MLTDLocalDataSource private constructor(
     private val dbExecutor: DBExecutor,
@@ -46,6 +50,21 @@ class MLTDLocalDataSource private constructor(
                 }
                 progress++
                 count.invoke(progress)
+            }
+        }
+    }
+
+    override fun getIdolList(
+        currentId: Int,
+        lang: String,
+        callBack: DBCallBack<List<IdolItem>>
+    ) {
+        dbExecutor.dbIOThread.execute {
+            try {
+                val idolList = idolDao.getIdolList(currentId, lang)
+                callBack.success(idolList)
+            } catch (e: Exception) {
+                callBack.fail()
             }
         }
     }

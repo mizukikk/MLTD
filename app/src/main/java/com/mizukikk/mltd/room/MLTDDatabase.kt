@@ -4,7 +4,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mizukikk.mltd.MLTDApplication
-import com.mizukikk.mltd.data.source.local.LocalDataSource
 import com.mizukikk.mltd.room.dao.IdolDao
 import com.mizukikk.mltd.room.entity.*
 
