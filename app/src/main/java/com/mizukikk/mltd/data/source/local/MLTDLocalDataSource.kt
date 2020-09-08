@@ -24,6 +24,18 @@ class MLTDLocalDataSource private constructor(
             }
     }
 
+    override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {
+        dbExecutor.dbIOThread.execute {
+            try {
+                val idolList = idolDao.checkDBData()
+                callBack.success(idolList)
+            } catch (e: Exception) {
+                callBack.fail()
+            }
+
+        }
+    }
+
     override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
         dbExecutor.dbIOThread.execute {
             var progress = 0

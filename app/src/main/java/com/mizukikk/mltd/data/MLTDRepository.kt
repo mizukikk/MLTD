@@ -26,6 +26,10 @@ class MLTDRepository private constructor(
         remoteDataSource.downloadAllCard(callBack)
     }
 
+    override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {
+        localDataSource.checkDBData(callBack)
+    }
+
     override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
         localDataSource.saveAll(count, *cards)
     }

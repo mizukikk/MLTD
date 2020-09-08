@@ -4,24 +4,32 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="showList"
+            type="java.lang.Boolean" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".main.idol.IdolListFragment">
 
         <include
             android:id="@+id/idol"
             layout="@layout/content_idol_list_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="@{showList ? View.VISIBLE : View.INVISIBLE , default=invisible}" />
 
         <include
             android:id="@+id/load"
             layout="@layout/content_idol_list_loading"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="@{showList ? View.INVISIBLE : View.VISIBLE , default=invisible}" />
 
     </FrameLayout>
 </layout>

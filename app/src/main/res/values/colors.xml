@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">@color/light_blue</color>
     <color name="colorPrimaryDark">@color/dark_blue</color>
-    <color name="colorAccent">@color/black</color>
+    <color name="colorAccent">@color/light_blue</color>
 
     <color name="black">#000</color>
-    <color name="gray">#7e7e7e</color>
+    <color name="white">#FFF</color>
+    <color name="gray">#7E7E7E</color>
     <color name="life">#62D47F</color>
     <color name="vocal">#E93926</color>
     <color name="visual">#F0A43A</color>

@@ -1,16 +1,20 @@
 package com.mizukikk.mltd.room.dao
 
 import androidx.room.*
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.room.entity.*
 import com.mizukikk.mltd.room.query.IdolItem
 
 @Dao
 interface IdolDao {
 
+    @Query("SELECT * FROM idol WHERE idol.lang = :lang LIMIT 1")
+    fun checkDBData(lang: String = PreferencesHelper.apiLanguage): List<IdolEntity>
+
     @Query("SELECT * FROM idol WHERE idol.id = :id")
     fun searchById(id: Int): List<IdolEntity>
 
-    @Query("SELECT * FROM idol WHERE idol.id > :currentId AND idol.lang = :lang")
+    @Query("SELECT * FROM idol WHERE idol.id > :currentId AND idol.lang = :lang LIMIT 20")
     fun getIdolList(currentId: Int, lang: String): List<IdolItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

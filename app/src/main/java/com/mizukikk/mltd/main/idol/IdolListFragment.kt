@@ -1,18 +1,15 @@
 package com.mizukikk.mltd.main.idol
 
-import android.content.Context
-import android.net.Uri
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
+import com.mizukikk.mltd.main.idol.model.IdolListResult
 import com.mizukikk.mltd.main.idol.model.IdolListViewModel
-import com.mizukikk.mltd.main.model.BaseMainViewModel
 
 class IdolListFragment :
     BaseMainFragment<IdolListViewModel, FragmentIdolListBinding>(R.layout.fragment_idol_list) {
@@ -28,6 +25,48 @@ class IdolListFragment :
         FragmentIdolListBinding.bind(view)
 
     override fun init() {
+        binding.idol.rvIdol.layoutManager = LinearLayoutManager(context)
+        initViewModel()
+        binding.showList = false
+        binding.load.loading = true
+        viewModel.checkDBdData()
+    }
 
+    private fun initViewModel() {
+        viewModel.idolListEvent.observe(this, Observer { result ->
+            when (result) {
+                is IdolListResult.CheckDB -> {
+                    if (result.dataEmpty) {
+                        binding.showList = false
+                        binding.load.loading = true
+                        viewModel.downloadAllCard()
+                    } else {
+                        binding.showList = true
+                        viewModel.getFirstListItem()
+                    }
+                }
+                is IdolListResult.Download -> {
+                    if (result.success) {
+                        binding.showList = false
+                        binding.load.loading = false
+                        binding.load.progressSave.max = result.totalItem
+                    } else {
+                        //show fail dialog
+                        binding.showList = true
+                    }
+                }
+                is IdolListResult.SaveIdolData -> {
+                    binding.showList = false
+                    binding.load.loading = false
+                    binding.load.tvProgress.text = result.progressText
+                    binding.load.progressSave.progress = result.progress
+                    if (result.saveSuccess)
+                        viewModel.getFirstListItem()
+                }
+            }
+        })
+        viewModel.idolListLiveData.observe(this, Observer {
+            Toast.makeText(context, "load success !!", Toast.LENGTH_SHORT).show()
+        })
     }
 }
