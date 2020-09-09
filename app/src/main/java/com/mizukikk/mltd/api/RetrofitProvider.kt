@@ -28,7 +28,7 @@ object RetrofitProvider {
             writeTimeout(API_TIME_OUT, TimeUnit.SECONDS)
             readTimeout(API_TIME_OUT, TimeUnit.SECONDS)
             if (BuildConfig.DEBUG) {
-//                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 addNetworkInterceptor(StethoInterceptor())
             }
         }.build()
