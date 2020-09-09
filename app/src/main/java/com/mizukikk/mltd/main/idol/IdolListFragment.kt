@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
+import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
 import com.mizukikk.mltd.main.idol.model.IdolListViewModel
 
@@ -19,17 +20,29 @@ class IdolListFragment :
         fun newInstance() = IdolListFragment()
     }
 
+    private var idolAdapter: IdolAdapter? = null
+
     override fun viewModelClass() = IdolListViewModel::class.java
 
     override fun initBinding(view: View): FragmentIdolListBinding =
         FragmentIdolListBinding.bind(view)
 
     override fun init() {
-        binding.idol.rvIdol.layoutManager = LinearLayoutManager(context)
+        initView()
         initViewModel()
         binding.showList = false
         binding.load.loading = true
         viewModel.checkDBdData()
+    }
+
+    private fun initView() {
+        initIdolList()
+    }
+
+    private fun initIdolList() {
+        binding.idol.rvIdol.layoutManager = LinearLayoutManager(context)
+        idolAdapter = IdolAdapter()
+        binding.idol.rvIdol.adapter = idolAdapter
     }
 
     private fun initViewModel() {
@@ -65,8 +78,10 @@ class IdolListFragment :
                 }
             }
         })
-        viewModel.idolListLiveData.observe(this, Observer {
-            Toast.makeText(context, "load success !!", Toast.LENGTH_SHORT).show()
+        viewModel.idolListLiveData.observe(this, Observer { idolList ->
+            binding.showList = true
+            binding.load.loading = false
+            idolAdapter?.swapData(idolList)
         })
     }
 }

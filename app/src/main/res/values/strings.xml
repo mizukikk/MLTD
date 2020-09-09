@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">MLTDHelper</string>
     <string name="service_error">service error</string>
+
+    <string name="skill_score_up">スコアアップ</string>
+    <string name="skill_combo_bonus">コンボボーナス</string>
+    <string name="skill_life_recovery">ライフ回復</string>
+    <string name="skill_damage_guard">ダメージガード</string>
+    <string name="skill_continue_combo">コンボ継続</string>
+    <string name="skill_strengthen_judgment">判定強化</string>
+    <string name="skill_double_boost">ダブルブースト</string>
+    <string name="skill_multi_up">マルチアップ</string>
+    <string name="skill_overclock">オーバークロック</string>
+    <string name="skill_overload">オーバーロンド</string>
+    <string name="skill_empty">---</string>
 </resources>

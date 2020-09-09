@@ -8,14 +8,20 @@ import com.mizukikk.mltd.room.query.IdolItem
 @Dao
 interface IdolDao {
 
-    @Query("SELECT * FROM idol WHERE idol.lang = :lang LIMIT 1")
+    @Query("SELECT * FROM idol WHERE idol.lang = :lang ORDER BY idol.id DESC LIMIT 1")
     fun checkDBData(lang: String = PreferencesHelper.apiLanguage): List<IdolEntity>
 
     @Query("SELECT * FROM idol WHERE idol.id = :id")
     fun searchById(id: Int): List<IdolEntity>
 
-    @Query("SELECT * FROM idol WHERE idol.id > :currentId AND idol.lang = :lang LIMIT 20")
+    @Query("SELECT * FROM idol WHERE idol.lang = :lang ORDER BY idol.id DESC ")
+    fun getFirstIdolList(lang: String): List<IdolItem>
+
+    @Query("SELECT * FROM idol WHERE idol.id <= :currentId AND idol.lang = :lang ORDER BY idol.id DESC LIMIT 20")
     fun getIdolList(currentId: Int, lang: String): List<IdolItem>
+
+    @Query("SELECT * FROM idol WHERE idol.lang = :lang ORDER BY idol.id DESC")
+    fun getAllIdolList(lang: String): List<IdolItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIdol(idolEntity: IdolEntity)

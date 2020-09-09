@@ -73,7 +73,12 @@ class MLTDLocalDataSource private constructor(
     ) {
         dbExecutor.dbIOThread.execute {
             try {
-                val idolList = idolDao.getIdolList(currentId, lang)
+//                val idolList =
+//                    if (currentId >= 0)
+//                        idolDao.getIdolList(currentId, lang)
+//                    else
+//                        idolDao.getFirstIdolList(lang)
+                val idolList = idolDao.getAllIdolList(lang)
                 callBack.success(idolList)
             } catch (e: Exception) {
                 callBack.fail()

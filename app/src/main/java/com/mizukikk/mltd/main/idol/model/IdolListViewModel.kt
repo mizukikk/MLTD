@@ -18,12 +18,14 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     val idolListLiveData = MutableLiveData<List<IdolItem>>()
     val idolListEvent = SingleLiveEvent<IdolListResult>()
 
+    private var lastIdolId = -1
+
     fun checkDBdData() {
         repository.checkDBData(object : DBCallBack<List<IdolEntity>> {
             override fun success(result: List<IdolEntity>) {
                 if (result.isNotEmpty())
-
-                    idolListEvent.postValue(IdolListResult.dbDataEmpty(result.isEmpty()))
+                    lastIdolId = result[0].id
+                idolListEvent.postValue(IdolListResult.dbDataEmpty(result.isEmpty()))
             }
 
             override fun fail() {
@@ -34,20 +36,17 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
 
     fun getFirstListItem() {
         repository.getIdolList(
-            0,
+            lastIdolId,
             PreferencesHelper.apiLanguage,
             object : DBCallBack<List<IdolItem>> {
                 override fun success(result: List<IdolItem>) {
                     val newIdolList = mutableListOf<IdolItem>()
-                    val idolList = idolListLiveData.value
-                    if (idolList != null)
-                        newIdolList.addAll(idolList)
                     newIdolList.addAll(result)
                     idolListLiveData.postValue(newIdolList)
                 }
 
                 override fun fail() {
-
+                    //do noting
                 }
             })
     }

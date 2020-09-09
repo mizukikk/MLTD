@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="data"
+            type="com.mizukikk.mltd.room.query.IdolItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +33,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:smallIcon="@{data.idol.resourceId}"
             tools:srcCompat="@drawable/ic_preview_idol_icon" />
 
         <androidx.constraintlayout.helper.widget.Flow
@@ -38,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:orientation="vertical"
-            app:constraint_referenced_ids="tvTitle,tvName,tvCenterSkill,flowAppeal"
+            app:constraint_referenced_ids="tvTitle,tvName,tvSkill,flowAppeal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline20"
@@ -51,6 +55,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:maxLines="2"
+            android:text="@{data.idolTitle}"
             android:textColor="@color/black"
             tools:ignore="MissingConstraints"
             tools:text="CHALLENGE FOR GLOW-RY DAYS" />
@@ -61,17 +66,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{data.idolName}"
             android:textColor="@color/black"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="342dp"
             tools:text="最上静香" />
 
         <TextView
-            android:id="@+id/tvCenterSkill"
+            android:id="@+id/tvSkill"
             style="@style/H5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{data.idolSkill}"
             android:textColor="@color/black"
             tools:ignore="MissingConstraints"
             tools:text="9s スコアアップ" />
@@ -92,6 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{data.life}"
             android:textColor="@color/life"
             app:layout_constraintHorizontal_weight="1"
             tools:ignore="MissingConstraints"
@@ -103,6 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{data.vo}"
             android:textColor="@color/vocal"
             app:layout_constraintHorizontal_weight="1"
             tools:ignore="MissingConstraints"
@@ -114,6 +122,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{data.vi}"
             android:textColor="@color/visual"
             app:layout_constraintHorizontal_weight="1"
             tools:ignore="MissingConstraints"
@@ -125,6 +134,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{data.da}"
             android:textColor="@color/dance"
             app:layout_constraintHorizontal_weight="1"
             tools:ignore="MissingConstraints"
@@ -133,8 +143,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
