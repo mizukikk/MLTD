@@ -1,7 +1,9 @@
 package com.mizukikk.mltd.main.idol.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mizukikk.mltd.databinding.ItemIdolBinding
 import com.mizukikk.mltd.room.query.IdolItem
@@ -9,6 +11,7 @@ import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 
 class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
 
+    private var listener: ((View, IdolItem) -> Unit?)? = null
     private var idolList: List<IdolItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdolHolder {
@@ -28,9 +31,18 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
         notifyDataSetChanged()
     }
 
+    fun setIdolListListener(listener: ((View, IdolItem) -> Unit)) {
+        this.listener = listener
+    }
+
     inner class IdolHolder(binding: ItemIdolBinding) : BaseViewHolder<ItemIdolBinding>(binding) {
         fun bindData(data: IdolItem) {
             binding.data = data
+            binding.executePendingBindings()
+            ViewCompat.setTransitionName(binding.ivIdolIcon, data.idol.resourceId)
+            binding.root.setOnClickListener {
+                listener?.invoke(binding.ivIdolIcon, data)
+            }
         }
     }
 }

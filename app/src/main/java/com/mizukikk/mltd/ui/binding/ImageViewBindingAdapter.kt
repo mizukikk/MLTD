@@ -11,7 +11,9 @@ fun loadSmallIcon(imageView: ImageView, imgRes: String?) {
         val url = "https://storage.matsurihi.me/mltd/icon_l/${imgRes}_1.png"
         Glide.with(imageView.context)
             .load(url)
-            .transition(withCrossFade())
             .into(imageView)
+    } else {
+        Glide.with(imageView.context)
+            .clear(imageView)
     }
 }
