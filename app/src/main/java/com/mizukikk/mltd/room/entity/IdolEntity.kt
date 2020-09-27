@@ -1,12 +1,15 @@
 package com.mizukikk.mltd.room.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.mizukikk.mltd.room.convert.IdolTypeConvert
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 @TypeConverters(IdolTypeConvert::class)
 @Entity(tableName = "idol")
 data class IdolEntity(
@@ -54,8 +57,9 @@ data class IdolEntity(
     var rank5CostumeId: Int?,
     var skillId: Int?,
     var lang: String?
-)
+) : Parcelable
 
+@Parcelize
 @Entity(tableName = "centerEffect")
 data class CenterEffectEntity(
     val attribute: Int,
@@ -65,8 +69,9 @@ data class CenterEffectEntity(
     val id: Int,
     val idolType: Int,
     val value: Int
-)
+) : Parcelable
 
+@Parcelize
 @TypeConverters(IdolTypeConvert::class)
 @Entity(tableName = "skill")
 data class SkillEntity(
@@ -81,8 +86,9 @@ data class SkillEntity(
     val interval: Int,
     val probability: Int,
     val value: List<Int>
-)
+) : Parcelable
 
+@Parcelize
 @Entity(tableName = "costume")
 data class CostumeEntity(
     val description: String,
@@ -94,8 +100,9 @@ data class CostumeEntity(
     @ColumnInfo(name = "costumeResId")
     val resourceId: String,
     val sortId: Int
-)
+) : Parcelable
 
+@Parcelize
 @Entity(tableName = "bonusCostume")
 data class BonusCostumeEntity(
     val description: String,
@@ -107,8 +114,9 @@ data class BonusCostumeEntity(
     @ColumnInfo(name = "bonusCostumeResId")
     val resourceId: String,
     val sortId: Int
-)
+) : Parcelable
 
+@Parcelize
 @Entity(tableName = "rank5Costume")
 data class Rank5CostumeEntity(
     val description: String,
@@ -120,4 +128,4 @@ data class Rank5CostumeEntity(
     @ColumnInfo(name = "rank5CostumeResId")
     val resourceId: String,
     val sortId: Int
-)
+) : Parcelable

@@ -1,5 +1,6 @@
 package com.mizukikk.mltd.room.query
 
+import android.os.Parcelable
 import androidx.annotation.StringRes
 import androidx.room.Embedded
 import androidx.room.Relation
@@ -7,7 +8,9 @@ import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.data.Field
 import com.mizukikk.mltd.room.entity.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class IdolItem(
     @Embedded
     val idol: IdolEntity,
@@ -21,7 +24,7 @@ data class IdolItem(
     val bonusCostumeEntity: BonusCostumeEntity?,
     @Relation(parentColumn = "rank5CostumeId", entityColumn = "rank5CostumeId")
     val rank5CostumeEntity: Rank5CostumeEntity?
-) {
+) : Parcelable {
     val idolTitle
         get() = run {
             val nameSplitList = idol.name.split("　")
@@ -68,6 +71,7 @@ data class IdolItem(
     val vo get() = idol.vocalMaxAwakened.toString()
     val vi get() = idol.visualMaxAwakened.toString()
     val da get() = idol.danceMaxAwakened.toString()
+    val iconUrl get() = "https://storage.matsurihi.me/mltd/icon_l/${idol.resourceId}_1.png"
 
     private fun getString(@StringRes id: Int) =
         MLTDApplication.applicationContext.getString(id)

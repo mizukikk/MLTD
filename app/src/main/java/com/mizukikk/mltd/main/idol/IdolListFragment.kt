@@ -1,7 +1,6 @@
 package com.mizukikk.mltd.main.idol
 
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -29,10 +28,15 @@ class IdolListFragment :
 
     override fun init() {
         initView()
+        idolAdapter?.setIdolListListener { shareView, idolItem ->
+            parentActivity?.setIdolFragment(shareView, idolItem)
+        }
         initViewModel()
         binding.showList = false
         binding.load.loading = true
-        viewModel.checkDBdData()
+        if (viewModel.idolListLiveData.value == null) {
+            viewModel.checkDBdData()
+        }
     }
 
     private fun initView() {
