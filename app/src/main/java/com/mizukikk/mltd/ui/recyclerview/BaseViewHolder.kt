@@ -1,7 +1,18 @@
 package com.mizukikk.mltd.ui.recyclerview
 
+import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-open class BaseViewHolder<B : ViewDataBinding>(protected val binding: B) :
-    RecyclerView.ViewHolder(binding.root)
+open class BaseViewHolder<B : ViewDataBinding> private constructor(itemView: View) :
+    RecyclerView.ViewHolder(itemView) {
+
+    private var _binding: B? = null
+    protected val binding get() = _binding!!
+
+    constructor(binding: ViewDataBinding) : this(binding.root) {
+        _binding = binding as B
+    }
+
+
+}
