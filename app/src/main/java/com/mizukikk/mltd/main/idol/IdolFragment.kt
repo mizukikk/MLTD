@@ -51,7 +51,7 @@ class IdolFragment :
     override fun initBinding(view: View) = FragmentIdolBinding.bind(view)
 
     override fun init() {
-        ViewCompat.setTransitionName(binding.ivTest, data.idol.resourceId)
+        ViewCompat.setTransitionName(binding.root, data.idol.resourceId)
         Glide.with(binding.root)
             .load(data.iconUrl)
             .listener(object : RequestListener<Drawable> {

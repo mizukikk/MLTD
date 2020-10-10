@@ -39,9 +39,9 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
         fun bindData(data: IdolItem) {
             binding.data = data
             binding.executePendingBindings()
-            ViewCompat.setTransitionName(binding.ivIdolIcon, data.idol.resourceId)
+            ViewCompat.setTransitionName(binding.root, data.idol.resourceId)
             binding.root.setOnClickListener {
-                listener?.invoke(binding.ivIdolIcon, data)
+                listener?.invoke(it, data)
             }
         }
     }
