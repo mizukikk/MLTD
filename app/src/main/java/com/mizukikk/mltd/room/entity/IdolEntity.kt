@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.room.convert.IdolTypeConvert
 import kotlinx.android.parcel.Parcelize
+import java.lang.reflect.Field
 
 
 @Parcelize
@@ -57,7 +59,18 @@ data class IdolEntity(
     var rank5CostumeId: Int?,
     var skillId: Int?,
     var lang: String?
-) : Parcelable
+) : Parcelable {
+    val cardBGUrl
+        get() = if (rarity == IdolField.Rarity.SSR)
+            IdolField.Card.CARD_BG.format("${resourceId}_0")
+        else
+            IdolField.Card.CARD.format("${resourceId}_0_b")
+    val cardWeekBGUrl
+        get() = if (rarity == IdolField.Rarity.SSR)
+            IdolField.Card.CARD_BG.format("${resourceId}_1")
+        else
+            IdolField.Card.CARD.format("${resourceId}_1_b")
+}
 
 @Parcelize
 @Entity(tableName = "centerEffect")

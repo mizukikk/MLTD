@@ -1,6 +1,10 @@
 package com.mizukikk.mltd.data.model
 
 object IdolField {
+    object Card {
+        const val CARD_BG = "https://storage.matsurihi.me/mltd/card_bg/%s.png"
+        const val CARD = "https://storage.matsurihi.me/mltd/card/%s.png"
+    }
 
     object Type {
         const val PRINCESS = 1
