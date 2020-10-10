@@ -13,7 +13,7 @@ import com.mizukikk.mltd.room.entity.IdolEntity
 @BindingAdapter("smallIcon")
 fun loadSmallIcon(imageView: ImageView, imgRes: String?) {
     if (imgRes != null) {
-        val url = "https://storage.matsurihi.me/mltd/icon_l/${imgRes}_1.png"
+        val url = "https://storage.matsurihi.me/mltd/icon_l/${imgRes}_0.png"
         Glide.with(imageView.context)
             .load(url)
             .into(imageView)

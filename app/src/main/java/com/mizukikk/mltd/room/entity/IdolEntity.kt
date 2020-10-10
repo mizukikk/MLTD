@@ -61,15 +61,29 @@ data class IdolEntity(
     var lang: String?
 ) : Parcelable {
     val cardBGUrl
-        get() = if (rarity == IdolField.Rarity.SSR)
-            IdolField.Card.CARD_BG.format("${resourceId}_0")
-        else
+        get() = IdolField.Card.CARD_BG.format("${resourceId}_0")
+    val cardWakenedBGUrl
+        get() = IdolField.Card.CARD_BG.format("${resourceId}_1")
+
+    val cardWithSignedUrl
+        get() =
+            IdolField.Card.CARD.format("${resourceId}_0_a")
+
+    val cardWithSignedWakenedUrl
+        get() =
+            IdolField.Card.CARD.format("${resourceId}_1_a")
+
+    val cardUrl
+        get() =
             IdolField.Card.CARD.format("${resourceId}_0_b")
-    val cardWeekBGUrl
-        get() = if (rarity == IdolField.Rarity.SSR)
-            IdolField.Card.CARD_BG.format("${resourceId}_1")
-        else
+
+    val cardWakenedUrl
+        get() =
             IdolField.Card.CARD.format("${resourceId}_1_b")
+
+
+
+
 }
 
 @Parcelize

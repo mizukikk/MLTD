@@ -25,9 +25,9 @@ class BannerAdapter(private val data: IdolEntity) :
         BaseViewHolder<ItemBannerBinding>(binding) {
         fun loadImg() {
             binding.cardBGUrl = if (adapterPosition == 0)
-                data.cardBGUrl
+                data.cardWithSignedUrl
             else
-                data.cardWeekBGUrl
+                data.cardWithSignedWakenedUrl
         }
     }
 }

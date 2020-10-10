@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.transition.TransitionInflater
+import com.google.android.material.transition.MaterialContainerTransform
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolBinding
 import com.mizukikk.mltd.main.BaseMainFragment
@@ -35,9 +36,9 @@ class IdolFragment :
             data = it.getParcelable(IDOL_DATA)!!
         }
         postponeEnterTransition()
-        sharedElementEnterTransition = TransitionInflater
-            .from(requireContext())
-            .inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 500
+        }
     }
 
     override fun viewModelClass() = IdolViewModel::class.java
