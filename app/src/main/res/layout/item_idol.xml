@@ -18,13 +18,13 @@
             android:id="@+id/ivBG"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/bg_item_idol"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/bg_item_idol"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -34,8 +34,8 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.2" />
 
-        <ImageView
-            android:id="@+id/ivIdolIcon"
+        <FrameLayout
+            android:id="@+id/flIcon"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -43,11 +43,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideline20"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:smallIcon="@{data.idol.resourceId}"
-            tools:srcCompat="@drawable/ic_preview_idol_icon" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivIdolIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:smallIcon="@{data.idol}"
+                tools:srcCompat="@drawable/ic_preview_idol_icon" />
+
+            <ImageView
+                android:id="@+id/ivRarity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rarityBorder="@{data.idol}"
+                tools:srcCompat="@drawable/ic_sr_border" />
+        </FrameLayout>
+
+
+        <ImageView
+            android:id="@+id/ivIdolType"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_fairy"
+            app:idolType="@{data.idol.idolType}"
+            app:layout_constraintBottom_toBottomOf="@id/flIcon"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/flIcon" />
+
 
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flow"
@@ -55,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:orientation="vertical"
-            app:constraint_referenced_ids="tvTitle,tvName,tvSkill,flowAppeal"
+            app:constraint_referenced_ids="tvTitle,tvName,tvCenterEffect,tvSkill,flowAppeal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline20"
@@ -94,6 +118,17 @@
             android:textColor="@color/black"
             tools:ignore="MissingConstraints"
             tools:text="9s スコアアップ" />
+
+        <TextView
+            android:id="@+id/tvCenterEffect"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@{data.centerEffect}"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:text="Fairyコーデ" />
 
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flowAppeal"

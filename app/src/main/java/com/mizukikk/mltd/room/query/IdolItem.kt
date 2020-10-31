@@ -67,6 +67,8 @@ data class IdolItem(
             }
         }
 
+    val centerEffect get() = idol.centerEffectName
+
     val life get() = idol.life.toString()
     val vo get() = idol.vocalMaxAwakened.toString()
     val vi get() = idol.visualMaxAwakened.toString()
