@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.mizukikk.mltd.room.query.IdolItem" />
+
+        <variable
+            name="statusData"
+            type="com.mizukikk.mltd.main.idol.model.IdolStatus" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHint"
+            style="@style/H4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="start"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_status_hint"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLevel"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_max_level"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHint" />
+
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{statusData.level}"
+            app:layout_constraintStart_toEndOf="@id/tvLevel"
+            app:layout_constraintTop_toTopOf="@id/tvLevel"
+            tools:text="90" />
+        <TextView
+            android:id="@+id/tvMaxMasterRankTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_max_master_rank"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{String.valueOf(data.idol.masterRankMax)}"
+            app:layout_constraintStart_toEndOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toTopOf="@id/tvMaxMasterRankTitle"
+            tools:text="4" />
+
+        <TextView
+            android:id="@+id/tvLifeTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_life"
+            android:textColor="@color/life"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvMaxMasterRankTitle" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{data.life}"
+            android:textColor="@color/life"
+            app:layout_constraintStart_toEndOf="@id/tvLifeTitle"
+            app:layout_constraintTop_toTopOf="@id/tvLifeTitle"
+            tools:text="40" />
+
+        <TextView
+            android:id="@+id/tvVoTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_vocal"
+            android:textColor="@color/vocal"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLifeTitle" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{statusData.vo}"
+            android:textColor="@color/vocal"
+            app:layout_constraintStart_toEndOf="@id/tvVoTitle"
+            app:layout_constraintTop_toTopOf="@id/tvVoTitle"
+            tools:text="9999" />
+
+        <TextView
+            android:id="@+id/tvDaTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_dance"
+            android:textColor="@color/dance"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvViTitle" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{statusData.da}"
+            android:textColor="@color/dance"
+            app:layout_constraintStart_toEndOf="@id/tvDaTitle"
+            app:layout_constraintTop_toTopOf="@id/tvDaTitle"
+            tools:text="9999" />
+
+        <TextView
+            android:id="@+id/tvViTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_visual"
+            android:textColor="@color/visual"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvVoTitle" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{statusData.vi}"
+            android:textColor="@color/visual"
+            app:layout_constraintStart_toEndOf="@id/tvViTitle"
+            app:layout_constraintTop_toTopOf="@id/tvViTitle"
+            tools:text="9999" />
+
+        <TextView
+            android:id="@+id/tvTotalTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_total"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvDaTitle" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{statusData.total}"
+            app:layout_constraintStart_toEndOf="@id/tvTotalTitle"
+            app:layout_constraintTop_toTopOf="@id/tvTotalTitle"
+            tools:text="99999" />
+
+        <TextView
+            android:id="@+id/tvCenterEffectTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_center_effect"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTotalTitle" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{data.idol.centerEffectName}"
+            app:layout_constraintStart_toEndOf="@id/tvCenterEffectTitle"
+            app:layout_constraintTop_toTopOf="@id/tvCenterEffectTitle"
+            tools:text=" Fairyコーデ" />
+
+        <TextView
+            android:id="@+id/tvCenterEffect"
+            style="@style/H4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="4dp"
+            android:text="@{data.centerEffectEntity.description}"
+            app:layout_constraintTop_toBottomOf="@id/tvCenterEffectTitle"
+            tools:text="Fairyタイプのビジュアル値が60％アップ" />
+
+        <TextView
+            android:id="@+id/tvSkillTitle"
+            style="@style/H4B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/fragment_idol_skill"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvCenterEffect" />
+
+        <TextView
+            style="@style/H4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="4dp"
+            android:text="@{data.idol.skillName}"
+            app:autoSizeMaxTextSize="16sp"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvSkillTitle"
+            app:layout_constraintTop_toTopOf="@id/tvSkillTitle"
+            tools:text="インフィニット・フェアリー" />
+
+        <TextView
+            android:id="@+id/tvSkill"
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="4dp"
+            android:text="@{data.skillText}"
+            app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvSkillTitle"
+            tools:text="11秒ごとに31-40％の確率で6秒間、Perfectのスコアが24％アップ" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

@@ -7,6 +7,8 @@ import androidx.room.Relation
 import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.data.Field
+import com.mizukikk.mltd.data.model.IdolField
+import com.mizukikk.mltd.main.idol.model.IdolStatus
 import com.mizukikk.mltd.room.entity.*
 import kotlinx.android.parcel.Parcelize
 
@@ -47,16 +49,16 @@ data class IdolItem(
     val idolSkill
         get() = run {
             val skillEffect: String = when (skill?.effectId) {
-                Field.Skill.SCORE_UP -> getString(R.string.skill_score_up)
-                Field.Skill.COMBO_BONUS -> getString(R.string.skill_combo_bonus)
-                Field.Skill.LIFE_RECOVERY -> getString(R.string.skill_life_recovery)
-                Field.Skill.DAMAGE_GUARD -> getString(R.string.skill_damage_guard)
-                Field.Skill.CONTINUE_COMBO -> getString(R.string.skill_continue_combo)
-                Field.Skill.STRENGTHEN_JUDGMENT -> getString(R.string.skill_strengthen_judgment)
-                Field.Skill.DOUBLE_BOOST -> getString(R.string.skill_double_boost)
-                Field.Skill.MULTI_UP -> getString(R.string.skill_multi_up)
-                Field.Skill.OVERCLOCK -> getString(R.string.skill_overclock)
-                Field.Skill.OVERLOAD -> getString(R.string.skill_overload)
+                IdolField.Skill.SCORE_UP -> getString(R.string.skill_score_up)
+                IdolField.Skill.COMBO_BONUS -> getString(R.string.skill_combo_bonus)
+                IdolField.Skill.LIFE_RECOVERY -> getString(R.string.skill_life_recovery)
+                IdolField.Skill.DAMAGE_GUARD -> getString(R.string.skill_damage_guard)
+                IdolField.Skill.CONTINUE_COMBO -> getString(R.string.skill_continue_combo)
+                IdolField.Skill.STRENGTHEN_JUDGMENT -> getString(R.string.skill_strengthen_judgment)
+                IdolField.Skill.DOUBLE_BOOST -> getString(R.string.skill_double_boost)
+                IdolField.Skill.MULTI_UP -> getString(R.string.skill_multi_up)
+                IdolField.Skill.OVERCLOCK -> getString(R.string.skill_overclock)
+                IdolField.Skill.OVERLOAD -> getString(R.string.skill_overload)
                 else -> getString(R.string.skill_empty)
             }
             if (skill != null) {
@@ -70,10 +72,77 @@ data class IdolItem(
     val centerEffect get() = idol.centerEffectName
 
     val life get() = idol.life.toString()
-    val vo get() = idol.vocalMaxAwakened.toString()
-    val vi get() = idol.visualMaxAwakened.toString()
-    val da get() = idol.danceMaxAwakened.toString()
-    val iconUrl get() = "https://storage.matsurihi.me/mltd/icon_l/${idol.resourceId}_1.png"
+
+    val voMax get() = "${idol.vocalMax}"
+    val viMax get() = "${idol.visualMax}"
+    val daMax get() = "${idol.danceMax}"
+
+    val voMRMax get() = "${idol.vocalMax + idol.vocalMasterBonus * idol.masterRankMax}"
+    val viMRMax get() = "${idol.visualMax + idol.visualMasterBonus * idol.masterRankMax}"
+    val daMRMax get() = "${idol.danceMax + idol.danceMasterBonus * idol.masterRankMax}"
+
+    val voAwakened get() = "${idol.vocalMaxAwakened}"
+    val viAwakened get() = "${idol.visualMaxAwakened}"
+    val daAwakened get() = "${idol.danceMaxAwakened}"
+
+    val voAwakenedMRMax get() = "${idol.vocalMaxAwakened + idol.vocalMasterBonus * idol.masterRankMax}"
+    val viAwakenedMRMax get() = "${idol.visualMaxAwakened + idol.visualMasterBonus * idol.masterRankMax}"
+    val daAwakenedMRMax get() = "${idol.danceMaxAwakened + idol.danceMasterBonus * idol.masterRankMax}"
+
+    val voText get() = "$voMax ($voMRMax)"
+    val viText get() = "$viMax ($viMRMax)"
+    val daText get() = "$daMax ($daMRMax)"
+
+    val voAwakenedText get() = "$voAwakened ($voAwakenedMRMax)"
+    val viAwakenedText get() = "$viAwakened ($viAwakenedMRMax)"
+    val daAwakenedText get() = "$daAwakened ($daAwakenedMRMax)"
+
+    val totalText
+        get():String {
+            val total = idol.vocalMax + idol.visualMax + idol.danceMax
+            val voMaxMR = idol.vocalMax + idol.vocalMasterBonus * idol.masterRankMax
+            val viMaxMR = idol.visualMax + idol.visualMasterBonus * idol.masterRankMax
+            val daMaxMR = idol.danceMax + idol.danceMasterBonus * idol.masterRankMax
+            val totalMaxMR = voMaxMR + viMaxMR + daMaxMR
+            return "$total ($totalMaxMR)"
+        }
+    val totalAwakenedText
+        get():String {
+            val total = idol.vocalMaxAwakened + idol.visualMaxAwakened + idol.danceMaxAwakened
+            val voMaxMR = idol.vocalMaxAwakened + idol.vocalMasterBonus * idol.masterRankMax
+            val viMaxMR = idol.visualMaxAwakened + idol.visualMasterBonus * idol.masterRankMax
+            val daMaxMR = idol.danceMaxAwakened + idol.danceMasterBonus * idol.masterRankMax
+            val totalMaxMR = voMaxMR + viMaxMR + daMaxMR
+            return "$total ($totalMaxMR)"
+        }
+
+    val skillText
+        get():String? {
+            return if (skill != null) {
+                val maximumPercent = if (idol.masterRankMax > 4) {
+                    skill.probability + 20
+                } else {
+                    skill.probability + 10
+                }
+                val minimumPercent = skill.probability + 1
+                skill.description.replace("{0}", "$minimumPercent-$maximumPercent")
+            } else {
+                null
+            }
+        }
+
+    fun getStatusData(awakened: Boolean) = if (awakened) {
+        IdolStatus(
+            voAwakenedText,
+            viAwakenedText,
+            daAwakenedText,
+            totalAwakenedText,
+            idol.levelMaxAwakened.toString()
+        )
+    } else {
+        IdolStatus(voText, viText, daText, totalText, idol.levelMax.toString())
+
+    }
 
     private fun getString(@StringRes id: Int) =
         MLTDApplication.applicationContext.getString(id)

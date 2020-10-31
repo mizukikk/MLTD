@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="cardBGUrl"
+            type="java.lang.String" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -24,12 +27,15 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:elevation="8dp">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/vpCardBanner"
+                    <ImageView
+                        android:id="@+id/ivCard"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        app:cardBG="@{cardBGUrl}" />
                 </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -40,6 +46,27 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context=".main.idol.IdolFragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/title"
+                    layout="@layout/content_idol_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+                <include
+                    android:id="@+id/status"
+                    layout="@layout/content_idol_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
 
         </androidx.core.widget.NestedScrollView>
 

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.mizukikk.mltd.room.query.IdolItem" />
+
+        <variable
+            name="iconUrl"
+            type="java.lang.String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/flIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivIdolIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:imgUrl="@{iconUrl}"
+                tools:srcCompat="@drawable/ic_preview_idol_icon" />
+
+            <ImageView
+                android:id="@+id/ivRarity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rarityBorder="@{data.idol}"
+                tools:srcCompat="@drawable/ic_sr_border" />
+
+            <ImageView
+                android:id="@+id/ivIdolType"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="start|bottom"
+                android:src="@drawable/ic_fairy"
+                app:idolType="@{data.idol.idolType}" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvAwakened"
+            app:layout_constraintStart_toEndOf="@id/flIcon"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:lines="1"
+                android:text="@{data.idolTitle}"
+                tools:text="CHALLENGE FOR GLOW-RY DAYS" />
+
+            <TextView
+                style="@style/H4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:lines="1"
+                android:text="@{data.idolName}"
+                tools:text="最上静香" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvAwakened"
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="覺醒"
+            app:layout_constraintBottom_toBottomOf="@id/swAwakened"
+            app:layout_constraintEnd_toStartOf="@id/swAwakened"
+            app:layout_constraintTop_toTopOf="@id/swAwakened" />
+
+        <Switch
+            android:id="@+id/swAwakened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:thumbTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

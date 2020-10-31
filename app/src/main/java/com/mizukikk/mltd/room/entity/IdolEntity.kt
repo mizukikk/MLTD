@@ -8,7 +8,6 @@ import androidx.room.TypeConverters
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.room.convert.IdolTypeConvert
 import kotlinx.android.parcel.Parcelize
-import java.lang.reflect.Field
 
 
 @Parcelize
@@ -61,28 +60,29 @@ data class IdolEntity(
     var lang: String?
 ) : Parcelable {
     val cardBGUrl
-        get() = IdolField.Card.CARD_BG.format("${resourceId}_0")
-    val cardWakenedBGUrl
-        get() = IdolField.Card.CARD_BG.format("${resourceId}_1")
+        get() = IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_0")
+    val cardBGAwakenedUrl
+        get() = IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_1")
 
     val cardWithSignedUrl
         get() =
-            IdolField.Card.CARD.format("${resourceId}_0_a")
+            IdolField.URL.CARD_FORMAT.format("${resourceId}_0_a")
 
-    val cardWithSignedWakenedUrl
+    val cardWithSignedAwakenedUrl
         get() =
-            IdolField.Card.CARD.format("${resourceId}_1_a")
+            IdolField.URL.CARD_FORMAT.format("${resourceId}_1_a")
 
     val cardUrl
         get() =
-            IdolField.Card.CARD.format("${resourceId}_0_b")
+            IdolField.URL.CARD_FORMAT.format("${resourceId}_0_b")
 
-    val cardWakenedUrl
+    val cardAwakenedUrl
         get() =
-            IdolField.Card.CARD.format("${resourceId}_1_b")
+            IdolField.URL.CARD_FORMAT.format("${resourceId}_1_b")
 
+    val iconUrl get() = IdolField.URL.ICON_FORMAT.format("${resourceId}_0")
 
-
+    val iconAwakenedUrl get() = IdolField.URL.ICON_FORMAT.format("${resourceId}_1")
 
 }
 

@@ -1,12 +1,13 @@
 package com.mizukikk.mltd.data.model
 
 object IdolField {
-    object Card {
-        const val CARD_BG = "https://storage.matsurihi.me/mltd/card_bg/%s.png"
-        const val CARD = "https://storage.matsurihi.me/mltd/card/%s.png"
+    object URL {
+        const val CARD_BG_FORMAT = "https://storage.matsurihi.me/mltd/card_bg/%s.png"
+        const val CARD_FORMAT = "https://storage.matsurihi.me/mltd/card/%s.png"
+        const val ICON_FORMAT = "https://storage.matsurihi.me/mltd/icon_l/%s.png"
     }
 
-    object Type {
+    object IdolType {
         const val PRINCESS = 1
         const val FAIRY = 2
         const val ANGEL = 3
@@ -118,7 +119,7 @@ object IdolField {
         const val OVERCLOCK = 10
 
         // オーバーロンド
-        const val OVER_LOND = 11
+        const val OVERLOAD = 11
     }
 
 
