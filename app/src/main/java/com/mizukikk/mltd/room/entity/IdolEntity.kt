@@ -127,7 +127,9 @@ data class CostumeEntity(
     @ColumnInfo(name = "costumeResId")
     val resourceId: String,
     val sortId: Int
-) : Parcelable
+) : Parcelable {
+    val costumeUrl get() = IdolField.URL.COSTUME_FORMAT.format(resourceId)
+}
 
 @Parcelize
 @Entity(tableName = "bonusCostume")
@@ -141,7 +143,9 @@ data class BonusCostumeEntity(
     @ColumnInfo(name = "bonusCostumeResId")
     val resourceId: String,
     val sortId: Int
-) : Parcelable
+) : Parcelable {
+    val costumeUrl get() = IdolField.URL.COSTUME_FORMAT.format(resourceId)
+}
 
 @Parcelize
 @Entity(tableName = "rank5Costume")
@@ -155,4 +159,6 @@ data class Rank5CostumeEntity(
     @ColumnInfo(name = "rank5CostumeResId")
     val resourceId: String,
     val sortId: Int
-) : Parcelable
+) : Parcelable {
+    val costumeUrl get() = IdolField.URL.COSTUME_FORMAT.format(resourceId)
+}

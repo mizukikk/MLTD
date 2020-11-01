@@ -5,6 +5,7 @@ object IdolField {
         const val CARD_BG_FORMAT = "https://storage.matsurihi.me/mltd/card_bg/%s.png"
         const val CARD_FORMAT = "https://storage.matsurihi.me/mltd/card/%s.png"
         const val ICON_FORMAT = "https://storage.matsurihi.me/mltd/icon_l/%s.png"
+        const val COSTUME_FORMAT = "https://storage.matsurihi.me/mltd/costume_icon_ll/%s.png"
     }
 
     object IdolType {
