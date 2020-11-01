@@ -3,7 +3,6 @@ package com.mizukikk.mltd.main.idol
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
@@ -28,10 +27,12 @@ class IdolListFragment :
 
     override fun init() {
         initView()
-        idolAdapter?.setIdolListListener { shareView, idolItem ->
-            parentActivity?.setIdolFragment(shareView, idolItem)
-        }
         initViewModel()
+        setListener()
+        getIdolList()
+    }
+
+    private fun getIdolList() {
         binding.showList = false
         binding.load.loading = true
         if (viewModel.idolListLiveData.value == null) {
@@ -39,8 +40,15 @@ class IdolListFragment :
         }
     }
 
+    private fun setListener() {
+        idolAdapter?.setIdolListListener { shareView, idolItem ->
+            parentActivity?.setIdolFragment(shareView, idolItem)
+        }
+    }
+
     private fun initView() {
         initIdolList()
+        binding.appBar.setExpanded(false)
     }
 
     private fun initIdolList() {
