@@ -1,10 +1,12 @@
 package com.mizukikk.mltd.main.idol.model
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
+import com.mizukikk.mltd.extension.nextUpdateTimeMillis
 import com.mizukikk.mltd.livedata.SingleLiveEvent
 import com.mizukikk.mltd.main.model.BaseMainViewModel
 import com.mizukikk.mltd.room.DBCallBack
@@ -43,12 +45,55 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
                     val newIdolList = mutableListOf<IdolItem>()
                     newIdolList.addAll(result)
                     idolListLiveData.postValue(newIdolList)
+                    val nextUpdateMillis = PreferencesHelper.nextUpdateTimeMillis
+                    if (System.currentTimeMillis() >= nextUpdateMillis)
+                        checkUpdate()
                 }
 
                 override fun fail() {
                     //do noting
                 }
             })
+    }
+
+    private fun checkUpdate() {
+        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<Card.CardResponse>>() {
+            override fun success(response: List<Card.CardResponse>) {
+                val update = response.isNotEmpty()
+                if (update) {
+                    updateDB()
+                }
+            }
+
+            override fun fail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<List<Card.CardResponse>>
+            ) {
+                //do noting
+            }
+        })
+    }
+
+    private fun updateDB() {
+        repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
+            override fun success(response: List<Card.CardResponse>) {
+                val finishProgress = response.size
+                repository.saveAll({ progress ->
+                    if (finishProgress == progress) {
+                        PreferencesHelper.nextUpdateTimeMillis =
+                            System.currentTimeMillis().nextUpdateTimeMillis()
+                    }
+                }, *response.toTypedArray())
+            }
+
+            override fun fail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<List<Card.CardResponse>>
+            ) {
+            }
+        })
     }
 
     fun getNextCardListItem(lastCardId: Int) {

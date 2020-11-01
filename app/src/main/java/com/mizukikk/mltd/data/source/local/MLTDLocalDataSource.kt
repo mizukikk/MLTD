@@ -1,6 +1,8 @@
 package com.mizukikk.mltd.data.source.local
 
+import android.util.Log
 import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.DBExecutor
 import com.mizukikk.mltd.room.dao.IdolDao
@@ -15,6 +17,7 @@ class MLTDLocalDataSource private constructor(
     companion object {
         private val TAG = MLTDLocalDataSource::class.java.simpleName
         private var INSTANCE: LocalDataSource? = null
+        private val lock = Any()
         fun getInstance(
             dbExecutor: DBExecutor,
             idolDao: IdolDao

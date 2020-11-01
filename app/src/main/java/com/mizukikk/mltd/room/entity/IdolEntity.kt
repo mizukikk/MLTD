@@ -14,8 +14,6 @@ import kotlinx.android.parcel.Parcelize
 @TypeConverters(IdolTypeConvert::class)
 @Entity(tableName = "idol")
 data class IdolEntity(
-    @PrimaryKey(autoGenerate = true)
-    val primaryKey: Int,
     val addDate: String?,
     val awakeningText: String,
     val category: String,
@@ -28,6 +26,8 @@ data class IdolEntity(
     val extraType: Int,
     val flavorText: String,
     val flavorTextAwakened: String,
+    @PrimaryKey
+    @ColumnInfo(name = "cardId")
     val id: Int,
     val idolId: Int,
     val idolType: Int,

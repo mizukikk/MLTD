@@ -37,4 +37,25 @@ object MLTDRemoteDataSource : RemoteDataSource {
             }
         })
     }
+
+    override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<Card.CardResponse>>) {
+        val nextId = lastIdolId + 1
+        val call = cardService.getCard(PreferencesHelper.apiLanguage, nextId)
+        call.enqueue(object : ApiCallBack<List<Card.CardResponse>>() {
+            override fun apiSuccess(
+                response: List<Card.CardResponse>,
+                call: Call<List<Card.CardResponse>>
+            ) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<List<Card.CardResponse>>
+            ) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
 }

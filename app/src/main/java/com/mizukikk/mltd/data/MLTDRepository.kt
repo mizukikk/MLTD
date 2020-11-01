@@ -22,14 +22,21 @@ class MLTDRepository private constructor(
             }
     }
 
+    //remote start
     override fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
         remoteDataSource.downloadAllCard(callBack)
+    }
+
+    override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<Card.CardResponse>>) {
+        remoteDataSource.checkUpdate(lastIdolId, callBack)
     }
 
     override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {
         localDataSource.checkDBData(callBack)
     }
+    //remote end
 
+    //local start
     override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
         localDataSource.saveAll(count, *cards)
     }
@@ -41,4 +48,5 @@ class MLTDRepository private constructor(
     ) {
         localDataSource.getIdolList(currentId, lang, callBack)
     }
+    //local end
 }

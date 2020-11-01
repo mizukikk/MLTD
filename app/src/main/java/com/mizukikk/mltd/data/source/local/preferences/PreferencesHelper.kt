@@ -9,18 +9,23 @@ object PreferencesHelper {
     private const val DEFAULT_API_LANGUAGE = "ja"
 
     private const val API_LANGUAGE = "apiLanguage"
+    private const val NEXT_CHECK_DB_TIME = "nextCheckDBTime"
 
-    private val mltdPrefernces =
+    private val mltdPreferences =
         MLTDApplication.applicationContext.getSharedPreferences(MLTD_PREFERNCES_NAME, MODE_PRIVATE)
 
     var apiLanguage
-        get() = mltdPrefernces.getString(
+        get() = mltdPreferences.getString(
             API_LANGUAGE,
             DEFAULT_API_LANGUAGE
         )!!
         set(value) {
-            mltdPrefernces.edit()
+            mltdPreferences.edit()
                 .putString(API_LANGUAGE, value)
                 .apply()
         }
+
+    var nextUpdateTimeMillis
+        get() = mltdPreferences.getLong(NEXT_CHECK_DB_TIME, 0L)
+        set(value) = mltdPreferences.edit().putLong(NEXT_CHECK_DB_TIME, value).apply()
 }

@@ -11,6 +11,10 @@ interface RetrofitService {
     interface CardService {
         @GET("{lan}/cards/")
         fun getAllCard(@Path("lan") lan: String): Call<List<Card.CardResponse>>
+
+        @GET("{lan}/cards/{idolId}")
+        fun getCard(@Path("lan") lan: String, @Path("idolId") idolId: Int): Call<List<Card.CardResponse>>
+
     }
 
     interface EventService {

@@ -5,4 +5,5 @@ import com.mizukikk.mltd.api.response.Card
 
 interface RemoteDataSource {
     fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>)
+    fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<Card.CardResponse>>)
 }
