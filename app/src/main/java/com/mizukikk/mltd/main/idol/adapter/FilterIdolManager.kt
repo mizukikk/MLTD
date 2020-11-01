@@ -33,6 +33,21 @@ class FilterIdolManager {
             FilterIdolAdapter(rarityArray, FilterIdolAdapter.FILTER_TYPE_RARITY)
         skillAdapter =
             FilterIdolAdapter(skillEffectArray, FilterIdolAdapter.FILTER_TYPE_SKILL)
+    }
 
+    fun showFilterList() {
+        idolTypeAdapter.checkFilterBtStatus()
+        centerEffectAdapter.checkFilterBtStatus()
+        extraTypeAdapter.checkFilterBtStatus()
+        rarityAdapter.checkFilterBtStatus()
+        skillAdapter.checkFilterBtStatus()
+    }
+
+    fun getFilterList() {
+        idolTypeAdapter.getFilterList()
+        centerEffectAdapter.getFilterList()
+        extraTypeAdapter.getFilterList()
+        rarityAdapter.getFilterList()
+        skillAdapter.getFilterList()
     }
 }

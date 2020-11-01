@@ -12,7 +12,6 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
-import com.mizukikk.mltd.main.idol.adapter.FilterIdolAdapter
 import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
 import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
@@ -29,7 +28,7 @@ class IdolListFragment :
     }
 
     private var idolAdapter: IdolAdapter? = null
-    val filterIdolManager by lazy { FilterIdolManager() }
+    private val filterIdolManager by lazy { FilterIdolManager() }
 
     override fun viewModelClass() = IdolListViewModel::class.java
 
@@ -74,10 +73,12 @@ class IdolListFragment :
             binding.edSearch.setText("")
             idolAdapter?.clearSearch()
         }
-        binding.ivFilter.setOnClickListener {
+        binding.ivOpenFilter.setOnClickListener {
+            filterIdolManager.showFilterList()
             binding.drawableLayout.openDrawer(GravityCompat.END)
         }
-        binding.navFilter.tvFilter.setOnClickListener {
+        binding.navFilter.tvFilterSearch.setOnClickListener {
+            filterIdolManager.getFilterList()
             binding.drawableLayout.closeDrawer(GravityCompat.END)
         }
     }
@@ -94,7 +95,6 @@ class IdolListFragment :
         binding.navFilter.rvExtraType.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvRarity.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvSkill.layoutManager = FlexboxLayoutManager(requireContext())
-
 
         binding.navFilter.rvIdolType.adapter = filterIdolManager.idolTypeAdapter
         binding.navFilter.rvCenterEffect.adapter = filterIdolManager.centerEffectAdapter

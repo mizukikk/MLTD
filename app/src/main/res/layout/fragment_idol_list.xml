@@ -51,7 +51,7 @@
                             android:background="@drawable/bg_search_bar"
                             android:orientation="horizontal"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/ivFilter"
+                            app:layout_constraintEnd_toStartOf="@id/ivOpenFilter"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -94,7 +94,7 @@
 
 
                         <ImageView
-                            android:id="@+id/ivFilter"
+                            android:id="@+id/ivOpenFilter"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:padding="5dp"
