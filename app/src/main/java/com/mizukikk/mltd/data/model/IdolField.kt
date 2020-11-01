@@ -13,6 +13,7 @@ object IdolField {
         const val FAIRY = 2
         const val ANGEL = 3
         const val EX = 4
+        val ARRAY = arrayOf(PRINCESS, FAIRY, ANGEL, EX)
     }
 
     object Rarity {
@@ -20,6 +21,7 @@ object IdolField {
         const val R = 2
         const val SR = 3
         const val SSR = 4
+        val ARRAY = arrayOf(N, R, SR, SSR)
     }
 
     object Category {
@@ -88,6 +90,10 @@ object IdolField {
 
         // 3 周年イベント報酬
         const val ANVI_3 = 10
+        val ARRAY = arrayOf(
+            NONE, PST_RANK, PST_POINT, FES, ANVI_1, EXTRA, ANVI_2, EXTRA_RANK,
+            EXTRA_POINT, ANVI_3
+        )
 
     }
 
@@ -121,6 +127,10 @@ object IdolField {
 
         // オーバーロンド
         const val OVERLOAD = 11
+        val ARRAY = arrayOf(
+            SCORE_UP, COMBO_BONUS, LIFE_RECOVERY, DAMAGE_GUARD, CONTINUE_COMBO,
+            STRENGTHEN_JUDGMENT, DOUBLE_BOOST, MULTI_UP, OVERCLOCK, OVERLOAD
+        )
     }
 
     object CenterEffectAttribute {
@@ -141,6 +151,7 @@ object IdolField {
 
         //スキル発動率
         const val SKILL_RATE = 6
+        val ARRAY = arrayOf(VOCAL, DANCE, VISUAL, ALL, LIFE, SKILL_RATE)
     }
 
 

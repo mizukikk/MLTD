@@ -13,6 +13,7 @@ import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
 import com.mizukikk.mltd.main.idol.adapter.FilterIdolAdapter
+import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
 import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
 import com.mizukikk.mltd.main.idol.model.IdolListViewModel
@@ -28,6 +29,7 @@ class IdolListFragment :
     }
 
     private var idolAdapter: IdolAdapter? = null
+    val filterIdolManager by lazy { FilterIdolManager() }
 
     override fun viewModelClass() = IdolListViewModel::class.java
 
@@ -87,23 +89,18 @@ class IdolListFragment :
     }
 
     private fun initFilterList() {
-        val idolTypeArray = resources.getStringArray(R.array.idolType)
-        val rarityArray = resources.getStringArray(R.array.rarity)
-        val extraTypeArray = resources.getStringArray(R.array.extraType)
-        val skillEffectArray = resources.getStringArray(R.array.skillEffect)
-        val centerEffectAttributeArray = resources.getStringArray(R.array.centerEffectAttribute)
-
         binding.navFilter.rvIdolType.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvCenterEffect.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvExtraType.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvRarity.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvSkill.layoutManager = FlexboxLayoutManager(requireContext())
 
-        binding.navFilter.rvIdolType.adapter = FilterIdolAdapter(idolTypeArray)
-        binding.navFilter.rvCenterEffect.adapter = FilterIdolAdapter(centerEffectAttributeArray)
-        binding.navFilter.rvExtraType.adapter = FilterIdolAdapter(extraTypeArray)
-        binding.navFilter.rvRarity.adapter = FilterIdolAdapter(rarityArray)
-        binding.navFilter.rvSkill.adapter = FilterIdolAdapter(skillEffectArray)
+
+        binding.navFilter.rvIdolType.adapter = filterIdolManager.idolTypeAdapter
+        binding.navFilter.rvCenterEffect.adapter = filterIdolManager.centerEffectAdapter
+        binding.navFilter.rvExtraType.adapter = filterIdolManager.extraTypeAdapter
+        binding.navFilter.rvRarity.adapter = filterIdolManager.rarityAdapter
+        binding.navFilter.rvSkill.adapter = filterIdolManager.skillAdapter
     }
 
     private fun initDrawableLayout() {
