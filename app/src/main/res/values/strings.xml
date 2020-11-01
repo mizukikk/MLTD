@@ -25,4 +25,7 @@
     <string name="fragment_idol_skill">技能 :</string>
     <string name="fragment_idol_status_hint">能力為滿等能力，括號為等級與明星階級滿等能力</string>
     <string name="fragment_idol_level">LV :</string>
+
+    <!--  IdolListFragment  -->
+    <string name="fragment_idol_list_search_hint">卡片名稱</string>
 </resources>

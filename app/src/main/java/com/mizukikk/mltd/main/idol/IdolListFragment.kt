@@ -1,6 +1,10 @@
 package com.mizukikk.mltd.main.idol
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
@@ -14,6 +18,8 @@ class IdolListFragment :
     BaseMainFragment<IdolListViewModel, FragmentIdolListBinding>(R.layout.fragment_idol_list) {
 
     companion object {
+        private val TAG = IdolListFragment::class.java.simpleName
+
         @JvmStatic
         fun newInstance() = IdolListFragment()
     }
@@ -44,11 +50,29 @@ class IdolListFragment :
         idolAdapter?.setIdolListListener { shareView, idolItem ->
             parentActivity?.setIdolFragment(shareView, idolItem)
         }
+        binding.edSearch.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                idolAdapter?.search(v.text.toString())
+            }
+            false
+        }
+        binding.edSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                binding.cancelEnable = s.toString().isNotEmpty()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+        binding.ivCancel.setOnClickListener {
+            binding.edSearch.setText("")
+            idolAdapter?.clearSearch()
+        }
     }
 
     private fun initView() {
         initIdolList()
-        binding.appBar.setExpanded(false)
     }
 
     private fun initIdolList() {
@@ -94,6 +118,13 @@ class IdolListFragment :
             binding.showList = true
             binding.load.loading = false
             idolAdapter?.swapData(idolList)
+            recoverySearchStatus()
         })
+    }
+
+    private fun recoverySearchStatus() {
+        if (binding.edSearch.text.toString().isNotEmpty()) {
+            idolAdapter?.search(binding.edSearch.text.toString())
+        }
     }
 }

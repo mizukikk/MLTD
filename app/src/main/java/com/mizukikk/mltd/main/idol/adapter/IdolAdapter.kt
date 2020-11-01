@@ -13,26 +13,49 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
 
     private var listener: ((View, IdolItem) -> Unit?)? = null
     private var idolList: List<IdolItem> = mutableListOf()
+    private var filterList: List<IdolItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdolHolder {
         val inflater = LayoutInflater.from(parent.context)
         return IdolHolder(ItemIdolBinding.inflate(inflater, parent, false))
     }
 
-    override fun getItemCount() = idolList.size
+    override fun getItemCount() = filterList.size
 
     override fun onBindViewHolder(holder: IdolHolder, position: Int) {
-        val data = idolList[position]
+        val data = filterList[position]
         holder.bindData(data)
     }
 
     fun swapData(newIdolList: List<IdolItem>) {
         this.idolList = newIdolList
+        filterList = newIdolList
         notifyDataSetChanged()
     }
 
     fun setIdolListListener(listener: ((View, IdolItem) -> Unit)) {
         this.listener = listener
+    }
+
+    fun search(searchText: String) {
+        synchronized(this) {
+            filterList = idolList.filter {
+                it.idol.name.contains(searchText)
+            }
+            notifyDataSetChanged()
+        }
+    }
+
+    fun filter() {
+        synchronized(this) {
+            filterList = filterList.filter { true }
+            notifyDataSetChanged()
+        }
+    }
+
+    fun clearSearch() {
+        filterList = idolList
+        notifyDataSetChanged()
     }
 
     inner class IdolHolder(binding: ItemIdolBinding) : BaseViewHolder<ItemIdolBinding>(binding) {

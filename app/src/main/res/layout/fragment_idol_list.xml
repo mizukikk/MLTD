@@ -10,6 +10,10 @@
         <variable
             name="showList"
             type="java.lang.Boolean" />
+
+        <variable
+            name="cancelEnable"
+            type="java.lang.Boolean" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -64,6 +68,9 @@
                             android:layout_marginEnd="4dp"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
+                            android:hint="@string/fragment_idol_list_search_hint"
+                            android:imeOptions="actionSearch"
+                            android:inputType="text"
                             android:lines="1"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp" />
@@ -71,10 +78,11 @@
                         <ImageView
                             android:id="@+id/ivCancel"
                             android:layout_width="30dp"
-                            android:layout_height="24dp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:layout_marginEnd="4dp"
                             android:padding="5dp"
+                            android:visibility="@{cancelEnable? View.VISIBLE : View.GONE , default=gone}"
                             app:srcCompat="@drawable/ic_cancel" />
                     </LinearLayout>
 
@@ -82,12 +90,10 @@
                     <ImageView
                         android:id="@+id/ivFilter"
                         android:layout_width="30dp"
-                        android:layout_height="0dp"
+                        android:layout_height="30dp"
                         android:padding="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/edSearch"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_filter"
                         tools:layout_editor_absoluteX="217dp" />
