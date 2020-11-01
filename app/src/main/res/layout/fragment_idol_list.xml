@@ -16,114 +16,134 @@
             type="java.lang.Boolean" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawableLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/tbTop"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
+                android:background="@color/white">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/tbTop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    app:layout_scrollFlags="scroll|enterAlways">
 
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_search_bar"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/ivFilter"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:padding="8dp">
 
-                        <ImageView
-                            android:id="@+id/ivSearch"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="4dp"
-                            android:padding="5dp"
-                            app:srcCompat="@drawable/ic_search" />
 
-                        <EditText
-                            android:id="@+id/edSearch"
-                            style="H4"
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:hint="@string/fragment_idol_list_search_hint"
-                            android:imeOptions="actionSearch"
-                            android:inputType="text"
-                            android:lines="1"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="4dp" />
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/bg_search_bar"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivFilter"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivSearch"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="4dp"
+                                android:padding="5dp"
+                                app:srcCompat="@drawable/ic_search" />
+
+                            <EditText
+                                android:id="@+id/edSearch"
+                                style="H4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:hint="@string/fragment_idol_list_search_hint"
+                                android:imeOptions="actionSearch"
+                                android:inputType="text"
+                                android:lines="1"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="4dp" />
+
+                            <ImageView
+                                android:id="@+id/ivCancel"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="4dp"
+                                android:padding="5dp"
+                                android:visibility="@{cancelEnable? View.VISIBLE : View.GONE , default=gone}"
+                                app:srcCompat="@drawable/ic_cancel" />
+                        </LinearLayout>
+
 
                         <ImageView
-                            android:id="@+id/ivCancel"
+                            android:id="@+id/ivFilter"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="4dp"
                             android:padding="5dp"
-                            android:visibility="@{cancelEnable? View.VISIBLE : View.GONE , default=gone}"
-                            app:srcCompat="@drawable/ic_cancel" />
-                    </LinearLayout>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_filter"
+                            tools:layout_editor_absoluteX="217dp" />
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:id="@+id/ivFilter"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="5dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_filter"
-                        tools:layout_editor_absoluteX="217dp" />
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                tools:context=".main.idol.IdolListFragment">
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+                <include
+                    android:id="@+id/idol"
+                    layout="@layout/content_idol_list_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{showList ? View.VISIBLE : View.INVISIBLE , default=invisible}" />
 
-        <FrameLayout
+                <include
+                    android:id="@+id/load"
+                    layout="@layout/content_idol_list_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{showList ? View.INVISIBLE : View.VISIBLE , default=invisible}" />
+
+            </FrameLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:context=".main.idol.IdolListFragment">
+            android:layout_gravity="end">
 
-            <include
-                android:id="@+id/idol"
-                layout="@layout/content_idol_list_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{showList ? View.VISIBLE : View.INVISIBLE , default=invisible}" />
 
-            <include
-                android:id="@+id/load"
-                layout="@layout/content_idol_list_loading"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{showList ? View.INVISIBLE : View.VISIBLE , default=invisible}" />
-
-        </FrameLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <include
+                    android:id="@+id/navFilter"
+                    layout="@layout/nav_idol_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

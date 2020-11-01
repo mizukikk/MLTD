@@ -123,5 +123,25 @@ object IdolField {
         const val OVERLOAD = 11
     }
 
+    object CenterEffectAttribute {
+        //ボーカル値
+        const val VOCAL = 1
+
+        //ダンス値
+        const val DANCE = 2
+
+        //ビジュアル値
+        const val VISUAL = 3
+
+        //全アピール値
+        const val ALL = 4
+
+        //ライフ
+        const val LIFE = 5
+
+        //スキル発動率
+        const val SKILL_RATE = 6
+    }
+
 
 }

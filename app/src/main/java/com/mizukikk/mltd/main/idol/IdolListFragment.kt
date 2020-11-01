@@ -2,14 +2,17 @@ package com.mizukikk.mltd.main.idol
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentIdolListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
+import com.mizukikk.mltd.main.idol.adapter.FilterIdolAdapter
 import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
 import com.mizukikk.mltd.main.idol.model.IdolListViewModel
@@ -69,10 +72,42 @@ class IdolListFragment :
             binding.edSearch.setText("")
             idolAdapter?.clearSearch()
         }
+        binding.ivFilter.setOnClickListener {
+            binding.drawableLayout.openDrawer(GravityCompat.END)
+        }
+        binding.navFilter.tvFilter.setOnClickListener {
+            binding.drawableLayout.closeDrawer(GravityCompat.END)
+        }
     }
 
     private fun initView() {
+        initDrawableLayout()
         initIdolList()
+        initFilterList()
+    }
+
+    private fun initFilterList() {
+        val idolTypeArray = resources.getStringArray(R.array.idolType)
+        val rarityArray = resources.getStringArray(R.array.rarity)
+        val extraTypeArray = resources.getStringArray(R.array.extraType)
+        val skillEffectArray = resources.getStringArray(R.array.skillEffect)
+        val centerEffectAttributeArray = resources.getStringArray(R.array.centerEffectAttribute)
+
+        binding.navFilter.rvIdolType.layoutManager = FlexboxLayoutManager(requireContext())
+        binding.navFilter.rvCenterEffect.layoutManager = FlexboxLayoutManager(requireContext())
+        binding.navFilter.rvExtraType.layoutManager = FlexboxLayoutManager(requireContext())
+        binding.navFilter.rvRarity.layoutManager = FlexboxLayoutManager(requireContext())
+        binding.navFilter.rvSkill.layoutManager = FlexboxLayoutManager(requireContext())
+
+        binding.navFilter.rvIdolType.adapter = FilterIdolAdapter(idolTypeArray)
+        binding.navFilter.rvCenterEffect.adapter = FilterIdolAdapter(centerEffectAttributeArray)
+        binding.navFilter.rvExtraType.adapter = FilterIdolAdapter(extraTypeArray)
+        binding.navFilter.rvRarity.adapter = FilterIdolAdapter(rarityArray)
+        binding.navFilter.rvSkill.adapter = FilterIdolAdapter(skillEffectArray)
+    }
+
+    private fun initDrawableLayout() {
+        binding.drawableLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     private fun initIdolList() {
