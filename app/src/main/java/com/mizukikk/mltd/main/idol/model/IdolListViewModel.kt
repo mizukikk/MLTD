@@ -81,8 +81,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
                 val finishProgress = response.size
                 repository.saveAll({ progress ->
                     if (finishProgress == progress) {
-                        PreferencesHelper.nextUpdateTimeMillis =
-                            System.currentTimeMillis().nextUpdateTimeMillis()
+                        saveNextUpdateTimeMillis()
                     }
                 }, *response.toTypedArray())
             }
@@ -94,6 +93,11 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
             ) {
             }
         })
+    }
+
+    private fun saveNextUpdateTimeMillis() {
+        PreferencesHelper.nextUpdateTimeMillis =
+            System.currentTimeMillis().nextUpdateTimeMillis()
     }
 
     fun getNextCardListItem(lastCardId: Int) {
@@ -136,6 +140,8 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     private fun saveIdolData(response: List<Card.CardResponse>) {
         val maxProgress = response.size
         repository.saveAll({ progress ->
+            if(maxProgress == progress)
+                saveNextUpdateTimeMillis()
             val result = IdolListResult.setSaveDataProgress(progress, maxProgress)
             idolListEvent.postValue(result)
         }, *response.toTypedArray())
