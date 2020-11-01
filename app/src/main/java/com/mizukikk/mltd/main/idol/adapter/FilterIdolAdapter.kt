@@ -22,19 +22,7 @@ class FilterIdolAdapter(private val filterArray: Array<String>, private val filt
         const val FILTER_TYPE_SKILL = 1115
     }
 
-    private var filterList = when (filterType) {
-        FILTER_TYPE_CENTER_EFFECT ->
-            IdolField.CenterEffectAttribute.ARRAY.toMutableList()
-        FILTER_TYPE_EXTRA_TYPE ->
-            IdolField.ExtraType.ARRAY.toMutableList()
-        FILTER_TYPE_IDOL_TYPE ->
-            IdolField.CenterEffectAttribute.ARRAY.toMutableList()
-        FILTER_TYPE_RARITY ->
-            IdolField.Rarity.ARRAY.toMutableList()
-        FILTER_TYPE_SKILL ->
-            IdolField.Skill.ARRAY.toMutableList()
-        else -> mutableListOf()
-    }
+    private var filterList = mutableListOf<Int>()
     private var tempFilterList = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterIdolHolder {
@@ -56,10 +44,17 @@ class FilterIdolAdapter(private val filterArray: Array<String>, private val filt
         notifyDataSetChanged()
     }
 
-    fun getFilterList() {
+    fun getFilterList(): List<Int> {
         val newList = mutableListOf<Int>()
         newList.addAll(tempFilterList)
         filterList = newList
+        notifyDataSetChanged()
+        return filterList
+    }
+
+    fun clearFilterList() {
+        filterList = mutableListOf()
+        tempFilterList = mutableListOf()
         notifyDataSetChanged()
     }
 

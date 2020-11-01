@@ -56,13 +56,13 @@ class IdolListFragment :
         }
         binding.edSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                idolAdapter?.search(v.text.toString())
+                idolAdapter?.search(v.text.toString(), filterIdolManager.getFilterData())
             }
             false
         }
         binding.edSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                binding.cancelEnable = s.toString().isNotEmpty()
+                checkSearchStatus()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -71,16 +71,24 @@ class IdolListFragment :
         })
         binding.ivCancel.setOnClickListener {
             binding.edSearch.setText("")
+            filterIdolManager.clearFilter()
             idolAdapter?.clearSearch()
+            checkSearchStatus()
         }
         binding.ivOpenFilter.setOnClickListener {
             filterIdolManager.showFilterList()
             binding.drawableLayout.openDrawer(GravityCompat.END)
         }
         binding.navFilter.tvFilterSearch.setOnClickListener {
-            filterIdolManager.getFilterList()
+            idolAdapter?.search(binding.edSearch.text.toString(), filterIdolManager.getFilterData())
+            checkSearchStatus()
             binding.drawableLayout.closeDrawer(GravityCompat.END)
         }
+    }
+
+    private fun checkSearchStatus() {
+        binding.cancelEnable =
+            binding.edSearch.text.toString().isNotEmpty() || filterIdolManager.isFilter
     }
 
     private fun initView() {
@@ -155,8 +163,8 @@ class IdolListFragment :
     }
 
     private fun recoverySearchStatus() {
-        if (binding.edSearch.text.toString().isNotEmpty()) {
-            idolAdapter?.search(binding.edSearch.text.toString())
+        if (binding.edSearch.text.toString().isNotEmpty() || filterIdolManager.isFilter) {
+            idolAdapter?.search(binding.edSearch.text.toString(), filterIdolManager.getFilterData())
         }
     }
 }

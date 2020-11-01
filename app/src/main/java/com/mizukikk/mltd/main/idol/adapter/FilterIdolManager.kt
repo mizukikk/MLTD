@@ -2,13 +2,22 @@ package com.mizukikk.mltd.main.idol.adapter
 
 import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.R
+import com.mizukikk.mltd.main.idol.model.FilterIdolData
 
 class FilterIdolManager {
+
     val idolTypeAdapter: FilterIdolAdapter
     val centerEffectAdapter: FilterIdolAdapter
     val extraTypeAdapter: FilterIdolAdapter
     val rarityAdapter: FilterIdolAdapter
     val skillAdapter: FilterIdolAdapter
+
+    val isFilter
+        get() = idolTypeAdapter.getFilterList().isNotEmpty()
+                || centerEffectAdapter.getFilterList().isNotEmpty()
+                || extraTypeAdapter.getFilterList().isNotEmpty()
+                || rarityAdapter.getFilterList().isNotEmpty()
+                || skillAdapter.getFilterList().isNotEmpty()
 
     init {
         val idolTypeArray =
@@ -43,11 +52,21 @@ class FilterIdolManager {
         skillAdapter.checkFilterBtStatus()
     }
 
-    fun getFilterList() {
-        idolTypeAdapter.getFilterList()
-        centerEffectAdapter.getFilterList()
-        extraTypeAdapter.getFilterList()
-        rarityAdapter.getFilterList()
-        skillAdapter.getFilterList()
+    fun getFilterData() =
+        FilterIdolData(
+            idolTypeAdapter.getFilterList(),
+            centerEffectAdapter.getFilterList(),
+            extraTypeAdapter.getFilterList(),
+            rarityAdapter.getFilterList(),
+            skillAdapter.getFilterList()
+        )
+
+    fun clearFilter() {
+        idolTypeAdapter.clearFilterList()
+        centerEffectAdapter.clearFilterList()
+        extraTypeAdapter.clearFilterList()
+        rarityAdapter.clearFilterList()
+        skillAdapter.clearFilterList()
     }
+
 }
