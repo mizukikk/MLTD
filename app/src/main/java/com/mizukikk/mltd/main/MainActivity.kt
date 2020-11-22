@@ -1,16 +1,19 @@
 package com.mizukikk.mltd.main
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.google.android.material.transition.MaterialContainerTransform
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.ActivityMainBinding
 import com.mizukikk.mltd.main.idol.IdolFragment
 import com.mizukikk.mltd.main.idol.IdolListFragment
+import com.mizukikk.mltd.photo.PhotoActivity
 import com.mizukikk.mltd.room.query.IdolItem
 
 class MainActivity : AppCompatActivity(), InteractiveMainActivity {
@@ -24,6 +27,10 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
         setHomeFragment()
     }
 
+    private fun initSharedElementParameter() {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        window.sharedElementsUseOverlay = true
+    }
 
     private val currentFragment =
         supportFragmentManager.findFragmentById(R.id.container)
@@ -57,5 +64,12 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
             .addSharedElement(shareView, transName)
             .addToBackStack(fragment.javaClass.simpleName)
             .commit()
+    }
+
+    override fun showPhoto(shareView: View, photoUri: Uri) {
+        val transactionName = getString(R.string.activity_photo_transition_name)
+        val opt = ActivityOptionsCompat
+            .makeSceneTransitionAnimation(this, shareView, transactionName)
+        startActivity(PhotoActivity.newIntent(this, photoUri), opt.toBundle())
     }
 }

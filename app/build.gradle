@@ -57,6 +57,8 @@ dependencies {
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-
+    //自動換行layout https://github.com/google/flexbox-layout
     implementation 'com.google.android:flexbox:2.0.1'
+    //圖片手勢縮放  https://github.com/chrisbanes/PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 }

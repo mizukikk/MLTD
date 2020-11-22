@@ -1,16 +1,13 @@
 package com.mizukikk.mltd.main.idol
 
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.ViewCompat
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialContainerTransform
 import com.mizukikk.mltd.R
+import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.databinding.FragmentIdolBinding
-import com.mizukikk.mltd.extension.convertDp2Px
 import com.mizukikk.mltd.main.BaseMainFragment
 import com.mizukikk.mltd.main.idol.model.IdolViewModel
 import com.mizukikk.mltd.room.query.IdolItem
@@ -59,6 +56,22 @@ class IdolFragment :
         binding.title.swAwakened.setOnCheckedChangeListener { buttonView, isChecked ->
             setIdolData(isChecked)
         }
+        binding.ivCard.setOnClickListener {
+            val photoUri = if (binding.title.swAwakened.isChecked) {
+                if (data.idol.rarity == IdolField.Rarity.SSR) {
+                    Uri.parse(data.idol.cardBGAwakenedUrl)
+                } else {
+                    Uri.parse(data.idol.cardAwakenedUrl)
+                }
+            } else {
+                if (data.idol.rarity == IdolField.Rarity.SSR) {
+                    Uri.parse(data.idol.cardBGUrl)
+                } else {
+                    Uri.parse(data.idol.cardUrl)
+                }
+            }
+            parentActivity?.showPhoto(binding.ivCard, photoUri)
+        }
     }
 
     private fun initView() {
@@ -82,10 +95,10 @@ class IdolFragment :
     private fun setIdolData(awakened: Boolean) {
         binding.status.statusData = data.getStatusData(awakened)
         if (awakened) {
-            binding.cardBGUrl = data.idol.cardAwakenedUrl
+            binding.cardBGUrl = data.idol.cardWithSignedAwakenedUrl
             binding.title.iconUrl = data.idol.iconAwakenedUrl
         } else {
-            binding.cardBGUrl = data.idol.cardUrl
+            binding.cardBGUrl = data.idol.cardWithSignedUrl
             binding.title.iconUrl = data.idol.iconUrl
         }
     }

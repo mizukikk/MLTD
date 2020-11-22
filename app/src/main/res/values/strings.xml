@@ -34,4 +34,7 @@
     <string name="fragment_idol_list_filter_skill">技能</string>
     <string name="fragment_idol_list_filter_center_effect">Center效果</string>
     <string name="fragment_idol_list_filter_bt_filter">搜尋</string>
+
+    <!--  PhotoActivity  -->
+    <string name="activity_photo_transition_name" translatable="false">PhotoActivityCard</string>
 </resources>
