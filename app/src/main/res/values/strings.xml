@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MLTDHelper</string>
+    <string name="app_name">MLTD小幫手</string>
     <string name="service_error">service error</string>
 
     <string name="skill_score_up">スコアアップ</string>
@@ -15,15 +15,15 @@
     <string name="skill_empty">---</string>
 
     <!--  IdolFragment  -->
-    <string name="fragment_idol_max_master_rank">明星階級Max :</string>
-    <string name="fragment_idol_life">體力 :</string>
-    <string name="fragment_idol_vocal">歌唱力 :</string>
-    <string name="fragment_idol_dance">舞蹈力 :</string>
-    <string name="fragment_idol_visual">視覺力 :</string>
-    <string name="fragment_idol_total">總表現值 :</string>
-    <string name="fragment_idol_center_effect">Center效果 :</string>
-    <string name="fragment_idol_skill">技能 :</string>
-    <string name="fragment_idol_status_hint">能力為滿等能力，括號為等級與明星階級滿等能力</string>
+    <string name="fragment_idol_max_master_rank">マスターランクMax :</string>
+    <string name="fragment_idol_life">ライフ :</string>
+    <string name="fragment_idol_vocal">ボーカル :</string>
+    <string name="fragment_idol_dance">ダンス :</string>
+    <string name="fragment_idol_visual">ビジュアル :</string>
+    <string name="fragment_idol_total">総アピール :</string>
+    <string name="fragment_idol_center_effect">センター効果 :</string>
+    <string name="fragment_idol_skill">スキル :</string>
+    <string name="fragment_idol_status_hint">括弧はマスターランクMax能力を示します</string>
     <string name="fragment_idol_level">LV :</string>
 
     <!--  IdolListFragment  -->
