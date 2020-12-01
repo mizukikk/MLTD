@@ -8,6 +8,8 @@ import androidx.room.TypeConverters
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.room.convert.IdolTypeConvert
 import kotlinx.android.parcel.Parcelize
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @Parcelize
@@ -59,6 +61,11 @@ data class IdolEntity(
     var skillId: Int?,
     var lang: String?
 ) : Parcelable {
+    val savePicName
+        get() :String {
+            val format = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.getDefault())
+            return "${name}_${format.format(System.currentTimeMillis())}"
+        }
     val cardBGUrl
         get() = IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_0")
     val cardBGAwakenedUrl

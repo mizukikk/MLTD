@@ -70,7 +70,7 @@ class IdolFragment :
                     Uri.parse(data.idol.cardUrl)
                 }
             }
-            parentActivity?.showPhoto(binding.ivCard, photoUri)
+            parentActivity?.showPhoto(binding.ivCard, photoUri, data)
         }
     }
 

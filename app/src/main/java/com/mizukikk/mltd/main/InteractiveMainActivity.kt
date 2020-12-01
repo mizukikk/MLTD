@@ -6,5 +6,9 @@ import com.mizukikk.mltd.room.query.IdolItem
 
 interface InteractiveMainActivity {
     fun setIdolFragment(shareView: View, idolItem: IdolItem)
-    fun showPhoto(shareView: View, photoUri: Uri)
+    fun showPhoto(
+        shareView: View,
+        photoUri: Uri,
+        data: IdolItem
+    )
 }

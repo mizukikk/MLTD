@@ -7,7 +7,7 @@
 
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
@@ -18,5 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:transitionName="@string/activity_photo_transition_name" />
-    </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollFunctions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior=".ui.widget.LockBottomSheet">
+
+            <include
+                android:id="@+id/functions"
+                layout="@layout/item_photo_functions" />
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

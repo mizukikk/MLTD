@@ -24,7 +24,7 @@ abstract class MLTDDatabase : RoomDatabase() {
         fun getInstance() =
             synchronized(MLTDDatabase::class) {
                 INSTANCE ?: Room.databaseBuilder(
-                    MLTDApplication.applicationContext,
+                    MLTDApplication.appContext,
                     MLTDDatabase::class.java,
                     MLTD_DB_NAME
                 ).build()

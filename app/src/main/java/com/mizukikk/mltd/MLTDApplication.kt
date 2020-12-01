@@ -8,7 +8,7 @@ class MLTDApplication : Application() {
 
     companion object {
         private var instance: Application? = null
-        val applicationContext by lazy { instance!!.applicationContext }
+        val appContext by lazy { instance!!.applicationContext }
     }
 
     override fun onCreate() {

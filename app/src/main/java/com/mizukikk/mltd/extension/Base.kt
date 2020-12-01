@@ -2,10 +2,9 @@ package com.mizukikk.mltd.extension
 
 import com.mizukikk.mltd.MLTDApplication
 import java.util.*
-import kotlin.time.milliseconds
 
 fun Float.convertDp2Px(): Float {
-    val density = MLTDApplication.applicationContext.resources.displayMetrics.density
+    val density = MLTDApplication.appContext.resources.displayMetrics.density
     return this * density
 }
 

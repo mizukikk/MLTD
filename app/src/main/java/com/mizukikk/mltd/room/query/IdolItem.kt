@@ -6,7 +6,6 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.R
-import com.mizukikk.mltd.data.Field
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.main.idol.model.IdolStatus
 import com.mizukikk.mltd.room.entity.*
@@ -145,5 +144,5 @@ data class IdolItem(
     }
 
     private fun getString(@StringRes id: Int) =
-        MLTDApplication.applicationContext.getString(id)
+        MLTDApplication.appContext.getString(id)
 }

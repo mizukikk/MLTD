@@ -66,10 +66,14 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
             .commit()
     }
 
-    override fun showPhoto(shareView: View, photoUri: Uri) {
+    override fun showPhoto(
+        shareView: View,
+        photoUri: Uri,
+        data: IdolItem
+    ) {
         val transactionName = getString(R.string.activity_photo_transition_name)
         val opt = ActivityOptionsCompat
             .makeSceneTransitionAnimation(this, shareView, transactionName)
-        startActivity(PhotoActivity.newIntent(this, photoUri), opt.toBundle())
+        startActivity(PhotoActivity.newIntent(this, photoUri, data), opt.toBundle())
     }
 }

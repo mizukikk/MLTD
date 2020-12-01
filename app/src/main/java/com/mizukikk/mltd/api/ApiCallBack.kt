@@ -14,7 +14,7 @@ abstract class ApiCallBack<T> : Callback<T> {
             val body = response.body()!!
             apiSuccess(body, call)
         } else {
-            val message = MLTDApplication.applicationContext.getString(R.string.service_error)
+            val message = MLTDApplication.appContext.getString(R.string.service_error)
             apiFail(message, response.code(), call)
         }
     }
@@ -22,7 +22,7 @@ abstract class ApiCallBack<T> : Callback<T> {
     override fun onFailure(call: Call<T>, t: Throwable) {
         if (BuildConfig.DEBUG)
             t.printStackTrace()
-        val message = MLTDApplication.applicationContext.getString(R.string.service_error)
+        val message = MLTDApplication.appContext.getString(R.string.service_error)
         apiFail(message, null, call)
     }
 

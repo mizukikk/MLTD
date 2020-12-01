@@ -9,12 +9,12 @@ import com.mizukikk.mltd.R
 @BindingAdapter("filterSelect")
 fun setFilterSelect(textView: TextView, filterSelect: Boolean) {
     if (filterSelect) {
-        textView.setTextColor(MLTDApplication.applicationContext.getColor(R.color.white))
+        textView.setTextColor(MLTDApplication.appContext.getColor(R.color.white))
         textView.background =
-            MLTDApplication.applicationContext.getDrawable(R.drawable.bt_filter_select)
+            MLTDApplication.appContext.getDrawable(R.drawable.bt_filter_select)
     } else {
-        textView.setTextColor(MLTDApplication.applicationContext.getColor(R.color.gray))
+        textView.setTextColor(MLTDApplication.appContext.getColor(R.color.gray))
         textView.background =
-            MLTDApplication.applicationContext.getDrawable(R.drawable.bt_filter_unselect)
+            MLTDApplication.appContext.getDrawable(R.drawable.bt_filter_unselect)
     }
 }

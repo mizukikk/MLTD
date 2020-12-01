@@ -21,15 +21,15 @@ class FilterIdolManager {
 
     init {
         val idolTypeArray =
-            MLTDApplication.applicationContext.resources.getStringArray(R.array.idolType)
+            MLTDApplication.appContext.resources.getStringArray(R.array.idolType)
         val rarityArray =
-            MLTDApplication.applicationContext.resources.getStringArray(R.array.rarity)
+            MLTDApplication.appContext.resources.getStringArray(R.array.rarity)
         val extraTypeArray =
-            MLTDApplication.applicationContext.resources.getStringArray(R.array.extraType)
+            MLTDApplication.appContext.resources.getStringArray(R.array.extraType)
         val skillEffectArray =
-            MLTDApplication.applicationContext.resources.getStringArray(R.array.skillEffect)
+            MLTDApplication.appContext.resources.getStringArray(R.array.skillEffect)
         val centerEffectAttributeArray =
-            MLTDApplication.applicationContext.resources.getStringArray(R.array.centerEffectAttribute)
+            MLTDApplication.appContext.resources.getStringArray(R.array.centerEffectAttribute)
         idolTypeAdapter =
             FilterIdolAdapter(idolTypeArray, FilterIdolAdapter.FILTER_TYPE_IDOL_TYPE)
         centerEffectAdapter = FilterIdolAdapter(
