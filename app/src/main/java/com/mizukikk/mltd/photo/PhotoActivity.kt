@@ -128,11 +128,18 @@ class PhotoActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            data?.let {
-                val resultUri = UCrop.getOutput(data)
-                viewModel.savePhoto(resultUri)
+        when (requestCode) {
+            UCrop.REQUEST_CROP -> {
+                if (resultCode == RESULT_OK) {
+                    data?.let {
+                        val resultUri = UCrop.getOutput(data)
+                        viewModel.savePhoto(resultUri, this.data!!.idol.name)
+                    }
+                } else {
+                    viewModel.savePhotoResultEvent.postValue(false)
+                }
             }
         }
+
     }
 }
