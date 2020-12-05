@@ -9,10 +9,13 @@ sealed class IdolListResult {
         val progressText get() = "$progress / $maxProgress"
     }
 
+    data class UpdateIdolData(val update: Boolean, val lastIdolId: Int) : IdolListResult()
+
     companion object {
         fun dbDataEmpty(empty: Boolean) = CheckDB(empty)
         fun downloadResult(success: Boolean, totalItem: Int = 0) = Download(success, totalItem)
         fun setSaveDataProgress(progress: Int, maxProgress: Int) =
             SaveIdolData(progress, maxProgress)
+        fun updateIdolData(update: Boolean, lastIdolId: Int) = UpdateIdolData(update, lastIdolId)
     }
 }

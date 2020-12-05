@@ -1,7 +1,9 @@
 package com.mizukikk.mltd.main.idol.model
 
 import android.app.Application
-import android.util.Log
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
@@ -19,7 +21,6 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     private val TAG = IdolListViewModel::class.java.simpleName
     val idolListLiveData = MutableLiveData<List<IdolItem>>()
     val idolListEvent = SingleLiveEvent<IdolListResult>()
-
     private var lastIdolId = -1
 
     fun checkDBdData() {
@@ -46,53 +47,15 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
                     newIdolList.addAll(result)
                     idolListLiveData.postValue(newIdolList)
                     val nextUpdateMillis = PreferencesHelper.nextUpdateTimeMillis
-                    if (System.currentTimeMillis() >= nextUpdateMillis)
-                        checkUpdate()
+                    val updateData = System.currentTimeMillis() >= nextUpdateMillis
+                    val updateResult = IdolListResult.updateIdolData(updateData, lastIdolId)
+                    idolListEvent.postValue(updateResult)
                 }
 
                 override fun fail() {
                     //do noting
                 }
             })
-    }
-
-    private fun checkUpdate() {
-        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<Card.CardResponse>>() {
-            override fun success(response: List<Card.CardResponse>) {
-                val update = response.isNotEmpty()
-                if (update) {
-                    updateDB()
-                }
-            }
-
-            override fun fail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
-            ) {
-                //do noting
-            }
-        })
-    }
-
-    private fun updateDB() {
-        repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
-            override fun success(response: List<Card.CardResponse>) {
-                val finishProgress = response.size
-                repository.saveAll({ progress ->
-                    if (finishProgress == progress) {
-                        saveNextUpdateTimeMillis()
-                    }
-                }, *response.toTypedArray())
-            }
-
-            override fun fail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
-            ) {
-            }
-        })
     }
 
     private fun saveNextUpdateTimeMillis() {
@@ -140,7 +103,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     private fun saveIdolData(response: List<Card.CardResponse>) {
         val maxProgress = response.size
         repository.saveAll({ progress ->
-            if(maxProgress == progress)
+            if (maxProgress == progress)
                 saveNextUpdateTimeMillis()
             val result = IdolListResult.setSaveDataProgress(progress, maxProgress)
             idolListEvent.postValue(result)

@@ -40,6 +40,10 @@
     <string name="activity_picture_select_pic_size">選擇儲存圖片尺寸</string>
 
     <!--  Toast  -->
-    <string name="toast_save_pic_success">儲存成功</string>
+    <string name="toast_save_pic_success">有新資料下拉刷新後更新!</string>
     <string name="toast_save_pic_fail">儲存失敗</string>
+    <string name="notification_idol_data_updating">更新資料中...</string>
+
+    <!--  notification  -->
+
 </resources>

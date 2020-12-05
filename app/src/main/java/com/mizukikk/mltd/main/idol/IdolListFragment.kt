@@ -1,9 +1,15 @@
 package com.mizukikk.mltd.main.idol
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -16,6 +22,9 @@ import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
 import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
 import com.mizukikk.mltd.main.idol.model.IdolListViewModel
+import com.mizukikk.mltd.main.idol.service.UpdateIdolService
+import com.mizukikk.mltd.utils.ServiceUtils
+import java.lang.Exception
 
 class IdolListFragment :
     BaseMainFragment<IdolListViewModel, FragmentIdolListBinding>(R.layout.fragment_idol_list) {
@@ -29,6 +38,18 @@ class IdolListFragment :
 
     private var idolAdapter: IdolAdapter? = null
     private val filterIdolManager by lazy { FilterIdolManager() }
+    private val updateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.action) {
+                UpdateIdolService.UPDATE_RESULT -> {
+                    context?.let {
+                        Toast.makeText(it, R.string.toast_save_pic_success, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+    }
 
     override fun viewModelClass() = IdolListViewModel::class.java
 
@@ -40,6 +61,23 @@ class IdolListFragment :
         initViewModel()
         setListener()
         getIdolList()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val intent = IntentFilter().apply {
+            addAction(UpdateIdolService.UPDATE_RESULT)
+        }
+        context?.registerReceiver(updateReceiver, intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try {
+            context?.unregisterReceiver(updateReceiver)
+        } catch (e: Exception) {
+            //receiver not register
+        }
     }
 
     private fun getIdolList() {
@@ -151,6 +189,12 @@ class IdolListFragment :
                     binding.load.progressSave.progress = result.progress
                     if (result.saveSuccess)
                         viewModel.getFirstListItem()
+                }
+                is IdolListResult.UpdateIdolData -> {
+                    if (result.update)
+                        context?.let {
+                            UpdateIdolService.start(it, result.lastIdolId)
+                        }
                 }
             }
         })

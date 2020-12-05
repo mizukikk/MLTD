@@ -39,6 +39,7 @@ class MLTDLocalDataSource private constructor(
         }
     }
 
+    @Synchronized
     override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
         dbExecutor.dbIOThread.execute {
             var progress = 0
