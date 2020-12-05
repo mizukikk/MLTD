@@ -67,9 +67,19 @@ data class IdolEntity(
             return "${name}_${format.format(System.currentTimeMillis())}"
         }
     val cardBGUrl
-        get() = IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_0")
+        get() = when (extraType) {
+            IdolField.ExtraType.ANVI_1,
+            IdolField.ExtraType.ANVI_2,
+            IdolField.ExtraType.ANVI_3 -> IdolField.URL.CARD_FORMAT.format("${resourceId}_0_b")
+            else -> IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_0")
+        }
     val cardBGAwakenedUrl
-        get() = IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_1")
+        get() = when (extraType) {
+            IdolField.ExtraType.ANVI_1,
+            IdolField.ExtraType.ANVI_2,
+            IdolField.ExtraType.ANVI_3 -> IdolField.URL.CARD_FORMAT.format("${resourceId}_1_b")
+            else -> IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_1_b")
+        }
 
     val cardWithSignedUrl
         get() =
