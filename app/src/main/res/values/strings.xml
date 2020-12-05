@@ -42,8 +42,18 @@
     <!--  Toast  -->
     <string name="toast_save_pic_success">有新資料下拉刷新後更新!</string>
     <string name="toast_save_pic_fail">儲存失敗</string>
+
+    <!--  Notification  -->
     <string name="notification_idol_data_updating">更新資料中...</string>
 
-    <!--  notification  -->
+    <!--  MainActivity navigation item  -->
+    <string name="nav_main_card">卡片</string>
+    <string name="nav_main_about">關於</string>
+    <string name="nav_title_function">功能</string>
+    <string name="nav_title_settings">設定</string>
+
+    <!--  AboutActivity  -->
+    <string name="activity_about_message">此 APP 為非官方遊戲資料查詢 APP 與 偶像大師 百萬人演唱會！ 劇場時光、アイドルマスター ミリオンライブ! シアターデイズ 無任何關係， APP 內遊戲相關資訊版權皆屬於 BANDAI NAMCO Entertainment。</string>
+    <string name="activity_about_api_by">api by <u>https://api.matsurihi.me/docs/</u></string>
 
 </resources>

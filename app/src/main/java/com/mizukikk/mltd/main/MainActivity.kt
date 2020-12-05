@@ -6,9 +6,11 @@ import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.mizukikk.mltd.AboutActivity
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.ActivityMainBinding
 import com.mizukikk.mltd.main.idol.IdolFragment
@@ -24,7 +26,27 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        initView()
+        setListener()
         setHomeFragment()
+    }
+
+    private fun setListener() {
+        binding.about.root.setOnClickListener {
+            binding.drawableLayout.closeDrawer(GravityCompat.START)
+            val intent = AboutActivity.newIntent(this)
+            startActivity(intent)
+        }
+        binding.card.root.setOnClickListener {
+            binding.drawableLayout.closeDrawer(GravityCompat.START)
+        }
+    }
+
+    private fun initView() {
+        binding.card.tvFunction.text = getString(R.string.nav_main_card)
+        binding.card.ivIcon.setImageResource(R.drawable.ic_people)
+        binding.about.tvFunction.text = getString(R.string.nav_main_about)
+        binding.about.ivIcon.setImageResource(R.drawable.ic_setting)
     }
 
     private fun initSharedElementParameter() {
