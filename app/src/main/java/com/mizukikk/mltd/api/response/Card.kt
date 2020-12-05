@@ -66,7 +66,7 @@ class Card {
         @SerializedName("idolId")
         val idolId: Int,
         @Expose
-        @SerializedName("idolType")
+        @SerializedName("idolType.txt")
         val idolType: Int,
         @Expose
         @SerializedName("levelMax")
@@ -244,7 +244,7 @@ class Card {
         @SerializedName("id")
         val id: Int,
         @Expose
-        @SerializedName("idolType")
+        @SerializedName("idolType.txt")
         val idolType: Int,
         @Expose
         @SerializedName("value")

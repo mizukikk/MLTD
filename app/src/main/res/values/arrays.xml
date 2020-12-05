@@ -4,48 +4,4 @@
         <item>原圖</item>
         <item>手機大小</item>
     </string-array>
-    <string-array name="idolType">
-        <item>Princess</item>
-        <item>Fairy</item>
-        <item>Angel</item>
-        <item>Ex</item>
-    </string-array>
-    <string-array name="rarity">
-        <item>N</item>
-        <item>R</item>
-        <item>SR</item>
-        <item>SSR</item>
-    </string-array>
-    <string-array name="extraType">
-        <item>なし</item>
-        <item>PST ランキング報酬</item>
-        <item>PST ポイント報酬</item>
-        <item>フェス</item>
-        <item>1 周年イベント報酬</item>
-        <item>Extra カード</item>
-        <item>2 周年イベント報酬</item>
-        <item>Extra PST ランキング報酬</item>
-        <item>Extra PST ポイント報酬</item>
-        <item>3 周年イベント報酬</item>
-    </string-array>
-    <string-array name="skillEffect">
-        <item>スコアアップ</item>
-        <item>コンボボーナス</item>
-        <item>ライフ回復</item>
-        <item>ダメージガード</item>
-        <item>コンボ継続</item>
-        <item>判定強化</item>
-        <item>ダブルブースト</item>
-        <item>マルチアップ</item>
-        <item>オーバークロック</item>
-        <item>オーバーロンド</item>
-    </string-array>
-    <string-array name="centerEffectAttribute">
-        <item>ボーカル値</item>
-        <item>ダンス値</item>
-        <item>ビジュアル値</item>
-        <item>全アピール値</item>
-        <item>ライフ</item>
-        <item>スキル発動率</item>
-    </string-array>
 </resources>

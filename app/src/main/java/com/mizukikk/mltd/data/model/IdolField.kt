@@ -8,6 +8,14 @@ object IdolField {
         const val COSTUME_FORMAT = "https://storage.matsurihi.me/mltd/costume_icon_ll/%s.png"
     }
 
+    object FilePath {
+        const val IDOL_TYPE = "idolType.txt"
+        const val CENTER_EFFECT = "centerEffect.txt"
+        const val EXTRA_TYPE = "extraType.txt"
+        const val SKILL = "skill.txt"
+        const val RARITY = "rarity.txt"
+    }
+
     object IdolType {
         const val PRINCESS = 1
         const val FAIRY = 2

@@ -1,0 +1,26 @@
+[
+    {
+        "type": "Princess",
+        "value": [
+            1
+        ]
+    },
+    {
+        "type": "Fairy",
+        "value": [
+            2
+        ]
+    },
+    {
+        "type": "Angel",
+        "value": [
+            3
+        ]
+    },
+    {
+        "type": "Ex",
+        "value": [
+            4
+        ]
+    }
+]

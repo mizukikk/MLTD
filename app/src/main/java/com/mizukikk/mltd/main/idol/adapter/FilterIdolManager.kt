@@ -1,16 +1,40 @@
 package com.mizukikk.mltd.main.idol.adapter
 
-import com.mizukikk.mltd.MLTDApplication
-import com.mizukikk.mltd.R
-import com.mizukikk.mltd.main.idol.model.FilterIdolData
+import com.mizukikk.mltd.main.idol.model.*
 
-class FilterIdolManager {
+class FilterIdolManager(
+    val centerEffectList: List<CenterEffect>,
+    val extraTypeList: List<ExtraType>,
+    val idolTypeList: List<IdolType>,
+    val rarityList: List<Rarity>,
+    val skillList: List<Skill>
+) {
 
-    val idolTypeAdapter: FilterIdolAdapter
-    val centerEffectAdapter: FilterIdolAdapter
-    val extraTypeAdapter: FilterIdolAdapter
-    val rarityAdapter: FilterIdolAdapter
-    val skillAdapter: FilterIdolAdapter
+    val idolTypeAdapter by lazy {
+        FilterIdolAdapter(
+            idolTypeList,
+            FilterIdolAdapter.FILTER_TYPE_IDOL_TYPE
+        )
+    }
+    val centerEffectAdapter by lazy {
+        FilterIdolAdapter(
+            centerEffectList,
+            FilterIdolAdapter.FILTER_TYPE_CENTER_EFFECT
+        )
+    }
+    val extraTypeAdapter by lazy {
+        FilterIdolAdapter(
+            extraTypeList,
+            FilterIdolAdapter.FILTER_TYPE_EXTRA_TYPE
+        )
+    }
+    val rarityAdapter by lazy {
+        FilterIdolAdapter(
+            rarityList,
+            FilterIdolAdapter.FILTER_TYPE_RARITY
+        )
+    }
+    val skillAdapter by lazy { FilterIdolAdapter(skillList, FilterIdolAdapter.FILTER_TYPE_SKILL) }
 
     val isFilter
         get() = idolTypeAdapter.getFilterList().isNotEmpty()
@@ -18,31 +42,6 @@ class FilterIdolManager {
                 || extraTypeAdapter.getFilterList().isNotEmpty()
                 || rarityAdapter.getFilterList().isNotEmpty()
                 || skillAdapter.getFilterList().isNotEmpty()
-
-    init {
-        val idolTypeArray =
-            MLTDApplication.appContext.resources.getStringArray(R.array.idolType)
-        val rarityArray =
-            MLTDApplication.appContext.resources.getStringArray(R.array.rarity)
-        val extraTypeArray =
-            MLTDApplication.appContext.resources.getStringArray(R.array.extraType)
-        val skillEffectArray =
-            MLTDApplication.appContext.resources.getStringArray(R.array.skillEffect)
-        val centerEffectAttributeArray =
-            MLTDApplication.appContext.resources.getStringArray(R.array.centerEffectAttribute)
-        idolTypeAdapter =
-            FilterIdolAdapter(idolTypeArray, FilterIdolAdapter.FILTER_TYPE_IDOL_TYPE)
-        centerEffectAdapter = FilterIdolAdapter(
-            centerEffectAttributeArray,
-            FilterIdolAdapter.FILTER_TYPE_CENTER_EFFECT
-        )
-        extraTypeAdapter =
-            FilterIdolAdapter(extraTypeArray, FilterIdolAdapter.FILTER_TYPE_EXTRA_TYPE)
-        rarityAdapter =
-            FilterIdolAdapter(rarityArray, FilterIdolAdapter.FILTER_TYPE_RARITY)
-        skillAdapter =
-            FilterIdolAdapter(skillEffectArray, FilterIdolAdapter.FILTER_TYPE_SKILL)
-    }
 
     fun showFilterList() {
         idolTypeAdapter.checkFilterBtStatus()

@@ -37,7 +37,7 @@ class IdolListFragment :
     }
 
     private var idolAdapter: IdolAdapter? = null
-    private val filterIdolManager by lazy { FilterIdolManager() }
+    private var filterIdolManager: FilterIdolManager? = null
     private val updateReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
@@ -60,7 +60,12 @@ class IdolListFragment :
         initView()
         initViewModel()
         setListener()
+        getFilterData()
         getIdolList()
+    }
+
+    private fun getFilterData() {
+        viewModel.getFilterData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,14 +98,14 @@ class IdolListFragment :
             parentActivity?.setIdolFragment(shareView, idolItem)
         }
         binding.idol.refresh.setOnRefreshListener {
-            filterIdolManager.clearFilter()
+            filterIdolManager?.clearFilter()
             binding.edSearch.edSearch.setText("")
             binding.edSearch.clearFocus()
             viewModel.refreshData()
         }
         binding.edSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                idolAdapter?.search(v.text.toString(), filterIdolManager.getFilterData())
+                idolAdapter?.search(v.text.toString(), filterIdolManager?.getFilterData())
             }
             false
         }
@@ -115,16 +120,19 @@ class IdolListFragment :
         })
         binding.ivCancel.setOnClickListener {
             binding.edSearch.setText("")
-            filterIdolManager.clearFilter()
+            filterIdolManager?.clearFilter()
             idolAdapter?.clearSearch()
             checkSearchStatus()
         }
         binding.ivOpenFilter.setOnClickListener {
-            filterIdolManager.showFilterList()
+            filterIdolManager?.showFilterList()
             binding.drawableLayout.openDrawer(GravityCompat.END)
         }
         binding.navFilter.tvFilterSearch.setOnClickListener {
-            idolAdapter?.search(binding.edSearch.text.toString(), filterIdolManager.getFilterData())
+            idolAdapter?.search(
+                binding.edSearch.text.toString(),
+                filterIdolManager?.getFilterData()
+            )
             checkSearchStatus()
             binding.drawableLayout.closeDrawer(GravityCompat.END)
         }
@@ -132,7 +140,7 @@ class IdolListFragment :
 
     private fun checkSearchStatus() {
         binding.cancelEnable =
-            binding.edSearch.text.toString().isNotEmpty() || filterIdolManager.isFilter
+            binding.edSearch.text.toString().isNotEmpty() || filterIdolManager?.isFilter ?: false
     }
 
     private fun initView() {
@@ -147,12 +155,6 @@ class IdolListFragment :
         binding.navFilter.rvExtraType.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvRarity.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvSkill.layoutManager = FlexboxLayoutManager(requireContext())
-
-        binding.navFilter.rvIdolType.adapter = filterIdolManager.idolTypeAdapter
-        binding.navFilter.rvCenterEffect.adapter = filterIdolManager.centerEffectAdapter
-        binding.navFilter.rvExtraType.adapter = filterIdolManager.extraTypeAdapter
-        binding.navFilter.rvRarity.adapter = filterIdolManager.rarityAdapter
-        binding.navFilter.rvSkill.adapter = filterIdolManager.skillAdapter
     }
 
     private fun initDrawableLayout() {
@@ -211,11 +213,22 @@ class IdolListFragment :
             idolAdapter?.swapData(idolList)
             recoverySearchStatus()
         })
+        viewModel.filterIdolManagerLiveData.observe(this, Observer {
+            filterIdolManager = it
+            binding.navFilter.rvIdolType.adapter = filterIdolManager?.idolTypeAdapter
+            binding.navFilter.rvCenterEffect.adapter = filterIdolManager?.centerEffectAdapter
+            binding.navFilter.rvExtraType.adapter = filterIdolManager?.extraTypeAdapter
+            binding.navFilter.rvRarity.adapter = filterIdolManager?.rarityAdapter
+            binding.navFilter.rvSkill.adapter = filterIdolManager?.skillAdapter
+        })
     }
 
     private fun recoverySearchStatus() {
-        if (binding.edSearch.text.toString().isNotEmpty() || filterIdolManager.isFilter) {
-            idolAdapter?.search(binding.edSearch.text.toString(), filterIdolManager.getFilterData())
+        if (binding.edSearch.text.toString().isNotEmpty() || filterIdolManager?.isFilter == true) {
+            idolAdapter?.search(
+                binding.edSearch.text.toString(),
+                filterIdolManager?.getFilterData()
+            )
         }
     }
 }

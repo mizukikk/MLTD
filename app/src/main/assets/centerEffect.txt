@@ -1,0 +1,38 @@
+[
+    {
+        "centerEffect": "ボーカル値",
+        "value": [
+            1
+        ]
+    },
+    {
+        "centerEffect": "ダンス値",
+        "value": [
+            2
+        ]
+    },
+    {
+        "centerEffect": "ビジュアル値",
+        "value": [
+            3
+        ]
+    },
+    {
+        "centerEffect": "全アピール値",
+        "value": [
+            4
+        ]
+    },
+    {
+        "centerEffect": "ライフ",
+        "value": [
+            5
+        ]
+    },
+    {
+        "centerEffect": "スキル発動率",
+        "value": [
+            6
+        ]
+    }
+]

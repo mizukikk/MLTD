@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.databinding.ItemFilterIdolBinding
+import com.mizukikk.mltd.main.idol.model.*
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 
-class FilterIdolAdapter(private val filterArray: Array<String>, private val filterType: Int) :
+class FilterIdolAdapter(private val filterArray: List<Any>, private val filterType: Int) :
     RecyclerView.Adapter<FilterIdolAdapter.FilterIdolHolder>() {
 
     companion object {
@@ -60,21 +61,35 @@ class FilterIdolAdapter(private val filterArray: Array<String>, private val filt
 
     inner class FilterIdolHolder(binding: ViewDataBinding) :
         BaseViewHolder<ItemFilterIdolBinding>(binding) {
-        fun bindData(text: String) {
-            binding.tvFilter.text = text
-            val filterData = getFilterData()
-            binding.filterSelect = filterList.contains(filterData)
+        fun bindData(data: Any) {
+            binding.tvFilter.text = when (data) {
+                is CenterEffect -> data.centerEffect
+                is ExtraType -> data.extraType
+                is IdolType -> data.type
+                is Skill -> data.skill
+                is Rarity -> data.rarity
+                else -> null
+            }
+            val filterDataList = when (data) {
+                is CenterEffect -> data.value
+                is ExtraType -> data.value
+                is IdolType -> data.value
+                is Skill -> data.value
+                is Rarity -> data.value
+                else -> mutableListOf()
+            }
+            binding.filterSelect = filterList.containsAll(filterDataList)
             binding.tvFilter.setOnClickListener {
                 when (binding.tvFilter.currentTextColor) {
                     getColor(R.color.white) -> {
                         binding.filterSelect = false
-                        if (tempFilterList.contains(filterData))
-                            tempFilterList.remove(filterData)
+                        if (tempFilterList.containsAll(filterDataList))
+                            tempFilterList.removeAll(filterDataList)
                     }
                     getColor(R.color.gray) -> {
                         binding.filterSelect = true
-                        if (tempFilterList.contains(filterData).not())
-                            tempFilterList.add(filterData)
+                        if (tempFilterList.containsAll(filterDataList).not())
+                            tempFilterList.addAll(filterDataList)
 
                     }
                 }

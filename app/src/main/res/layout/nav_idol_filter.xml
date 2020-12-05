@@ -56,7 +56,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/fragment_idol_list_filter_extra_type"
-                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,8 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:overScrollMode="never"
-                android:visibility="gone" />
+                android:overScrollMode="never" />
 
             <TextView
                 style="@style/H4B"

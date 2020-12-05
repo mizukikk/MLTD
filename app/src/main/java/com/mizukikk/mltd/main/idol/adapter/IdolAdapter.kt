@@ -38,7 +38,7 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
         this.listener = listener
     }
 
-    fun search(searchText: String, filterData: FilterIdolData) {
+    fun search(searchText: String, filterData: FilterIdolData?) {
         synchronized(this) {
             filterList = idolList.filter {
                 if (searchText.isEmpty())
@@ -46,26 +46,28 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
                 else
                     it.idol.name.contains(searchText)
             }
-            if (filterData.idolTypeFilterList.isNotEmpty())
-                filterList = filterList.filter {
-                    filterData.idolTypeFilterList.contains(it.idol.idolType)
-                }
-            if (filterData.centerEffectFilterList.isNotEmpty())
-                filterList = filterList.filter {
-                    filterData.centerEffectFilterList.contains(it.centerEffectEntity?.attribute)
-                }
-            if (filterData.extraTypeFilterList.isNotEmpty())
-                filterList = filterList.filter {
-                    filterData.extraTypeFilterList.contains(it.skill?.effectId)
-                }
-            if (filterData.rarityFilterList.isNotEmpty())
-                filterList = filterList.filter {
-                    filterData.rarityFilterList.contains(it.idol.rarity)
-                }
-            if (filterData.skillFilterList.isNotEmpty())
-                filterList = filterList.filter {
-                    filterData.skillFilterList.contains(it.skill?.effectId)
-                }
+            filterData?.let {
+                if (filterData.idolTypeFilterList.isNotEmpty())
+                    filterList = filterList.filter {
+                        filterData.idolTypeFilterList.contains(it.idol.idolType)
+                    }
+                if (filterData.centerEffectFilterList.isNotEmpty())
+                    filterList = filterList.filter {
+                        filterData.centerEffectFilterList.contains(it.centerEffectEntity?.attribute)
+                    }
+                if (filterData.extraTypeFilterList.isNotEmpty())
+                    filterList = filterList.filter {
+                        filterData.extraTypeFilterList.contains(it.idol.extraType)
+                    }
+                if (filterData.rarityFilterList.isNotEmpty())
+                    filterList = filterList.filter {
+                        filterData.rarityFilterList.contains(it.idol.rarity)
+                    }
+                if (filterData.skillFilterList.isNotEmpty())
+                    filterList = filterList.filter {
+                        filterData.skillFilterList.contains(it.skill?.effectId)
+                    }
+            }
             notifyDataSetChanged()
         }
     }

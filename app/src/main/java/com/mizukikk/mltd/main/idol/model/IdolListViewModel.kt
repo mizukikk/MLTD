@@ -1,22 +1,29 @@
 package com.mizukikk.mltd.main.idol.model
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.extension.nextUpdateTimeMillis
 import com.mizukikk.mltd.livedata.SingleLiveEvent
+import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
 import com.mizukikk.mltd.main.model.BaseMainViewModel
 import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.entity.IdolEntity
 import com.mizukikk.mltd.room.query.IdolItem
+import com.mizukikk.mltd.utils.GsonUtils
 import retrofit2.Call
 
 class IdolListViewModel(application: Application) : BaseMainViewModel(application) {
 
     private val TAG = IdolListViewModel::class.java.simpleName
     val idolListLiveData = MutableLiveData<List<IdolItem>>()
+    val filterIdolManagerLiveData = MutableLiveData<FilterIdolManager>()
     val idolListEvent = SingleLiveEvent<IdolListResult>()
     private var lastIdolId = -1
 
@@ -109,5 +116,40 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
 
     fun refreshData() {
         getIdolListItem()
+    }
+
+    fun getFilterData() {
+        if (filterIdolManagerLiveData.value == null) {
+            val centerEffect = getAssetsDataText(IdolField.FilePath.CENTER_EFFECT)
+            val extraType = getAssetsDataText(IdolField.FilePath.EXTRA_TYPE)
+            val idolType = getAssetsDataText(IdolField.FilePath.IDOL_TYPE)
+            val rarity = getAssetsDataText(IdolField.FilePath.RARITY)
+            val skill = getAssetsDataText(IdolField.FilePath.SKILL)
+            val centerEffectList = GsonUtils.toList<List<CenterEffect>>(centerEffect,
+                object : TypeToken<List<CenterEffect>>() {}.type
+            )
+            val extraTypeList = GsonUtils.toList<List<ExtraType>>(
+                extraType,
+                object : TypeToken<List<ExtraType>>() {}.type
+            )
+            val idolTypeList =
+                GsonUtils.toList<List<IdolType>>(
+                    idolType,
+                    object : TypeToken<List<IdolType>>() {}.type
+                )
+            val rarityList =
+                GsonUtils.toList<List<Rarity>>(rarity, object : TypeToken<List<Rarity>>() {}.type)
+            val skillList =
+                GsonUtils.toList<List<Skill>>(skill, object : TypeToken<List<Skill>>() {}.type)
+            val filterIdolManager =
+                FilterIdolManager(
+                    centerEffectList,
+                    extraTypeList,
+                    idolTypeList,
+                    rarityList,
+                    skillList
+                )
+            filterIdolManagerLiveData.postValue(filterIdolManager)
+        }
     }
 }

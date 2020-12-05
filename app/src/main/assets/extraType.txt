@@ -1,0 +1,38 @@
+[
+    {
+        "extraType": "PST 報酬",
+        "value": [
+            2,3,8,9
+        ]
+    },
+    {
+        "extraType": "フェス",
+        "value": [
+            4
+        ]
+    },
+    {
+        "extraType": "1 周年イベント報酬",
+        "value": [
+            5
+        ]
+    },
+    {
+        "extraType": "Extra カード",
+        "value": [
+            6
+        ]
+    },
+    {
+        "extraType": "2 周年イベント報酬",
+        "value": [
+            7
+        ]
+    },
+    {
+        "extraType": "3 周年イベント報酬",
+        "value": [
+            10
+        ]
+    }
+]
