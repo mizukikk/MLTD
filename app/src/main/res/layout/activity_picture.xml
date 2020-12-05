@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".photo.PhotoActivity">
+        tools:context=".picture.PictureActivity">
 
         <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/ivCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:transitionName="@string/activity_photo_transition_name" />
+            android:transitionName="@string/activity_picture_transition_name" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollFunctions"

@@ -22,6 +22,6 @@
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:tint="@color/white"
-            app:srcCompat="@android:drawable/ic_menu_save" />
+            app:srcCompat="@drawable/ic_save" />
     </LinearLayout>
 </layout>

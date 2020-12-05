@@ -13,7 +13,7 @@ import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.ActivityMainBinding
 import com.mizukikk.mltd.main.idol.IdolFragment
 import com.mizukikk.mltd.main.idol.IdolListFragment
-import com.mizukikk.mltd.photo.PhotoActivity
+import com.mizukikk.mltd.picture.PictureActivity
 import com.mizukikk.mltd.room.query.IdolItem
 
 class MainActivity : AppCompatActivity(), InteractiveMainActivity {
@@ -71,9 +71,9 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
         photoUri: Uri,
         data: IdolItem
     ) {
-        val transactionName = getString(R.string.activity_photo_transition_name)
+        val transactionName = getString(R.string.activity_picture_transition_name)
         val opt = ActivityOptionsCompat
             .makeSceneTransitionAnimation(this, shareView, transactionName)
-        startActivity(PhotoActivity.newIntent(this, photoUri, data), opt.toBundle())
+        startActivity(PictureActivity.newIntent(this, photoUri, data), opt.toBundle())
     }
 }

@@ -3,6 +3,8 @@
     package="com.mizukikk.mltd">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MLTDApplication"
@@ -13,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".photo.PhotoActivity"
+            android:name=".picture.PictureActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".main.MainActivity"

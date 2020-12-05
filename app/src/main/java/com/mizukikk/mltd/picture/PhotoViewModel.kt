@@ -1,4 +1,4 @@
-package com.mizukikk.mltd.photo
+package com.mizukikk.mltd.picture
 
 import android.app.Application
 import android.graphics.drawable.BitmapDrawable
@@ -59,6 +59,14 @@ class PhotoViewModel(application: Application) : BaseMainViewModel(application) 
                 }
             })
             .submit()
+    }
+
+    fun getCropCacheDir(): String {
+        val cropCacheDir = "${MLTDApplication.appContext.cacheDir}/crop"
+        val file = File(cropCacheDir)
+        if (file.exists().not())
+            file.mkdir()
+        return cropCacheDir
     }
 
 }

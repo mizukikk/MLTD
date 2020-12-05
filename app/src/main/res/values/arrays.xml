@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="savePhotoSize">
+        <item>原圖</item>
+        <item>手機大小</item>
+    </string-array>
     <string-array name="idolType">
         <item>Princess</item>
         <item>Fairy</item>
