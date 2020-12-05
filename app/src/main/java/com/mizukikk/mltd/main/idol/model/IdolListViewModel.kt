@@ -1,9 +1,6 @@
 package com.mizukikk.mltd.main.idol.model
 
 import android.app.Application
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
@@ -37,7 +34,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
         })
     }
 
-    fun getFirstListItem() {
+    fun getIdolListItem() {
         repository.getIdolList(
             lastIdolId,
             PreferencesHelper.apiLanguage,
@@ -108,5 +105,9 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
             val result = IdolListResult.setSaveDataProgress(progress, maxProgress)
             idolListEvent.postValue(result)
         }, *response.toTypedArray())
+    }
+
+    fun refreshData() {
+        getIdolListItem()
     }
 }

@@ -23,7 +23,7 @@ import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
 import com.mizukikk.mltd.main.idol.model.IdolListViewModel
 import com.mizukikk.mltd.main.idol.service.UpdateIdolService
-import com.mizukikk.mltd.utils.ServiceUtils
+import kotlinx.android.synthetic.main.fragment_idol_list.view.*
 import java.lang.Exception
 
 class IdolListFragment :
@@ -91,6 +91,12 @@ class IdolListFragment :
     private fun setListener() {
         idolAdapter?.setIdolListListener { shareView, idolItem ->
             parentActivity?.setIdolFragment(shareView, idolItem)
+        }
+        binding.idol.refresh.setOnRefreshListener {
+            filterIdolManager.clearFilter()
+            binding.edSearch.edSearch.setText("")
+            binding.edSearch.clearFocus()
+            viewModel.refreshData()
         }
         binding.edSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -169,7 +175,7 @@ class IdolListFragment :
                         viewModel.downloadAllCard()
                     } else {
                         binding.showList = true
-                        viewModel.getFirstListItem()
+                        viewModel.getIdolListItem()
                     }
                 }
                 is IdolListResult.Download -> {
@@ -188,7 +194,7 @@ class IdolListFragment :
                     binding.load.tvProgress.text = result.progressText
                     binding.load.progressSave.progress = result.progress
                     if (result.saveSuccess)
-                        viewModel.getFirstListItem()
+                        viewModel.getIdolListItem()
                 }
                 is IdolListResult.UpdateIdolData -> {
                     if (result.update)
@@ -199,6 +205,7 @@ class IdolListFragment :
             }
         })
         viewModel.idolListLiveData.observe(this, Observer { idolList ->
+            binding.idol.refresh.isRefreshing = false
             binding.showList = true
             binding.load.loading = false
             idolAdapter?.swapData(idolList)
