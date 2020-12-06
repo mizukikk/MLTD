@@ -43,7 +43,7 @@ class IdolListFragment :
             when (intent?.action) {
                 UpdateIdolService.UPDATE_RESULT -> {
                     context?.let {
-                        Toast.makeText(it, R.string.toast_save_pic_success, Toast.LENGTH_SHORT)
+                        Toast.makeText(it, R.string.toast_update_idol_data_success, Toast.LENGTH_SHORT)
                             .show()
                     }
                 }

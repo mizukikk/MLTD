@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">MLTD小幫手</string>
+    <string name="app_name_release">MLTD小幫手</string>
+    <string name="app_name_dev">MLTD小幫手Dev</string>
     <string name="service_error">service error</string>
 
     <string name="skill_score_up">スコアアップ</string>
@@ -40,7 +41,8 @@
     <string name="activity_picture_select_pic_size">選擇儲存圖片尺寸</string>
 
     <!--  Toast  -->
-    <string name="toast_save_pic_success">有新資料下拉刷新後更新!</string>
+    <string name="toast_update_idol_data_success">有新資料下拉刷新後更新!</string>
+    <string name="toast_save_pic_success">儲存成功</string>
     <string name="toast_save_pic_fail">儲存失敗</string>
 
     <!--  Notification  -->
