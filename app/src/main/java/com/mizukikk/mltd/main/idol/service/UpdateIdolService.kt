@@ -1,5 +1,7 @@
 package com.mizukikk.mltd.main.idol.service
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
@@ -7,6 +9,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.mizukikk.mltd.Inject
 import com.mizukikk.mltd.R
@@ -54,12 +57,23 @@ class UpdateIdolService : Service() {
             Intent(this, MainActivity::class.java).let { notificationIntent ->
                 PendingIntent.getActivity(this, 0, notificationIntent, 0)
             }
+        val nm = NotificationManagerCompat.from(this)
         val notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(android.R.drawable.stat_sys_download_done)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.notification_idol_data_updating))
             .setContentIntent(pendingIntent)
             .build()
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                "更新資料通知",
+                NotificationManager.IMPORTANCE_LOW
+            )
+            nm.createNotificationChannel(channel)
+        }
+
         startForeground(FOREGROUND_NOTIFICATION_ID, notification)
     }
 
