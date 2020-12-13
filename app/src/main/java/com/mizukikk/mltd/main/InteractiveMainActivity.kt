@@ -11,4 +11,5 @@ interface InteractiveMainActivity {
         photoUri: Uri,
         data: IdolItem
     )
+    fun showNavMenu()
 }

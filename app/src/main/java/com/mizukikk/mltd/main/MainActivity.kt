@@ -98,4 +98,8 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
             .makeSceneTransitionAnimation(this, shareView, transactionName)
         startActivity(PictureActivity.newIntent(this, photoUri, data), opt.toBundle())
     }
+
+    override fun showNavMenu() {
+        binding.drawableLayout.openDrawer(GravityCompat.START)
+    }
 }

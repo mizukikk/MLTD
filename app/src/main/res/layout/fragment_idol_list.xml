@@ -56,12 +56,24 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:id="@+id/ivSearch"
+                                android:id="@+id/ivMenu"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="4dp"
                                 android:padding="5dp"
+                                android:tint="@color/gray"
+                                app:srcCompat="@drawable/ic_menu" />
+
+                            <ImageView
+                                android:id="@+id/ivSearch"
+                                android:visibility="gone"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="4dp"
+                                android:padding="5dp"
+                                android:tint="@color/gray"
                                 app:srcCompat="@drawable/ic_search" />
 
                             <EditText
@@ -98,6 +110,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:padding="5dp"
+                            android:tint="@color/gray"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -139,11 +152,11 @@
             android:layout_gravity="end">
 
 
-                <include
-                    android:id="@+id/navFilter"
-                    layout="@layout/nav_idol_filter"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+            <include
+                android:id="@+id/navFilter"
+                layout="@layout/nav_idol_filter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

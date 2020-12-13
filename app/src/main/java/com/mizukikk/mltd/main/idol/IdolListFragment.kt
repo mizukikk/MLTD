@@ -43,7 +43,11 @@ class IdolListFragment :
             when (intent?.action) {
                 UpdateIdolService.UPDATE_RESULT -> {
                     context?.let {
-                        Toast.makeText(it, R.string.toast_update_idol_data_success, Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            it,
+                            R.string.toast_update_idol_data_success,
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 }
@@ -118,6 +122,9 @@ class IdolListFragment :
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+        binding.ivMenu.setOnClickListener {
+            parentActivity?.showNavMenu()
+        }
         binding.ivCancel.setOnClickListener {
             binding.edSearch.setText("")
             filterIdolManager?.clearFilter()
