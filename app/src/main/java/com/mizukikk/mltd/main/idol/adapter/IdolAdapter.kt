@@ -44,7 +44,7 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
                 if (searchText.isEmpty())
                     true
                 else
-                    it.idol.name.contains(searchText)
+                    it.idol.name.toLowerCase().contains(searchText.toLowerCase())
             }
             filterData?.let {
                 if (filterData.idolTypeFilterList.isNotEmpty())
