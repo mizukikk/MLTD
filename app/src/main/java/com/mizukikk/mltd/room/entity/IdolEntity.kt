@@ -78,7 +78,7 @@ data class IdolEntity(
             IdolField.ExtraType.ANVI_1,
             IdolField.ExtraType.ANVI_2,
             IdolField.ExtraType.ANVI_3 -> IdolField.URL.CARD_FORMAT.format("${resourceId}_1_b")
-            else -> IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_1_b")
+            else -> IdolField.URL.CARD_BG_FORMAT.format("${resourceId}_1")
         }
 
     val cardWithSignedUrl
