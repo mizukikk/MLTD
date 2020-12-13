@@ -22,7 +22,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_preview_idol_icon" />
+            app:srcCompat="@mipmap/app_icon" />
 
 
         <TextView
