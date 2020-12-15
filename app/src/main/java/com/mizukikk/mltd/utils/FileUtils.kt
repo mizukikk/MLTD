@@ -19,7 +19,7 @@ import java.util.*
 
 object FileUtils {
 
-    private const val PICTURI_DIR_NAME = "gemcard"
+    private const val PICTURI_DIR_NAME = "mltd"
     private const val SAVE_MIME_TYPE = "image/png"
 
     @Throws(IOException::class)
@@ -63,7 +63,7 @@ object FileUtils {
         format: Bitmap.CompressFormat, mimeType: String,
         displayName: String
     ) {
-        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/cardcool"
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/$PICTURI_DIR_NAME"
         val contentValues = ContentValues()
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
