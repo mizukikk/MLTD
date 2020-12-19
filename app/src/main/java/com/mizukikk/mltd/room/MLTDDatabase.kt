@@ -19,7 +19,7 @@ import com.mizukikk.mltd.room.entity.*
 )
 abstract class MLTDDatabase : RoomDatabase() {
     companion object {
-        private const val MLTD_DB_NAME = "mltd.db"
+        private const val MLTD_DB_NAME = "mltdSup.db"
         private var INSTANCE: MLTDDatabase? = null
         fun getInstance() =
             synchronized(MLTDDatabase::class) {

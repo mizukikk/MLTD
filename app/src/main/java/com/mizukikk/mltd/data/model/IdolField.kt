@@ -1,10 +1,26 @@
 package com.mizukikk.mltd.data.model
 
+import com.mizukikk.mltd.data.Field
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
+
 object IdolField {
     object URL {
-        const val CARD_BG_FORMAT = "https://storage.matsurihi.me/mltd/card_bg/%s.png"
-        const val CARD_FORMAT = "https://storage.matsurihi.me/mltd/card/%s.png"
-        const val ICON_FORMAT = "https://storage.matsurihi.me/mltd/icon_l/%s.png"
+        val CARD_BG_FORMAT
+            get() = when (PreferencesHelper.apiLanguage) {
+                Field.API.LANG_ZH -> "https://storage.matsurihi.me/mltd_zh/card_bg/%s.png"
+                else -> "https://storage.matsurihi.me/mltd/card_bg/%s.png"
+            }
+        val CARD_FORMAT
+            get() = when (PreferencesHelper.apiLanguage) {
+                Field.API.LANG_ZH -> "https://storage.matsurihi.me/mltd_zh/card/%s.png"
+                else -> "https://storage.matsurihi.me/mltd/card/%s.png"
+            }
+
+        val ICON_FORMAT
+            get() = when (PreferencesHelper.apiLanguage) {
+                Field.API.LANG_ZH -> "https://storage.matsurihi.me/mltd_zh/icon_l/%s.png"
+                else -> "https://storage.matsurihi.me/mltd/icon_l/%s.png"
+            }
         const val COSTUME_FORMAT = "https://storage.matsurihi.me/mltd/costume_icon_ll/%s.png"
     }
 

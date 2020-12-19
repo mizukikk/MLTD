@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.mizukikk.mltd.data.Field
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.room.convert.IdolTypeConvert
 import kotlinx.android.parcel.Parcelize
@@ -14,7 +15,9 @@ import java.util.*
 
 @Parcelize
 @TypeConverters(IdolTypeConvert::class)
-@Entity(tableName = "idol")
+@Entity(tableName = "idol",
+    primaryKeys = ["cardId", "lang"]
+)
 data class IdolEntity(
     val addDate: String?,
     val awakeningText: String,
@@ -28,7 +31,6 @@ data class IdolEntity(
     val extraType: Int,
     val flavorText: String,
     val flavorTextAwakened: String,
-    @PrimaryKey
     @ColumnInfo(name = "cardId")
     val id: Int,
     val idolId: Int,
@@ -59,7 +61,7 @@ data class IdolEntity(
     var costumeId: Int?,
     var rank5CostumeId: Int?,
     var skillId: Int?,
-    var lang: String?
+    var lang: String = Field.API.LANG_JP
 ) : Parcelable {
     val savePicName
         get() :String {
@@ -104,78 +106,83 @@ data class IdolEntity(
 }
 
 @Parcelize
-@Entity(tableName = "centerEffect")
+@Entity(tableName = "centerEffect",
+    primaryKeys = ["centerEffectId", "lang"])
 data class CenterEffectEntity(
     val attribute: Int,
     val description: String,
-    @PrimaryKey
     @ColumnInfo(name = "centerEffectId")
     val id: Int,
     val idolType: Int,
-    val value: Int
+    val value: Int,
+    var lang: String = Field.API.LANG_JP
 ) : Parcelable
 
 @Parcelize
 @TypeConverters(IdolTypeConvert::class)
-@Entity(tableName = "skill")
+@Entity(tableName = "skill",
+    primaryKeys = ["skillId", "lang"])
 data class SkillEntity(
     val description: String,
     val duration: Int,
     val effectId: Int,
     val evaluation: Int,
     val evaluation2: Int,
-    @PrimaryKey
     @ColumnInfo(name = "skillId")
     val id: Int,
     val interval: Int,
     val probability: Int,
-    val value: List<Int>
+    val value: List<Int>,
+    var lang: String = Field.API.LANG_JP
 ) : Parcelable
 
 @Parcelize
-@Entity(tableName = "costume")
+@Entity(tableName = "costume",
+    primaryKeys = ["costumeId", "lang"])
 data class CostumeEntity(
     val description: String,
-    @PrimaryKey
     @ColumnInfo(name = "costumeId")
     val id: Int,
     val modelId: String,
     val name: String,
     @ColumnInfo(name = "costumeResId")
     val resourceId: String,
-    val sortId: Int
+    val sortId: Int,
+    var lang: String = Field.API.LANG_JP
 ) : Parcelable {
     val costumeUrl get() = IdolField.URL.COSTUME_FORMAT.format(resourceId)
 }
 
 @Parcelize
-@Entity(tableName = "bonusCostume")
+@Entity(tableName = "bonusCostume",
+    primaryKeys = ["bonusCostumeId", "lang"])
 data class BonusCostumeEntity(
     val description: String,
-    @PrimaryKey
     @ColumnInfo(name = "bonusCostumeId")
     val id: Int,
     val modelId: String,
     val name: String,
     @ColumnInfo(name = "bonusCostumeResId")
     val resourceId: String,
-    val sortId: Int
+    val sortId: Int,
+    var lang: String = Field.API.LANG_JP
 ) : Parcelable {
     val costumeUrl get() = IdolField.URL.COSTUME_FORMAT.format(resourceId)
 }
 
 @Parcelize
-@Entity(tableName = "rank5Costume")
+@Entity(tableName = "rank5Costume",
+    primaryKeys = ["rank5CostumeId", "lang"])
 data class Rank5CostumeEntity(
     val description: String,
-    @PrimaryKey
     @ColumnInfo(name = "rank5CostumeId")
     val id: Int,
     val modelId: String,
     val name: String,
     @ColumnInfo(name = "rank5CostumeResId")
     val resourceId: String,
-    val sortId: Int
+    val sortId: Int,
+    var lang: String = Field.API.LANG_JP
 ) : Parcelable {
     val costumeUrl get() = IdolField.URL.COSTUME_FORMAT.format(resourceId)
 }

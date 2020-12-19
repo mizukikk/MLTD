@@ -16,7 +16,7 @@ import com.mizukikk.mltd.room.entity.IdolEntity
 @BindingAdapter("smallIcon")
 fun loadSmallIcon(imageView: ImageView, data: IdolEntity?) {
     if (data != null) {
-        val url = "https://storage.matsurihi.me/mltd/icon_l/${data.resourceId}_0.png"
+        val url = data.iconUrl
         val placeHolder = when (data.idolType) {
             IdolField.IdolType.PRINCESS -> R.color.princess
             IdolField.IdolType.FAIRY -> R.color.fairy
