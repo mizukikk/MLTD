@@ -22,13 +22,17 @@ class MainViewModel(application: Application) : BaseMainViewModel(application) {
         selectLangDialogEvent.postValue(langArray)
     }
 
-    fun saveSelectLang(selectLang: String) {
-        PreferencesHelper.apiLanguage = when (selectLang) {
+    fun saveSelectLang(selectLang: String): Boolean {
+        val currentLang = PreferencesHelper.apiLanguage
+        val newLang = when (selectLang) {
             getString(R.string.lang_ja) -> Field.API.LANG_JP
             getString(R.string.lang_zh) -> Field.API.LANG_ZH
             else -> Field.API.LANG_JP
         }
-
+        val updateLang = currentLang != newLang
+        if (updateLang)
+            PreferencesHelper.apiLanguage = newLang
+        return updateLang
     }
 
 

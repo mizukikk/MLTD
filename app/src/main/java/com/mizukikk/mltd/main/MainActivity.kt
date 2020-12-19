@@ -55,15 +55,15 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 ) { dialog, which ->
                     val selectLang = langArray[which]
                     binding.functions.version.tvContent.text = selectLang
-                    viewModel.saveSelectLang(selectLang)
-                    reloadCardData()
+                    if (viewModel.saveSelectLang(selectLang))
+                        reloadCardData()
                 }
                 .show()
         })
     }
 
     private fun reloadCardData() {
-        val fragment =currentFragment
+        val fragment = currentFragment
         if (fragment is IdolListFragment) {
             fragment.reloadData()
         }
