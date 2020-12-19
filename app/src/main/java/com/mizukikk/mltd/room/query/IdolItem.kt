@@ -6,7 +6,9 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.R
+import com.mizukikk.mltd.data.Field
 import com.mizukikk.mltd.data.model.IdolField
+import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.main.idol.model.IdolStatus
 import com.mizukikk.mltd.room.entity.*
 import kotlinx.android.parcel.Parcelize
@@ -45,19 +47,45 @@ data class IdolItem(
             }
         }
 
+    private val langJp get() = PreferencesHelper.apiLanguage == Field.API.LANG_JP
+    private val langZh get() = PreferencesHelper.apiLanguage == Field.API.LANG_ZH
     val idolSkill
         get() = run {
-            val skillEffect: String = when (skill?.effectId) {
-                IdolField.Skill.SCORE_UP -> getString(R.string.skill_score_up)
-                IdolField.Skill.COMBO_BONUS -> getString(R.string.skill_combo_bonus)
-                IdolField.Skill.LIFE_RECOVERY -> getString(R.string.skill_life_recovery)
-                IdolField.Skill.DAMAGE_GUARD -> getString(R.string.skill_damage_guard)
-                IdolField.Skill.CONTINUE_COMBO -> getString(R.string.skill_continue_combo)
-                IdolField.Skill.STRENGTHEN_JUDGMENT -> getString(R.string.skill_strengthen_judgment)
-                IdolField.Skill.DOUBLE_BOOST -> getString(R.string.skill_double_boost)
-                IdolField.Skill.MULTI_UP -> getString(R.string.skill_multi_up)
-                IdolField.Skill.OVERCLOCK -> getString(R.string.skill_overclock)
-                IdolField.Skill.OVERLOAD -> getString(R.string.skill_overload)
+            val skillEffect: String = when {
+                skill?.effectId == IdolField.Skill.SCORE_UP && langJp ->
+                    getString(R.string.skill_score_up)
+                skill?.effectId == IdolField.Skill.SCORE_UP && langZh ->
+                    getString(R.string.skill_score_up_zh)
+                skill?.effectId == IdolField.Skill.COMBO_BONUS && langJp ->
+                    getString(R.string.skill_combo_bonus)
+                skill?.effectId == IdolField.Skill.COMBO_BONUS && langZh ->
+                    getString(R.string.skill_combo_bonus_zh)
+                skill?.effectId == IdolField.Skill.LIFE_RECOVERY && langJp ->
+                    getString(R.string.skill_life_recovery)
+                skill?.effectId == IdolField.Skill.LIFE_RECOVERY && langZh ->
+                    getString(R.string.skill_life_recovery_zh)
+                skill?.effectId == IdolField.Skill.DAMAGE_GUARD && langJp ->
+                    getString(R.string.skill_damage_guard)
+                skill?.effectId == IdolField.Skill.DAMAGE_GUARD && langZh ->
+                    getString(R.string.skill_damage_guard_zh)
+                skill?.effectId == IdolField.Skill.CONTINUE_COMBO && langJp ->
+                    getString(R.string.skill_continue_combo)
+                skill?.effectId == IdolField.Skill.CONTINUE_COMBO && langZh ->
+                    getString(R.string.skill_continue_combo_zh)
+                skill?.effectId == IdolField.Skill.STRENGTHEN_JUDGMENT && langJp ->
+                    getString(R.string.skill_strengthen_judgment)
+                skill?.effectId == IdolField.Skill.STRENGTHEN_JUDGMENT && langZh ->
+                    getString(R.string.skill_strengthen_judgment_zh)
+                skill?.effectId == IdolField.Skill.DOUBLE_BOOST && langJp ->
+                    getString(R.string.skill_double_boost)
+                skill?.effectId == IdolField.Skill.DOUBLE_BOOST && langZh ->
+                    getString(R.string.skill_double_boost_zh)
+                skill?.effectId == IdolField.Skill.MULTI_UP && langJp ->
+                    getString(R.string.skill_multi_up)
+                skill?.effectId == IdolField.Skill.OVERCLOCK && langJp ->
+                    getString(R.string.skill_overclock)
+                skill?.effectId == IdolField.Skill.OVERLOAD && langJp ->
+                    getString(R.string.skill_overload)
                 else -> getString(R.string.skill_empty)
             }
             if (skill != null) {
