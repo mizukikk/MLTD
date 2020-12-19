@@ -85,6 +85,8 @@ fun setIconExtraType(imageView: ImageView, extraType: Int?) {
         IdolField.ExtraType.ANVI_1 -> R.drawable.ic_1stanv
         IdolField.ExtraType.ANVI_2 -> R.drawable.ic_2ndanv
         IdolField.ExtraType.ANVI_3 -> R.drawable.ic_3rdanv
+        IdolField.ExtraType.PST_RANK,
+        IdolField.ExtraType.PST_POINT -> R.drawable.ic_pst
         IdolField.ExtraType.FES -> R.drawable.ic_fes
         else -> android.R.color.transparent
     }
