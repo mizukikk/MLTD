@@ -12,6 +12,10 @@
         <variable
             name="statusData"
             type="com.mizukikk.mltd.main.idol.model.IdolStatus" />
+
+        <variable
+            name="langJp"
+            type="java.lang.Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,8 +40,9 @@
             android:layout_marginTop="4dp"
             android:gravity="start"
             android:padding="4dp"
-            android:text="@string/fragment_idol_status_hint"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@{langJp ? @string/fragment_idol_status_hint : @string/fragment_idol_status_hint_zh}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/fragment_idol_status_hint" />
 
         <TextView
             android:id="@+id/tvLevel"
@@ -59,15 +64,17 @@
             app:layout_constraintStart_toEndOf="@id/tvLevel"
             app:layout_constraintTop_toTopOf="@id/tvLevel"
             tools:text="90" />
+
         <TextView
             android:id="@+id/tvMaxMasterRankTitle"
             style="@style/H4B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_max_master_rank"
+            android:text="@{langJp ? @string/fragment_idol_max_master_rank : @string/fragment_idol_max_master_rank_zh}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLevel"
+            tools:text="@string/fragment_idol_max_master_rank" />
 
         <TextView
             style="@style/H4"
@@ -85,10 +92,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_life"
+            android:text="@{langJp ? @string/fragment_idol_life : @string/fragment_idol_life_zh}"
             android:textColor="@color/life"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvMaxMasterRankTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvMaxMasterRankTitle"
+            tools:text="@string/fragment_idol_life" />
 
         <TextView
             style="@style/H4"
@@ -107,10 +115,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_vocal"
+            android:text="@{langJp ? @string/fragment_idol_vocal : @string/fragment_idol_vocal_zh}"
             android:textColor="@color/vocal"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvLifeTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvLifeTitle"
+            tools:text="@string/fragment_idol_vocal" />
 
         <TextView
             style="@style/H4"
@@ -129,10 +138,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_dance"
+            android:text="@{langJp ? @string/fragment_idol_dance : @string/fragment_idol_dance_zh}"
             android:textColor="@color/dance"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvViTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvViTitle"
+            tools:text="@string/fragment_idol_dance" />
 
         <TextView
             style="@style/H4"
@@ -151,10 +161,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_visual"
+            android:text="@{langJp ? @string/fragment_idol_visual : @string/fragment_idol_visual_zh}"
             android:textColor="@color/visual"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvVoTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvVoTitle"
+            tools:text="@string/fragment_idol_visual" />
 
         <TextView
             style="@style/H4"
@@ -173,9 +184,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_total"
+            android:text="@{langJp ? @string/fragment_idol_total : @string/fragment_idol_total_zh}"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvDaTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvDaTitle"
+            tools:text="@string/fragment_idol_total" />
 
         <TextView
             style="@style/H4"
@@ -193,9 +205,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_center_effect"
+            android:text="@{langJp ? @string/fragment_idol_center_effect : @string/fragment_idol_center_effect_zh}"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvTotalTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvTotalTitle"
+            tools:text="@string/fragment_idol_center_effect" />
 
         <TextView
             style="@style/H4"
@@ -224,9 +237,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="@string/fragment_idol_skill"
+            android:text="@{langJp ? @string/fragment_idol_skill : @string/fragment_idol_skill_zh}"
             app:layout_constraintStart_toStartOf="@id/tvMaxMasterRankTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvCenterEffect" />
+            app:layout_constraintTop_toBottomOf="@id/tvCenterEffect"
+            tools:text="@string/fragment_idol_skill" />
 
         <TextView
             style="@style/H4"

@@ -28,14 +28,23 @@
 
     <!--  IdolFragment  -->
     <string name="fragment_idol_max_master_rank">マスターランクMax :</string>
+    <string name="fragment_idol_max_master_rank_zh">明星階級Max :</string>
     <string name="fragment_idol_life">ライフ :</string>
+    <string name="fragment_idol_life_zh">體力 :</string>
     <string name="fragment_idol_vocal">ボーカル :</string>
+    <string name="fragment_idol_vocal_zh">歌唱力 :</string>
     <string name="fragment_idol_dance">ダンス :</string>
+    <string name="fragment_idol_dance_zh">舞蹈力 :</string>
     <string name="fragment_idol_visual">ビジュアル :</string>
+    <string name="fragment_idol_visual_zh">視覺力 :</string>
     <string name="fragment_idol_total">総アピール :</string>
+    <string name="fragment_idol_total_zh">總表現值 :</string>
     <string name="fragment_idol_center_effect">センター効果 :</string>
+    <string name="fragment_idol_center_effect_zh">Center效果 :</string>
     <string name="fragment_idol_skill">スキル :</string>
+    <string name="fragment_idol_skill_zh">技能 :</string>
     <string name="fragment_idol_status_hint">括弧はマスターランクMax能力を示します</string>
+    <string name="fragment_idol_status_hint_zh">括弧內為明星階級Max能力</string>
     <string name="fragment_idol_level">LV :</string>
 
     <!--  IdolListFragment  -->

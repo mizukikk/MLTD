@@ -82,6 +82,7 @@ class IdolFragment :
     private fun setDefaultData() {
         binding.title.data = data
         binding.status.data = data
+        binding.status.langJp = viewModel.langJp
         binding.costume.costumeUrl = data.costumeEntity?.costumeUrl
         binding.costume.bonusCostumeUrl = data.bonusCostumeEntity?.costumeUrl
         binding.costume.rank5CostumeUrl = data.rank5CostumeEntity?.costumeUrl
