@@ -4,8 +4,8 @@
     <string name="service_error">service error</string>
 
     <!--  Card lang  -->
-    <string name="lang_ja">日版</string>
-    <string name="lang_zh">台版</string>
+    <string name="lang_ja">日文版</string>
+    <string name="lang_zh">繁中版</string>
 
     <string name="skill_score_up">スコアアップ</string>
     <string name="skill_score_up_zh">分數提升</string>
