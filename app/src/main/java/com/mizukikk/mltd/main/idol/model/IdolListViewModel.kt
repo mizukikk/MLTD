@@ -152,4 +152,8 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
             filterIdolManagerLiveData.postValue(filterIdolManager)
         }
     }
+
+    fun reloadData() {
+        checkDBdData()
+    }
 }

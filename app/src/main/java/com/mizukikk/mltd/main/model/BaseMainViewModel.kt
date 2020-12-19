@@ -1,6 +1,8 @@
 package com.mizukikk.mltd.main.model
 
 import android.app.Application
+import androidx.annotation.ArrayRes
+import androidx.annotation.StringRes
 import androidx.lifecycle.AndroidViewModel
 import com.mizukikk.mltd.Inject
 import java.lang.Exception
@@ -21,4 +23,7 @@ open class BaseMainViewModel(application: Application) : AndroidViewModel(applic
             ""
         }
     }
+
+    protected fun getString(@StringRes id: Int) = context.getString(id)
+    protected fun getStringArray(@ArrayRes id: Int) = context.resources.getStringArray(id)
 }

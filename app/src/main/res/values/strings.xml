@@ -3,6 +3,10 @@
     <string name="app_name_dev">MLTD小幫手Dev</string>
     <string name="service_error">service error</string>
 
+    <!--  Card lang  -->
+    <string name="lang_ja">日版</string>
+    <string name="lang_zh">台版</string>
+
     <string name="skill_score_up">スコアアップ</string>
     <string name="skill_combo_bonus">コンボボーナス</string>
     <string name="skill_life_recovery">ライフ回復</string>
@@ -51,6 +55,7 @@
 
     <!--  MainActivity navigation item  -->
     <string name="nav_main_card">卡片</string>
+    <string name="nav_main_version">圖鑑版本</string>
     <string name="nav_main_about">關於</string>
     <string name="nav_title_function">功能</string>
     <string name="nav_title_settings">設定</string>
@@ -59,5 +64,8 @@
     <string name="activity_about_message">此 APP 為非官方遊戲資料查詢 APP 與 偶像大師 百萬人演唱會！ 劇場時光、アイドルマスター ミリオンライブ! シアターデイズ 無任何關係， APP 內遊戲相關資訊版權皆屬於 BANDAI NAMCO Entertainment。</string>
     <string name="activity_about_api_by">api by <u>https://api.matsurihi.me/docs/</u></string>
     <string name="activity_about_create_by">app create by 永遠17歳のKK</string>
+
+    <!--  Dialog  -->
+    <string name="dialog_title_card_version">選擇圖鑑版本</string>
 
 </resources>

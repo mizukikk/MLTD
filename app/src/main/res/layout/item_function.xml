@@ -13,21 +13,39 @@
 
         <ImageView
             android:id="@+id/ivIcon"
-            android:tint="@color/gray"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"
+            android:tint="@color/gray" />
 
         <TextView
             android:id="@+id/tvFunction"
             style="@style/H4B"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="center_vertical|start"
+            android:lines="1"
             android:padding="8dp"
             tools:text="functions" />
+
+
+        <TextView
+            android:id="@+id/tvContent"
+            style="@style/H5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|start"
+            android:lines="1"
+            android:padding="8dp"
+            tools:text="content" />
+
 
     </LinearLayout>
 </layout>

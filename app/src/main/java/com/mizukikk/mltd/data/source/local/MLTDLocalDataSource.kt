@@ -44,25 +44,29 @@ class MLTDLocalDataSource private constructor(
         dbExecutor.dbIOThread.execute {
             var progress = 0
             cards.forEach { card ->
-                card.toIdolEntity?.let { entity ->
-                    idolDao.insertIdol(entity)
-                }
-                card.toBonusCostumeEntity?.let { entity ->
-                    idolDao.insertBonusCostume(entity)
-                }
-                card.toCenterEffectEntity?.let { entity ->
-                    idolDao.insertCenterEffect(entity)
-                }
-                card.toCostumeEntity?.let { entity ->
-                    idolDao.insertCostume(entity)
-                }
-                card.toRank5CostumeEntity?.let { entity ->
-                    idolDao.insertRank5Costume(entity)
-                }
-                card.toSkillEntity?.let { skillList ->
-                    skillList.forEach { entity ->
-                        idolDao.insertSkill(entity)
+                try {
+                    card.toIdolEntity?.let { entity ->
+                        idolDao.insertIdol(entity)
                     }
+                    card.toBonusCostumeEntity?.let { entity ->
+                        idolDao.insertBonusCostume(entity)
+                    }
+                    card.toCenterEffectEntity?.let { entity ->
+                        idolDao.insertCenterEffect(entity)
+                    }
+                    card.toCostumeEntity?.let { entity ->
+                        idolDao.insertCostume(entity)
+                    }
+                    card.toRank5CostumeEntity?.let { entity ->
+                        idolDao.insertRank5Costume(entity)
+                    }
+                    card.toSkillEntity?.let { skillList ->
+                        skillList.forEach { entity ->
+                            idolDao.insertSkill(entity)
+                        }
+                    }
+                } catch (e: Exception) {
+                    //some data lost skip this card
                 }
                 progress++
                 count.invoke(progress)

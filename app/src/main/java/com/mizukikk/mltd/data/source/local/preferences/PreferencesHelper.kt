@@ -2,11 +2,10 @@ package com.mizukikk.mltd.data.source.local.preferences
 
 import android.content.Context.MODE_PRIVATE
 import com.mizukikk.mltd.MLTDApplication
+import com.mizukikk.mltd.data.Field
 
 object PreferencesHelper {
     private const val MLTD_PREFERNCES_NAME = "mltdPrefernces"
-
-    private const val DEFAULT_API_LANGUAGE = "ja"
 
     private const val API_LANGUAGE = "apiLanguage"
     private const val NEXT_CHECK_DB_TIME = "nextCheckDBTime"
@@ -17,7 +16,7 @@ object PreferencesHelper {
     var apiLanguage
         get() = mltdPreferences.getString(
             API_LANGUAGE,
-            DEFAULT_API_LANGUAGE
+            Field.API.LANG_JP
         )!!
         set(value) {
             mltdPreferences.edit()

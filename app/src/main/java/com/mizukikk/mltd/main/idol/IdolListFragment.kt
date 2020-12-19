@@ -238,4 +238,11 @@ class IdolListFragment :
             )
         }
     }
+
+    fun reloadData() {
+        idolAdapter?.swapData(mutableListOf())
+        idolAdapter?.clearSearch()
+        filterIdolManager?.clearFilter()
+        viewModel.reloadData()
+    }
 }
