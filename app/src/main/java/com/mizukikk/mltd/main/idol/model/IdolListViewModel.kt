@@ -118,8 +118,8 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
         getIdolListItem()
     }
 
-    fun getFilterData() {
-        if (filterIdolManagerLiveData.value == null) {
+    fun getFilterData(update: Boolean = false) {
+        if (filterIdolManagerLiveData.value == null || update) {
             val centerEffect = getAssetsDataText(IdolField.FilePath.CENTER_EFFECT)
             val extraType = getAssetsDataText(IdolField.FilePath.EXTRA_TYPE)
             val idolType = getAssetsDataText(IdolField.FilePath.IDOL_TYPE)
@@ -156,6 +156,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     }
 
     fun reloadData() {
+        getFilterData(true)
         checkDBdData()
     }
 }
