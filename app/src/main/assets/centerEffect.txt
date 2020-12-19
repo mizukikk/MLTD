@@ -1,36 +1,54 @@
 [
     {
-        "centerEffect": "ボーカル値",
+        "centerEffect": {
+            "ja": "ボーカル値",
+            "zh": "歌唱值提升"
+        },
         "value": [
             1
         ]
     },
     {
-        "centerEffect": "ダンス値",
+        "centerEffect": {
+            "ja": "ダンス値",
+            "zh": "舞蹈值提升"
+        },
         "value": [
             2
         ]
     },
     {
-        "centerEffect": "ビジュアル値",
+        "centerEffect": {
+            "ja": "ビジュアル値",
+            "zh": "視覺值提升"
+        },
         "value": [
             3
         ]
     },
     {
-        "centerEffect": "全アピール値",
+        "centerEffect": {
+            "ja": "ビジュアル値",
+            "zh": "全表現值提升"
+        },
         "value": [
             4
         ]
     },
     {
-        "centerEffect": "ライフ",
+        "centerEffect": {
+            "ja": "ライフ",
+            "zh": "體力提升"
+        },
         "value": [
             5
         ]
     },
     {
-        "centerEffect": "スキル発動率",
+        "centerEffect": {
+            "ja": "スキル発動率",
+            "zh": "技能發動率提升"
+        },
         "value": [
             6
         ]

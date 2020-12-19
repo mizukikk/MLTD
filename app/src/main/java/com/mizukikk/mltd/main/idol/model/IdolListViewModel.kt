@@ -125,13 +125,14 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
             val idolType = getAssetsDataText(IdolField.FilePath.IDOL_TYPE)
             val rarity = getAssetsDataText(IdolField.FilePath.RARITY)
             val skill = getAssetsDataText(IdolField.FilePath.SKILL)
-            val centerEffectList = GsonUtils.toList<List<CenterEffect>>(centerEffect,
+            val centerEffectList = GsonUtils.toList<List<CenterEffect>>(
+                centerEffect,
                 object : TypeToken<List<CenterEffect>>() {}.type
-            )
+            ).filter { it.centerEffectValue != null }
             val extraTypeList = GsonUtils.toList<List<ExtraType>>(
                 extraType,
                 object : TypeToken<List<ExtraType>>() {}.type
-            )
+            ).filter { it.extraTypeValue != null }
             val idolTypeList =
                 GsonUtils.toList<List<IdolType>>(
                     idolType,
@@ -141,6 +142,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
                 GsonUtils.toList<List<Rarity>>(rarity, object : TypeToken<List<Rarity>>() {}.type)
             val skillList =
                 GsonUtils.toList<List<Skill>>(skill, object : TypeToken<List<Skill>>() {}.type)
+                    .filter { it.skillValue != null }
             val filterIdolManager =
                 FilterIdolManager(
                     centerEffectList,

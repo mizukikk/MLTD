@@ -1,36 +1,57 @@
 [
     {
-        "extraType": "PST 報酬",
+        "extraType": {
+            "ja": "PST 報酬",
+            "zh": "PST"
+        },
         "value": [
-            2,3,8,9
+            2,
+            3,
+            8,
+            9
         ]
     },
     {
-        "extraType": "フェス",
+        "extraType": {
+            "ja": "フェス",
+            "zh": "FES"
+        },
         "value": [
             4
         ]
     },
     {
-        "extraType": "1 周年イベント報酬",
+        "extraType": {
+            "ja": "1 周年イベント報酬",
+            "zh": "1 週年"
+        },
         "value": [
             5
         ]
     },
     {
-        "extraType": "Extra カード",
+        "extraType": {
+            "ja": "Extra カード",
+            "zh": "Extra"
+        },
         "value": [
             6
         ]
     },
     {
-        "extraType": "2 周年イベント報酬",
+        "extraType": {
+            "ja": "2 周年イベント報酬",
+            "zh": "2 週年"
+        },
         "value": [
             7
         ]
     },
     {
-        "extraType": "3 周年イベント報酬",
+        "extraType": {
+            "ja": "3 周年イベント報酬",
+            "zh": "3 週年"
+        },
         "value": [
             10
         ]

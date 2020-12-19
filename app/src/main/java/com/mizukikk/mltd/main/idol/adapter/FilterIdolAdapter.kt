@@ -63,10 +63,10 @@ class FilterIdolAdapter(private val filterArray: List<Any>, private val filterTy
         BaseViewHolder<ItemFilterIdolBinding>(binding) {
         fun bindData(data: Any) {
             binding.tvFilter.text = when (data) {
-                is CenterEffect -> data.centerEffect
-                is ExtraType -> data.extraType
+                is CenterEffect -> data.centerEffectValue
+                is ExtraType -> data.extraTypeValue
                 is IdolType -> data.type
-                is Skill -> data.skill
+                is Skill -> data.skillValue
                 is Rarity -> data.rarity
                 else -> null
             }
