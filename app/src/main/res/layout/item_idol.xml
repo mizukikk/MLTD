@@ -66,11 +66,21 @@
             android:id="@+id/ivIdolType"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_fairy"
             app:idolType="@{data.idol.idolType}"
             app:layout_constraintBottom_toBottomOf="@id/flIcon"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="@id/flIcon" />
+            app:layout_constraintStart_toStartOf="@id/flIcon"
+            tools:srcCompat="@drawable/ic_fairy" />
+
+        <ImageView
+            android:id="@+id/ivExtraType"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            app:extraType="@{data.idol.extraType}"
+            app:layout_constraintBottom_toBottomOf="@id/flIcon"
+            app:layout_constraintStart_toEndOf="@id/ivIdolType"
+            tools:srcCompat="@drawable/ic_3rdanv" />
 
 
         <androidx.constraintlayout.helper.widget.Flow

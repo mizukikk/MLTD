@@ -79,6 +79,20 @@ fun setIconIdolType(imageView: ImageView, idolType: Int?) {
         .into(imageView)
 }
 
+@BindingAdapter("extraType")
+fun setIconExtraType(imageView: ImageView, extraType: Int?) {
+    val iconRes = when (extraType) {
+        IdolField.ExtraType.ANVI_1 -> R.drawable.ic_1stanv
+        IdolField.ExtraType.ANVI_2 -> R.drawable.ic_2ndanv
+        IdolField.ExtraType.ANVI_3 -> R.drawable.ic_3rdanv
+        IdolField.ExtraType.FES -> R.drawable.ic_fes
+        else -> android.R.color.transparent
+    }
+    Glide.with(imageView.context)
+        .load(iconRes)
+        .into(imageView)
+}
+
 @BindingAdapter("cardBG")
 fun loadCardBG(imageView: ImageView, cardBGURl: String?) {
     if (cardBGURl != null) {
