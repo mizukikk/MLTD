@@ -7,7 +7,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -68,7 +67,7 @@ class UpdateIdolService : Service() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 NOTIFICATION_CHANNEL_ID,
-                "更新資料通知",
+                getString(R.string.notification_update_notification_title),
                 NotificationManager.IMPORTANCE_LOW
             )
             nm.createNotificationChannel(channel)
@@ -94,6 +93,7 @@ class UpdateIdolService : Service() {
                 if (update) {
                     updateDB()
                 } else {
+                    saveNextUpdateTimeMillis()
                     stopForeground(true)
                 }
             }

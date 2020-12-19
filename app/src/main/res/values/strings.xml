@@ -47,6 +47,7 @@
 
     <!--  Notification  -->
     <string name="notification_idol_data_updating">更新資料中...</string>
+    <string name="notification_update_notification_title">更新資料通知</string>
 
     <!--  MainActivity navigation item  -->
     <string name="nav_main_card">卡片</string>
