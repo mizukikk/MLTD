@@ -21,7 +21,11 @@ object IdolField {
                 Field.API.LANG_ZH -> "https://storage.matsurihi.me/mltd_zh/icon_l/%s.png"
                 else -> "https://storage.matsurihi.me/mltd/icon_l/%s.png"
             }
-        const val COSTUME_FORMAT = "https://storage.matsurihi.me/mltd/costume_icon_ll/%s.png"
+        val COSTUME_FORMAT
+            get() = when (PreferencesHelper.apiLanguage) {
+                Field.API.LANG_ZH -> "https://storage.matsurihi.me/mltd_zh/costume_icon_ll/%s.png"
+                else -> "https://storage.matsurihi.me/mltd/costume_icon_ll/%s.png"
+            }
     }
 
     object FilePath {
