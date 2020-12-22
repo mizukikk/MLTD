@@ -8,7 +8,7 @@ import com.mizukikk.mltd.room.query.IdolItem
 @Dao
 interface IdolDao {
 
-    @Query("SELECT * FROM idol WHERE idol.lang = :lang ORDER BY idol.cardId DESC LIMIT 1")
+    @Query("SELECT * FROM idol WHERE idol.lang = :lang AND idol.cardId < 8000 ORDER BY idol.cardId DESC LIMIT 1")
     fun checkDBData(lang: String = PreferencesHelper.apiLanguage): List<IdolEntity>
 
     @Query("SELECT * FROM idol WHERE idol.cardId = :id")

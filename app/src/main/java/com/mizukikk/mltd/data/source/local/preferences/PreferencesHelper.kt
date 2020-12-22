@@ -8,7 +8,7 @@ object PreferencesHelper {
     private const val MLTD_PREFERNCES_NAME = "mltdPrefernces"
 
     private const val API_LANGUAGE = "apiLanguage"
-    private const val NEXT_CHECK_DB_TIME = "nextCheckDBTime"
+    private val NEXT_CHECK_DB_TIME get() = "nextCheckDBTime_$apiLanguage"
 
     private val mltdPreferences =
         MLTDApplication.appContext.getSharedPreferences(MLTD_PREFERNCES_NAME, MODE_PRIVATE)
