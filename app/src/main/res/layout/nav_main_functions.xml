@@ -35,6 +35,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <include
+                android:id="@+id/updateCheck"
+                layout="@layout/item_function"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

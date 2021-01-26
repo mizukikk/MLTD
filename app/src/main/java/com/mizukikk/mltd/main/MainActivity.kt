@@ -20,6 +20,7 @@ import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.ActivityMainBinding
 import com.mizukikk.mltd.main.idol.IdolFragment
 import com.mizukikk.mltd.main.idol.IdolListFragment
+import com.mizukikk.mltd.main.idol.service.UpdateIdolService
 import com.mizukikk.mltd.main.model.MainViewModel
 import com.mizukikk.mltd.picture.PictureActivity
 import com.mizukikk.mltd.room.query.IdolItem
@@ -82,6 +83,9 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 R.id.version -> {
                     viewModel.showSelectLangDialog()
                 }
+                R.id.updateCheck -> {
+                    UpdateIdolService.start(this, 1)
+                }
             }
         }
         for (i in 0 until binding.functions.llItems.childCount) {
@@ -105,6 +109,9 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
         binding.functions.version.ivIcon.setImageResource(R.drawable.ic_version)
         binding.functions.version.tvFunction.text = getString(R.string.nav_main_version)
         binding.functions.version.tvContent.text = viewModel.getSelectCardLang()
+
+        binding.functions.updateCheck.ivIcon.setImageResource(R.drawable.ic_update)
+        binding.functions.updateCheck.tvFunction.text = getString(R.string.nav_main_check_update)
 
         binding.functions.about.tvFunction.text = getString(R.string.nav_main_about)
         binding.functions.about.ivIcon.setImageResource(R.drawable.ic_setting)

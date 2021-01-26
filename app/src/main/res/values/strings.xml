@@ -75,6 +75,7 @@
     <string name="nav_main_about">關於</string>
     <string name="nav_title_function">功能</string>
     <string name="nav_title_settings">設定</string>
+    <string name="nav_main_check_update">檢查更新</string>
 
     <!--  AboutActivity  -->
     <string name="activity_about_message">此 APP 為非官方遊戲資料查詢 APP 與 偶像大師 百萬人演唱會！ 劇場時光、アイドルマスター ミリオンライブ! シアターデイズ 無任何關係， APP 內遊戲相關資訊版權皆屬於 BANDAI NAMCO Entertainment。</string>
