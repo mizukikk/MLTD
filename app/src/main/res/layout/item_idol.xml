@@ -152,7 +152,7 @@
 
         <TextView
             android:id="@+id/tvLife"
-            style="@style/H5"
+            style="@style/H5B"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -164,7 +164,7 @@
 
         <TextView
             android:id="@+id/tvVocal"
-            style="@style/H5"
+            style="@style/H5B"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -176,7 +176,7 @@
 
         <TextView
             android:id="@+id/tvVisual"
-            style="@style/H5"
+            style="@style/H5B"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -188,7 +188,7 @@
 
         <TextView
             android:id="@+id/tvDance"
-            style="@style/H5"
+            style="@style/H5B"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
