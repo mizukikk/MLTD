@@ -1,4 +1,4 @@
-package com.mizukikk.mltd.main.model
+package com.mizukikk.mltd.main.viewmodel
 
 import android.app.Application
 import androidx.annotation.ArrayRes

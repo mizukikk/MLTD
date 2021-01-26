@@ -21,7 +21,7 @@ import com.mizukikk.mltd.databinding.ActivityMainBinding
 import com.mizukikk.mltd.main.idol.IdolFragment
 import com.mizukikk.mltd.main.idol.IdolListFragment
 import com.mizukikk.mltd.main.idol.service.UpdateIdolService
-import com.mizukikk.mltd.main.model.MainViewModel
+import com.mizukikk.mltd.main.viewmodel.MainViewModel
 import com.mizukikk.mltd.picture.PictureActivity
 import com.mizukikk.mltd.room.query.IdolItem
 

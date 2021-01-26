@@ -1,9 +1,7 @@
-package com.mizukikk.mltd.main.idol.model
+package com.mizukikk.mltd.main.idol.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
@@ -12,7 +10,8 @@ import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.extension.nextUpdateTimeMillis
 import com.mizukikk.mltd.livedata.SingleLiveEvent
 import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
-import com.mizukikk.mltd.main.model.BaseMainViewModel
+import com.mizukikk.mltd.main.idol.model.*
+import com.mizukikk.mltd.main.viewmodel.BaseMainViewModel
 import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.entity.IdolEntity
 import com.mizukikk.mltd.room.query.IdolItem
@@ -32,11 +31,19 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
             override fun success(result: List<IdolEntity>) {
                 if (result.isNotEmpty())
                     lastIdolId = result[0].id
-                idolListEvent.postValue(IdolListResult.dbDataEmpty(result.isEmpty()))
+                idolListEvent.postValue(
+                    IdolListResult.dbDataEmpty(
+                        result.isEmpty()
+                    )
+                )
             }
 
             override fun fail() {
-                idolListEvent.postValue(IdolListResult.dbDataEmpty(true))
+                idolListEvent.postValue(
+                    IdolListResult.dbDataEmpty(
+                        true
+                    )
+                )
             }
         })
     }
@@ -52,7 +59,11 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
                     idolListLiveData.postValue(newIdolList)
                     val nextUpdateMillis = PreferencesHelper.nextUpdateTimeMillis
                     val updateData = System.currentTimeMillis() >= nextUpdateMillis
-                    val updateResult = IdolListResult.updateIdolData(updateData, lastIdolId)
+                    val updateResult =
+                        IdolListResult.updateIdolData(
+                            updateData,
+                            lastIdolId
+                        )
                     idolListEvent.postValue(updateResult)
                 }
 
@@ -90,7 +101,12 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     fun downloadAllCard() {
         repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
             override fun success(response: List<Card.CardResponse>) {
-                idolListEvent.postValue(IdolListResult.downloadResult(true, response.size))
+                idolListEvent.postValue(
+                    IdolListResult.downloadResult(
+                        true,
+                        response.size
+                    )
+                )
                 saveIdolData(response)
             }
 
@@ -99,7 +115,11 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
                 errorCode: Int?,
                 call: Call<List<Card.CardResponse>>
             ) {
-                idolListEvent.postValue(IdolListResult.downloadResult(false))
+                idolListEvent.postValue(
+                    IdolListResult.downloadResult(
+                        false
+                    )
+                )
             }
         })
     }
@@ -109,7 +129,11 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
         repository.saveAll({ progress ->
             if (maxProgress == progress)
                 saveNextUpdateTimeMillis()
-            val result = IdolListResult.setSaveDataProgress(progress, maxProgress)
+            val result =
+                IdolListResult.setSaveDataProgress(
+                    progress,
+                    maxProgress
+                )
             idolListEvent.postValue(result)
         }, *response.toTypedArray())
     }

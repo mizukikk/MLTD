@@ -9,7 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.mizukikk.mltd.main.model.BaseMainViewModel
+import com.mizukikk.mltd.main.viewmodel.BaseMainViewModel
 
 abstract class BaseMainFragment<VM : BaseMainViewModel, B : ViewDataBinding>(@LayoutRes val layoutRes: Int) :
     Fragment(layoutRes) {

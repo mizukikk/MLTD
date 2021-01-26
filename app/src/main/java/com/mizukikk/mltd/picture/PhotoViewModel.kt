@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.livedata.SingleLiveEvent
-import com.mizukikk.mltd.main.model.BaseMainViewModel
+import com.mizukikk.mltd.main.viewmodel.BaseMainViewModel
 import com.mizukikk.mltd.utils.FileUtils
 import java.io.File
 import java.lang.Exception

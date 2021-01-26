@@ -9,7 +9,7 @@ import com.mizukikk.mltd.R
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.databinding.FragmentIdolBinding
 import com.mizukikk.mltd.main.BaseMainFragment
-import com.mizukikk.mltd.main.idol.model.IdolViewModel
+import com.mizukikk.mltd.main.idol.viewmodel.IdolViewModel
 import com.mizukikk.mltd.room.query.IdolItem
 
 

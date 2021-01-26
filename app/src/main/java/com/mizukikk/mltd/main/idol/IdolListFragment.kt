@@ -21,7 +21,7 @@ import com.mizukikk.mltd.main.BaseMainFragment
 import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
 import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
-import com.mizukikk.mltd.main.idol.model.IdolListViewModel
+import com.mizukikk.mltd.main.idol.viewmodel.IdolListViewModel
 import com.mizukikk.mltd.main.idol.service.UpdateIdolService
 import kotlinx.android.synthetic.main.fragment_idol_list.view.*
 import java.lang.Exception
