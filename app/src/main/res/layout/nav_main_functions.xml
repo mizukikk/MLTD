@@ -46,6 +46,21 @@
                 android:layout_height="1dp"
                 android:background="@color/whiteTow" />
 
+
+            <TextView
+                style="@style/H5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/nav_title_settings" />
+
+            <include
+                android:id="@+id/eventList"
+                layout="@layout/item_function"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <TextView
                 style="@style/H5"
                 android:layout_width="wrap_content"

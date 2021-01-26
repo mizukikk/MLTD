@@ -5,6 +5,7 @@ import com.mizukikk.mltd.api.response.Event
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RetrofitService {
 
@@ -13,12 +14,15 @@ interface RetrofitService {
         fun getAllCard(@Path("lan") lan: String): Call<List<Card.CardResponse>>
 
         @GET("{lan}/cards/{idolId}")
-        fun getCard(@Path("lan") lan: String, @Path("idolId") idolId: Int): Call<List<Card.CardResponse>>
+        fun getCard(
+            @Path("lan") lan: String,
+            @Path("idolId") idolId: Int
+        ): Call<List<Card.CardResponse>>
 
     }
 
     interface EventService {
-        @GET("{lan}/events/")
-        fun getAllEvent(@Path("lan") lan: String): Call<List<Event.EventResponse>>
+        @GET("events/")
+        fun getAllEvent(@Query("prettyPrint") prettyPrint: Boolean = false): Call<List<Event.EventResponse>>
     }
 }

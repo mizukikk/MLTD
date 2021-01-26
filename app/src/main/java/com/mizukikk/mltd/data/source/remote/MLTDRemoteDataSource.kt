@@ -62,4 +62,24 @@ object MLTDRemoteDataSource : RemoteDataSource {
             }
         })
     }
+
+    override fun getEventList(callBack: ResponseCallBack<List<Event.EventResponse>>) {
+        val call = eventService.getAllEvent()
+        call.enqueue(object : ApiCallBack<List<Event.EventResponse>>() {
+            override fun apiSuccess(
+                response: List<Event.EventResponse>,
+                call: Call<List<Event.EventResponse>>
+            ) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<List<Event.EventResponse>>
+            ) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
 }

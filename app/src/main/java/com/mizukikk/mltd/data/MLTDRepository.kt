@@ -2,6 +2,7 @@ package com.mizukikk.mltd.data
 
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.api.response.Event
 import com.mizukikk.mltd.data.source.local.LocalDataSource
 import com.mizukikk.mltd.data.source.remote.MLTDRemoteDataSource
 import com.mizukikk.mltd.data.source.remote.RemoteDataSource
@@ -29,6 +30,10 @@ class MLTDRepository private constructor(
 
     override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<Card.CardResponse>>) {
         remoteDataSource.checkUpdate(lastIdolId, callBack)
+    }
+
+    override fun getEventList(callBack: ResponseCallBack<List<Event.EventResponse>>) {
+        remoteDataSource.getEventList(callBack)
     }
 
     override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {

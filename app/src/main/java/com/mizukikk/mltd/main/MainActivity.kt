@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.mizukikk.mltd.AboutActivity
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.ActivityMainBinding
+import com.mizukikk.mltd.main.event.EventListFragment
 import com.mizukikk.mltd.main.idol.IdolFragment
 import com.mizukikk.mltd.main.idol.IdolListFragment
 import com.mizukikk.mltd.main.idol.service.UpdateIdolService
@@ -86,6 +87,9 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 R.id.updateCheck -> {
                     UpdateIdolService.start(this, 1)
                 }
+                R.id.eventList -> {
+                    EventListFragment.newInstance().beginTransactionStack()
+                }
             }
         }
         for (i in 0 until binding.functions.llItems.childCount) {
@@ -113,8 +117,11 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
         binding.functions.updateCheck.ivIcon.setImageResource(R.drawable.ic_update)
         binding.functions.updateCheck.tvFunction.text = getString(R.string.nav_main_check_update)
 
-        binding.functions.about.tvFunction.text = getString(R.string.nav_main_about)
+        binding.functions.eventList.ivIcon.setImageResource(R.drawable.ic_event_rank)
+        binding.functions.eventList.tvFunction.text = getString(R.string.nav_main_event)
+
         binding.functions.about.ivIcon.setImageResource(R.drawable.ic_setting)
+        binding.functions.about.tvFunction.text = getString(R.string.nav_main_about)
     }
 
     private fun initSharedElementParameter() {
@@ -133,12 +140,18 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 .commit()
     }
 
-    fun Fragment.begineTransarcionStack() {
-        if (this.isAdded.not())
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, this)
+    fun Fragment.beginTransactionStack() {
+        if (this.isAdded.not()) {
+            val transaction = supportFragmentManager.beginTransaction()
+            currentFragment?.let {
+                transaction.hide(it)
+            }
+            transaction
+                .add(R.id.container, this)
                 .addToBackStack(this.javaClass.simpleName)
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit()
+        }
     }
 
     fun setHomeFragment() {

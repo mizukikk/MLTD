@@ -75,6 +75,8 @@
     <string name="nav_main_version">圖鑑版本</string>
     <string name="nav_main_about">關於</string>
     <string name="nav_title_function">功能</string>
+    <string name="nav_title_event">活動</string>
+    <string name="nav_main_event">活動排行</string>
     <string name="nav_title_settings">設定</string>
     <string name="nav_main_check_update">檢查更新</string>
 
