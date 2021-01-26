@@ -133,7 +133,8 @@ class Card {
         val vocalMin: Int,
         @Expose
         @SerializedName("vocalMinAwakened")
-        val vocalMinAwakened: Int
+        val vocalMinAwakened: Int,
+        var lang: String?
     ) {
 
         val toIdolEntity
@@ -146,7 +147,7 @@ class Card {
                 idolEntity?.rank5CostumeId = rank5Costume?.id
                 val skillIds = skill?.map { it.id }
                 idolEntity?.skillId = skillIds?.get(0) ?: null
-                idolEntity?.lang = PreferencesHelper.apiLanguage
+                idolEntity?.lang = lang ?: PreferencesHelper.apiLanguage
                 idolEntity
             } catch (e: JsonSyntaxException) {
                 null
@@ -156,7 +157,7 @@ class Card {
                 if (bonusCostume != null) {
                     val json = GsonUtils.toJsonString(bonusCostume)
                     val entity = GsonUtils.toDataObj(json, BonusCostumeEntity::class.java)
-                    entity?.lang = PreferencesHelper.apiLanguage
+                    entity?.lang = lang ?: PreferencesHelper.apiLanguage
                     entity
                 } else {
                     null
@@ -169,7 +170,7 @@ class Card {
                 if (centerEffect != null) {
                     val json = GsonUtils.toJsonString(centerEffect)
                     val entity = GsonUtils.toDataObj(json, CenterEffectEntity::class.java)
-                    entity?.lang = PreferencesHelper.apiLanguage
+                    entity?.lang = lang ?: PreferencesHelper.apiLanguage
                     entity
                 } else {
                     null
@@ -182,7 +183,7 @@ class Card {
                 if (costume != null) {
                     val json = GsonUtils.toJsonString(costume)
                     val entity = GsonUtils.toDataObj(json, CostumeEntity::class.java)
-                    entity?.lang = PreferencesHelper.apiLanguage
+                    entity?.lang = lang ?: PreferencesHelper.apiLanguage
                     entity
                 } else {
                     null
@@ -196,7 +197,7 @@ class Card {
                 if (rank5Costume != null) {
                     val json = GsonUtils.toJsonString(rank5Costume)
                     val entity = GsonUtils.toDataObj(json, Rank5CostumeEntity::class.java)
-                    entity?.lang = PreferencesHelper.apiLanguage
+                    entity?.lang = lang ?: PreferencesHelper.apiLanguage
                     entity
                 } else {
                     null
@@ -213,7 +214,7 @@ class Card {
                         object : TypeToken<List<SkillEntity>>() {}.type
                     )
                     entityList.forEach {
-                        it.lang = PreferencesHelper.apiLanguage
+                        it.lang = lang ?: PreferencesHelper.apiLanguage
                     }
                     entityList
                 } else {

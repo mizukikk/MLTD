@@ -19,12 +19,16 @@ object MLTDRemoteDataSource : RemoteDataSource {
     }
 
     override fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
-        val call = cardService.getAllCard(PreferencesHelper.apiLanguage)
+        val lang = PreferencesHelper.apiLanguage
+        val call = cardService.getAllCard(lang)
         call.enqueue(object : ApiCallBack<List<Card.CardResponse>>() {
             override fun apiSuccess(
                 response: List<Card.CardResponse>,
                 call: Call<List<Card.CardResponse>>
             ) {
+                response.forEach {
+                    it.lang = lang
+                }
                 callBack.success(response)
             }
 
