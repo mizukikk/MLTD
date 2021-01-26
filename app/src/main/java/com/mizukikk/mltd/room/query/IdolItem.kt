@@ -89,8 +89,8 @@ data class IdolItem(
                 else -> getString(R.string.skill_empty)
             }
             if (skill != null) {
-                val skillFormat = "%ds %s"
-                skillFormat.format(skill.duration, skillEffect)
+                val skillFormat = "%d(%d)秒 %s"
+                skillFormat.format(skill.interval, skill.duration, skillEffect)
             } else {
                 skillEffect
             }

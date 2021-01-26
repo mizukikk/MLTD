@@ -67,6 +67,10 @@ class IdolAdapter : RecyclerView.Adapter<IdolAdapter.IdolHolder>() {
                     filterList = filterList.filter {
                         filterData.skillFilterList.contains(it.skill?.effectId)
                     }
+                if (filterData.skillDurationFilterList.isNotEmpty())
+                    filterList = filterList.filter {
+                        filterData.skillDurationFilterList.contains(it.skill?.interval)
+                    }
             }
             notifyDataSetChanged()
         }

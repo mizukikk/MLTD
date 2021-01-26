@@ -21,6 +21,7 @@ class FilterIdolAdapter(private val filterArray: List<Any>, private val filterTy
         const val FILTER_TYPE_EXTRA_TYPE = 1113
         const val FILTER_TYPE_RARITY = 1114
         const val FILTER_TYPE_SKILL = 1115
+        const val FILTER_TYPE_SKILL_DURATION = 1116
     }
 
     private var filterList = mutableListOf<Int>()
@@ -34,8 +35,8 @@ class FilterIdolAdapter(private val filterArray: List<Any>, private val filterTy
     override fun getItemCount() = filterArray.size
 
     override fun onBindViewHolder(holder: FilterIdolHolder, position: Int) {
-        val text = filterArray[position]
-        holder.bindData(text)
+        val data = filterArray[position]
+        holder.bindData(data)
     }
 
     fun checkFilterBtStatus() {
@@ -68,6 +69,7 @@ class FilterIdolAdapter(private val filterArray: List<Any>, private val filterTy
                 is IdolType -> data.type
                 is Skill -> data.skillValue
                 is Rarity -> data.rarity
+                is Int -> data.toString()
                 else -> null
             }
             val filterDataList = when (data) {
@@ -76,6 +78,7 @@ class FilterIdolAdapter(private val filterArray: List<Any>, private val filterTy
                 is IdolType -> data.value
                 is Skill -> data.value
                 is Rarity -> data.value
+                is Int -> mutableListOf(data)
                 else -> mutableListOf()
             }
             binding.filterSelect = filterList.containsAll(filterDataList)
@@ -96,21 +99,6 @@ class FilterIdolAdapter(private val filterArray: List<Any>, private val filterTy
             }
         }
 
-        private fun getFilterData(): Int {
-            return when (filterType) {
-                FILTER_TYPE_CENTER_EFFECT ->
-                    IdolField.CenterEffectAttribute.ARRAY[adapterPosition]
-                FILTER_TYPE_EXTRA_TYPE ->
-                    IdolField.ExtraType.ARRAY[adapterPosition]
-                FILTER_TYPE_IDOL_TYPE ->
-                    IdolField.CenterEffectAttribute.ARRAY[adapterPosition]
-                FILTER_TYPE_RARITY ->
-                    IdolField.Rarity.ARRAY[adapterPosition]
-                FILTER_TYPE_SKILL ->
-                    IdolField.Skill.ARRAY[adapterPosition]
-                else -> -1
-            }
-        }
 
         fun getColor(@ColorRes colorRes: Int) =
             ContextCompat.getColor(binding.root.context, colorRes)

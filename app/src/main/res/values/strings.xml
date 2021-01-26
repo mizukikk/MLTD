@@ -53,6 +53,7 @@
     <string name="fragment_idol_list_filter_rarity">稀有度</string>
     <string name="fragment_idol_list_filter_extra_type">卡片種類</string>
     <string name="fragment_idol_list_filter_skill">技能</string>
+    <string name="fragment_idol_list_filter_skill_duration">技能間隔</string>
     <string name="fragment_idol_list_filter_center_effect">Center效果</string>
     <string name="fragment_idol_list_filter_bt_filter">搜尋</string>
 

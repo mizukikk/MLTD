@@ -162,6 +162,7 @@ class IdolListFragment :
         binding.navFilter.rvExtraType.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvRarity.layoutManager = FlexboxLayoutManager(requireContext())
         binding.navFilter.rvSkill.layoutManager = FlexboxLayoutManager(requireContext())
+        binding.navFilter.rvSkillDuration.layoutManager = FlexboxLayoutManager(requireContext())
     }
 
     private fun initDrawableLayout() {
@@ -227,6 +228,7 @@ class IdolListFragment :
             binding.navFilter.rvExtraType.adapter = filterIdolManager?.extraTypeAdapter
             binding.navFilter.rvRarity.adapter = filterIdolManager?.rarityAdapter
             binding.navFilter.rvSkill.adapter = filterIdolManager?.skillAdapter
+            binding.navFilter.rvSkillDuration.adapter = filterIdolManager?.skillDurationAdapter
         })
     }
 

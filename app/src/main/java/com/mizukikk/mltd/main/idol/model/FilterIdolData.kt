@@ -7,7 +7,8 @@ data class FilterIdolData(
     val centerEffectFilterList: List<Int>,
     val extraTypeFilterList: List<Int>,
     val rarityFilterList: List<Int>,
-    val skillFilterList: List<Int>
+    val skillFilterList: List<Int>,
+    val skillDurationFilterList: List<Int>
 )
 
 data class IdolType(val type: String, val value: List<Int>)
@@ -21,6 +22,8 @@ data class ExtraType(val extraType: Map<String, String>, val value: List<Int>) {
 }
 
 data class Rarity(val rarity: String, val value: List<Int>)
+
 data class Skill(val skill: Map<String, String?>, val value: List<Int>) {
     val skillValue get() = skill[PreferencesHelper.apiLanguage]
 }
+
