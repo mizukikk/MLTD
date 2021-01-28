@@ -149,7 +149,12 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
             transaction
                 .add(R.id.container, this)
                 .addToBackStack(this.javaClass.simpleName)
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .setCustomAnimations(
+                    android.R.anim.fade_in,
+                    android.R.anim.fade_out,
+                    android.R.anim.fade_out,
+                    android.R.anim.fade_in
+                )
                 .commit()
         }
     }

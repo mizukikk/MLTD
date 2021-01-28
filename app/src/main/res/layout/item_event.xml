@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.mizukikk.mltd.api.response.Event.EventResponse" />
+
+        <variable
+            name="imgUrl"
+            type="java.lang.String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBG"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_item_event"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivEventImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:cardBG="@{data.bgUrl}"
+            app:layout_constraintDimensionRatio="1280:720"
+            app:layout_constraintEnd_toEndOf="@id/ivBG"
+            app:layout_constraintStart_toStartOf="@id/ivBG"
+            app:layout_constraintTop_toTopOf="@id/ivBG" />
+
+        <TextView
+            android:id="@+id/tvEventName"
+            style="@style/H4B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@{data.name}"
+            app:layout_constraintEnd_toEndOf="@id/ivBG"
+            app:layout_constraintStart_toStartOf="@id/ivBG"
+            app:layout_constraintTop_toBottomOf="@id/ivEventImg" />
+
+        <TextView
+            android:id="@+id/tvEventDate"
+            style="@style/H5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@{data.date}"
+            app:layout_constraintBottom_toBottomOf="@id/ivBG"
+            app:layout_constraintEnd_toEndOf="@id/ivBG"
+            app:layout_constraintStart_toStartOf="@id/ivBG"
+            app:layout_constraintTop_toBottomOf="@id/tvEventName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

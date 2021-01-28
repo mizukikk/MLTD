@@ -115,3 +115,24 @@ fun loadCardBG(imageView: ImageView, cardBGURl: String?) {
             .clear(imageView)
     }
 }
+
+@BindingAdapter("cardBG")
+fun loadImg(imageView: ImageView, url: String?) {
+    if (url != null) {
+        val progress = CircularProgressDrawable(imageView.context).apply {
+            strokeWidth = 5f.convertDp2Px()
+            centerRadius = 30f.convertDp2Px()
+            setColorSchemeColors(ContextCompat.getColor(imageView.context, R.color.colorPrimary))
+            start()
+        }
+        Glide.with(imageView.context)
+            .load(url)
+            .error(android.R.color.transparent)
+            .transition(withCrossFade())
+            .placeholder(progress)
+            .into(imageView)
+    } else {
+        Glide.with(imageView.context)
+            .clear(imageView)
+    }
+}

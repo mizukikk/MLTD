@@ -3,6 +3,7 @@ package com.mizukikk.mltd.main.event
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentEventListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
@@ -16,13 +17,19 @@ class EventListFragment :
         fun newInstance() = EventListFragment()
     }
 
+    private var eventAdapter: EventAdapter? = null
+
     override fun viewModelClass() = EventListViewModel::class.java
 
     override fun initBinding(view: View) = FragmentEventListBinding.bind(view)
 
     override fun init() {
+        binding.rvEvent.layoutManager = LinearLayoutManager(requireContext())
         viewModel.eventListLiveData.observe(this, Observer {
-            Log.d(TAG, "init: aaa3 $it")
+            if (eventAdapter == null) {
+                eventAdapter = EventAdapter((it))
+            }
+            binding.rvEvent.adapter = eventAdapter
         })
         viewModel.getEventList()
     }

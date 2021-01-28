@@ -14,7 +14,7 @@ class EventListViewModel(application: Application) : BaseMainViewModel(applicati
     fun getEventList() {
         repository.getEventList(object : ResponseCallBack<List<Event.EventResponse>>() {
             override fun success(response: List<Event.EventResponse>) {
-                eventListLiveData.postValue(response)
+                eventListLiveData.postValue(response.sortedBy { it.sort }.reversed())
             }
 
             override fun fail(
