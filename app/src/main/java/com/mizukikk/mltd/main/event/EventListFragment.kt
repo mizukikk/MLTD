@@ -1,12 +1,12 @@
 package com.mizukikk.mltd.main.event
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentEventListBinding
 import com.mizukikk.mltd.main.BaseMainFragment
+import com.mizukikk.mltd.main.event.adapter.EventAdapter
 import com.mizukikk.mltd.main.event.viewmodel.EventListViewModel
 
 class EventListFragment :

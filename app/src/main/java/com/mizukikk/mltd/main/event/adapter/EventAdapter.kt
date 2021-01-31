@@ -1,10 +1,9 @@
-package com.mizukikk.mltd.main.event
+package com.mizukikk.mltd.main.event.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mizukikk.mltd.api.response.Event
 import com.mizukikk.mltd.databinding.ItemEventBinding
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
