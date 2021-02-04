@@ -1,7 +1,9 @@
 package com.mizukikk.mltd.api
 
-import com.mizukikk.mltd.api.response.Card
-import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.obj.EventBorders
+import com.mizukikk.mltd.api.obj.EventPoint
+import com.mizukikk.mltd.api.response.CardResponse
+import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.api.response.GetLastPointResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,22 +14,22 @@ interface RetrofitService {
 
     interface CardService {
         @GET("{lan}/cards/")
-        fun getAllCard(@Path("lan") lan: String): Call<List<Card.CardResponse>>
+        fun getAllCard(@Path("lan") lan: String): Call<List<CardResponse>>
 
         @GET("{lan}/cards/{idolId}")
         fun getCard(
             @Path("lan") lan: String,
             @Path("idolId") idolId: Int
-        ): Call<List<Card.CardResponse>>
+        ): Call<List<CardResponse>>
 
     }
 
     interface EventService {
         @GET("events/")
-        fun getAllEvent(@Query("prettyPrint") prettyPrint: Boolean = false): Call<List<Event.EventResponse>>
+        fun getAllEvent(@Query("prettyPrint") prettyPrint: Boolean = false): Call<List<EventResponse>>
 
         @GET("events/{id}/rankings/borders")
-        fun getEventBorders(@Path("id") id: Int): Call<Event.EventBorders>
+        fun getEventBorders(@Path("id") id: Int): Call<EventBorders>
 
         @GET("events/{id}/rankings/borderPoints")
         fun getLastEventPoints(@Path("id") id: Int): Call<GetLastPointResponse>
@@ -36,6 +38,6 @@ interface RetrofitService {
         fun getEventPoint(
             @Path("id") id: Int,
             @Path("borders") borders: String
-        ): Call<Event.EventPoint>
+        ): Call<EventPoint>
     }
 }

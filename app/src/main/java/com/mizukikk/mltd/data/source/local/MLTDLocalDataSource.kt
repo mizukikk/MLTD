@@ -1,14 +1,11 @@
 package com.mizukikk.mltd.data.source.local
 
-import android.util.Log
-import com.mizukikk.mltd.api.response.Card
-import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
+import com.mizukikk.mltd.api.response.CardResponse
 import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.DBExecutor
 import com.mizukikk.mltd.room.dao.IdolDao
 import com.mizukikk.mltd.room.entity.IdolEntity
 import com.mizukikk.mltd.room.query.IdolItem
-import java.lang.Exception
 
 class MLTDLocalDataSource private constructor(
     private val dbExecutor: DBExecutor,
@@ -40,7 +37,7 @@ class MLTDLocalDataSource private constructor(
     }
 
     @Synchronized
-    override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
+    override fun saveAll(count: (progress: Int) -> Unit, vararg cards: CardResponse) {
         dbExecutor.dbIOThread.execute {
             var progress = 0
             cards.forEach { card ->

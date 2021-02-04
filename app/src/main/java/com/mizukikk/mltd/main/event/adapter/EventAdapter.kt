@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.databinding.ItemEventBinding
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 
-class EventAdapter(private val eventList: List<Event.EventResponse>) :
+class EventAdapter(private val eventList: List<EventResponse>) :
     RecyclerView.Adapter<EventAdapter.EventHolder>() {
 
     private var listener: ((Int) -> Unit)? = null
@@ -29,14 +29,14 @@ class EventAdapter(private val eventList: List<Event.EventResponse>) :
     }
 
     inner class EventHolder(binding: ViewDataBinding) : BaseViewHolder<ItemEventBinding>(binding) {
-        fun bindData(data: Event.EventResponse) {
+        fun bindData(data: EventResponse) {
             itemView.setOnClickListener {
                 listener?.invoke(data.id)
             }
             setData(data)
         }
 
-        private fun setData(data: Event.EventResponse) {
+        private fun setData(data: EventResponse) {
             binding.data = data
             binding.executePendingBindings()
         }

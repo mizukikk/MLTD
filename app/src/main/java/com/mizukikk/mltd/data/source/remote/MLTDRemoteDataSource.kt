@@ -4,8 +4,10 @@ import com.mizukikk.mltd.api.ApiCallBack
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.RetrofitProvider
 import com.mizukikk.mltd.api.RetrofitService
-import com.mizukikk.mltd.api.response.Card
-import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.obj.EventBorders
+import com.mizukikk.mltd.api.obj.EventPoint
+import com.mizukikk.mltd.api.response.CardResponse
+import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.api.response.GetLastPointResponse
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import retrofit2.Call
@@ -19,13 +21,13 @@ object MLTDRemoteDataSource : RemoteDataSource {
         RetrofitProvider.instance.create(RetrofitService.CardService::class.java)
     }
 
-    override fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
+    override fun downloadAllCard(callBack: ResponseCallBack<List<CardResponse>>) {
         val lang = PreferencesHelper.apiLanguage
         val call = cardService.getAllCard(lang)
-        call.enqueue(object : ApiCallBack<List<Card.CardResponse>>() {
+        call.enqueue(object : ApiCallBack<List<CardResponse>>() {
             override fun apiSuccess(
-                response: List<Card.CardResponse>,
-                call: Call<List<Card.CardResponse>>
+                response: List<CardResponse>,
+                call: Call<List<CardResponse>>
             ) {
                 response.forEach {
                     it.lang = lang
@@ -36,20 +38,20 @@ object MLTDRemoteDataSource : RemoteDataSource {
             override fun apiFail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
+                call: Call<List<CardResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })
     }
 
-    override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<Card.CardResponse>>) {
+    override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<CardResponse>>) {
         val nextId = lastIdolId + 1
         val call = cardService.getCard(PreferencesHelper.apiLanguage, nextId)
-        call.enqueue(object : ApiCallBack<List<Card.CardResponse>>() {
+        call.enqueue(object : ApiCallBack<List<CardResponse>>() {
             override fun apiSuccess(
-                response: List<Card.CardResponse>,
-                call: Call<List<Card.CardResponse>>
+                response: List<CardResponse>,
+                call: Call<List<CardResponse>>
             ) {
                 callBack.success(response)
             }
@@ -57,19 +59,19 @@ object MLTDRemoteDataSource : RemoteDataSource {
             override fun apiFail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
+                call: Call<List<CardResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })
     }
 
-    override fun getEventList(callBack: ResponseCallBack<List<Event.EventResponse>>) {
+    override fun getEventList(callBack: ResponseCallBack<List<EventResponse>>) {
         val call = eventService.getAllEvent()
-        call.enqueue(object : ApiCallBack<List<Event.EventResponse>>() {
+        call.enqueue(object : ApiCallBack<List<EventResponse>>() {
             override fun apiSuccess(
-                response: List<Event.EventResponse>,
-                call: Call<List<Event.EventResponse>>
+                response: List<EventResponse>,
+                call: Call<List<EventResponse>>
             ) {
                 callBack.success(response)
             }
@@ -77,7 +79,7 @@ object MLTDRemoteDataSource : RemoteDataSource {
             override fun apiFail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Event.EventResponse>>
+                call: Call<List<EventResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
@@ -107,17 +109,17 @@ object MLTDRemoteDataSource : RemoteDataSource {
         })
     }
 
-    override fun getEventBorders(id: Int, callBack: ResponseCallBack<Event.EventBorders>) {
+    override fun getEventBorders(id: Int, callBack: ResponseCallBack<EventBorders>) {
         val call = eventService.getEventBorders(id)
-        call.enqueue(object : ApiCallBack<Event.EventBorders>() {
-            override fun apiSuccess(response: Event.EventBorders, call: Call<Event.EventBorders>) {
+        call.enqueue(object : ApiCallBack<EventBorders>() {
+            override fun apiSuccess(response: EventBorders, call: Call<EventBorders>) {
                 callBack.success(response)
             }
 
             override fun apiFail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<Event.EventBorders>
+                call: Call<EventBorders>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
@@ -127,18 +129,18 @@ object MLTDRemoteDataSource : RemoteDataSource {
     override fun getEventPoint(
         id: Int,
         borders: String,
-        callBack: ResponseCallBack<Event.EventPoint>
+        callBack: ResponseCallBack<EventPoint>
     ) {
         val call = eventService.getEventPoint(id, borders)
-        call.enqueue(object : ApiCallBack<Event.EventPoint>() {
-            override fun apiSuccess(response: Event.EventPoint, call: Call<Event.EventPoint>) {
+        call.enqueue(object : ApiCallBack<EventPoint>() {
+            override fun apiSuccess(response: EventPoint, call: Call<EventPoint>) {
                 callBack.success(response)
             }
 
             override fun apiFail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<Event.EventPoint>
+                call: Call<EventPoint>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }

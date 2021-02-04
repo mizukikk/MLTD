@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.reflect.TypeToken
 import com.mizukikk.mltd.api.ResponseCallBack
-import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.api.response.CardResponse
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.extension.nextUpdateTimeMillis
@@ -99,8 +99,8 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     }
 
     fun downloadAllCard() {
-        repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
-            override fun success(response: List<Card.CardResponse>) {
+        repository.downloadAllCard(object : ResponseCallBack<List<CardResponse>>() {
+            override fun success(response: List<CardResponse>) {
                 idolListEvent.postValue(
                     IdolListResult.downloadResult(
                         true,
@@ -113,7 +113,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
             override fun fail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
+                call: Call<List<CardResponse>>
             ) {
                 idolListEvent.postValue(
                     IdolListResult.downloadResult(
@@ -124,7 +124,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
         })
     }
 
-    private fun saveIdolData(response: List<Card.CardResponse>) {
+    private fun saveIdolData(response: List<CardResponse>) {
         val maxProgress = response.size
         repository.saveAll({ progress ->
             if (maxProgress == progress)

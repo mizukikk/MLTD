@@ -1,8 +1,10 @@
 package com.mizukikk.mltd.data
 
 import com.mizukikk.mltd.api.ResponseCallBack
-import com.mizukikk.mltd.api.response.Card
-import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.obj.EventBorders
+import com.mizukikk.mltd.api.obj.EventPoint
+import com.mizukikk.mltd.api.response.CardResponse
+import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.api.response.GetLastPointResponse
 import com.mizukikk.mltd.data.source.local.LocalDataSource
 import com.mizukikk.mltd.data.source.remote.MLTDRemoteDataSource
@@ -25,15 +27,15 @@ class MLTDRepository private constructor(
     }
 
     //remote start
-    override fun downloadAllCard(callBack: ResponseCallBack<List<Card.CardResponse>>) {
+    override fun downloadAllCard(callBack: ResponseCallBack<List<CardResponse>>) {
         remoteDataSource.downloadAllCard(callBack)
     }
 
-    override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<Card.CardResponse>>) {
+    override fun checkUpdate(lastIdolId: Int, callBack: ResponseCallBack<List<CardResponse>>) {
         remoteDataSource.checkUpdate(lastIdolId, callBack)
     }
 
-    override fun getEventList(callBack: ResponseCallBack<List<Event.EventResponse>>) {
+    override fun getEventList(callBack: ResponseCallBack<List<EventResponse>>) {
         remoteDataSource.getEventList(callBack)
     }
 
@@ -44,14 +46,14 @@ class MLTDRepository private constructor(
         remoteDataSource.getLastEventPoints(eventId, callBack)
     }
 
-    override fun getEventBorders(id: Int, callBack: ResponseCallBack<Event.EventBorders>) {
+    override fun getEventBorders(id: Int, callBack: ResponseCallBack<EventBorders>) {
         remoteDataSource.getEventBorders(id, callBack)
     }
 
     override fun getEventPoint(
         id: Int,
         borders: String,
-        callBack: ResponseCallBack<Event.EventPoint>
+        callBack: ResponseCallBack<EventPoint>
     ) {
         remoteDataSource.getEventPoint(id, borders, callBack)
     }
@@ -62,7 +64,7 @@ class MLTDRepository private constructor(
     //remote end
 
     //local start
-    override fun saveAll(count: (progress: Int) -> Unit, vararg cards: Card.CardResponse) {
+    override fun saveAll(count: (progress: Int) -> Unit, vararg cards: CardResponse) {
         localDataSource.saveAll(count, *cards)
     }
 

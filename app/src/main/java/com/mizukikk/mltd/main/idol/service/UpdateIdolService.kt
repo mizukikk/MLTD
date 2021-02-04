@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import com.mizukikk.mltd.Inject
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.api.ResponseCallBack
-import com.mizukikk.mltd.api.response.Card
+import com.mizukikk.mltd.api.response.CardResponse
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.extension.nextUpdateTimeMillis
 import com.mizukikk.mltd.main.MainActivity
@@ -87,8 +87,8 @@ class UpdateIdolService : Service() {
 
     private fun downloadData(intent: Intent?) {
         val lastIdolId = intent?.getIntExtra(LAST_IDOL_ID, 0)!!
-        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<Card.CardResponse>>() {
-            override fun success(response: List<Card.CardResponse>) {
+        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<CardResponse>>() {
+            override fun success(response: List<CardResponse>) {
                 val update = response.isNotEmpty()
                 if (update) {
                     updateDB()
@@ -101,7 +101,7 @@ class UpdateIdolService : Service() {
             override fun fail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
+                call: Call<List<CardResponse>>
             ) {
                 stopForeground(true)
             }
@@ -109,8 +109,8 @@ class UpdateIdolService : Service() {
     }
 
     private fun updateDB() {
-        repository.downloadAllCard(object : ResponseCallBack<List<Card.CardResponse>>() {
-            override fun success(response: List<Card.CardResponse>) {
+        repository.downloadAllCard(object : ResponseCallBack<List<CardResponse>>() {
+            override fun success(response: List<CardResponse>) {
                 val finishProgress = response.size
                 repository.saveAll({ progress ->
                     if (finishProgress == progress) {
@@ -124,7 +124,7 @@ class UpdateIdolService : Service() {
             override fun fail(
                 errorMessage: String,
                 errorCode: Int?,
-                call: Call<List<Card.CardResponse>>
+                call: Call<List<CardResponse>>
             ) {
                 stopForeground(true)
             }
