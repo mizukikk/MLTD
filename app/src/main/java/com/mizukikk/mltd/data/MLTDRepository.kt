@@ -3,6 +3,7 @@ package com.mizukikk.mltd.data
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.response.GetLastPointResponse
 import com.mizukikk.mltd.data.source.local.LocalDataSource
 import com.mizukikk.mltd.data.source.remote.MLTDRemoteDataSource
 import com.mizukikk.mltd.data.source.remote.RemoteDataSource
@@ -34,6 +35,25 @@ class MLTDRepository private constructor(
 
     override fun getEventList(callBack: ResponseCallBack<List<Event.EventResponse>>) {
         remoteDataSource.getEventList(callBack)
+    }
+
+    override fun getLastEventPoints(
+        eventId: Int,
+        callBack: ResponseCallBack<GetLastPointResponse>
+    ) {
+        remoteDataSource.getLastEventPoints(eventId, callBack)
+    }
+
+    override fun getEventBorders(id: Int, callBack: ResponseCallBack<Event.EventBorders>) {
+        remoteDataSource.getEventBorders(id, callBack)
+    }
+
+    override fun getEventPoint(
+        id: Int,
+        borders: String,
+        callBack: ResponseCallBack<Event.EventPoint>
+    ) {
+        remoteDataSource.getEventPoint(id, borders, callBack)
     }
 
     override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {

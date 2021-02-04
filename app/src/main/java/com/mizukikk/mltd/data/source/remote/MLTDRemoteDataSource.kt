@@ -6,6 +6,7 @@ import com.mizukikk.mltd.api.RetrofitProvider
 import com.mizukikk.mltd.api.RetrofitService
 import com.mizukikk.mltd.api.response.Card
 import com.mizukikk.mltd.api.response.Event
+import com.mizukikk.mltd.api.response.GetLastPointResponse
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import retrofit2.Call
 
@@ -77,6 +78,67 @@ object MLTDRemoteDataSource : RemoteDataSource {
                 errorMessage: String,
                 errorCode: Int?,
                 call: Call<List<Event.EventResponse>>
+            ) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
+
+    override fun getLastEventPoints(
+        eventId: Int,
+        callBack: ResponseCallBack<GetLastPointResponse>
+    ) {
+        val call = eventService.getLastEventPoints(eventId)
+        call.enqueue(object : ApiCallBack<GetLastPointResponse>() {
+            override fun apiSuccess(
+                response: GetLastPointResponse,
+                call: Call<GetLastPointResponse>
+            ) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<GetLastPointResponse>
+            ) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
+
+    override fun getEventBorders(id: Int, callBack: ResponseCallBack<Event.EventBorders>) {
+        val call = eventService.getEventBorders(id)
+        call.enqueue(object : ApiCallBack<Event.EventBorders>() {
+            override fun apiSuccess(response: Event.EventBorders, call: Call<Event.EventBorders>) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<Event.EventBorders>
+            ) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
+
+    override fun getEventPoint(
+        id: Int,
+        borders: String,
+        callBack: ResponseCallBack<Event.EventPoint>
+    ) {
+        val call = eventService.getEventPoint(id, borders)
+        call.enqueue(object : ApiCallBack<Event.EventPoint>() {
+            override fun apiSuccess(response: Event.EventPoint, call: Call<Event.EventPoint>) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<Event.EventPoint>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }

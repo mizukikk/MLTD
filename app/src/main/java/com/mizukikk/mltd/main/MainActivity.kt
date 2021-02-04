@@ -18,7 +18,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.mizukikk.mltd.AboutActivity
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.ActivityMainBinding
+import com.mizukikk.mltd.main.event.EventDetailFragment
 import com.mizukikk.mltd.main.event.EventListFragment
+import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.idol.IdolFragment
 import com.mizukikk.mltd.main.idol.IdolListFragment
 import com.mizukikk.mltd.main.idol.service.UpdateIdolService
@@ -151,9 +153,7 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 .addToBackStack(this.javaClass.simpleName)
                 .setCustomAnimations(
                     android.R.anim.fade_in,
-                    android.R.anim.fade_out,
-                    android.R.anim.fade_out,
-                    android.R.anim.fade_in
+                    android.R.anim.fade_out
                 )
                 .commit()
         }
@@ -172,6 +172,10 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
             .addSharedElement(shareView, transName)
             .addToBackStack(fragment.javaClass.simpleName)
             .commit()
+    }
+
+    override fun setEventDetailFragment(data: EventDetailData) {
+        EventDetailFragment.newInstance(data).beginTransactionStack()
     }
 
     override fun showPhoto(

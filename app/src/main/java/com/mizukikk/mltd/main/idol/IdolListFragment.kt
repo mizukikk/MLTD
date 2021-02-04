@@ -21,10 +21,9 @@ import com.mizukikk.mltd.main.BaseMainFragment
 import com.mizukikk.mltd.main.idol.adapter.FilterIdolManager
 import com.mizukikk.mltd.main.idol.adapter.IdolAdapter
 import com.mizukikk.mltd.main.idol.model.IdolListResult
-import com.mizukikk.mltd.main.idol.viewmodel.IdolListViewModel
 import com.mizukikk.mltd.main.idol.service.UpdateIdolService
+import com.mizukikk.mltd.main.idol.viewmodel.IdolListViewModel
 import kotlinx.android.synthetic.main.fragment_idol_list.view.*
-import java.lang.Exception
 
 class IdolListFragment :
     BaseMainFragment<IdolListViewModel, FragmentIdolListBinding>(R.layout.fragment_idol_list) {
@@ -151,6 +150,7 @@ class IdolListFragment :
     }
 
     private fun initView() {
+        binding.edSearch.isFocusable = false
         initDrawableLayout()
         initIdolList()
         initFilterList()

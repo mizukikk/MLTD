@@ -1,6 +1,5 @@
 package com.mizukikk.mltd.api.response
 
-import android.util.Log
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.mizukikk.mltd.data.model.EventField
@@ -57,4 +56,67 @@ class Event {
                 return "$start - $end"
             }
     }
+
+    data class EventBorders(
+        @Expose
+        @SerializedName("eventPoint")
+        val eventPoint: List<Int>,
+        @Expose
+        @SerializedName("highScore")
+        val highScore: List<Int>,
+        @Expose
+        @SerializedName("idolPoint")
+        val idolPoint: List<IdolPoint>,
+        @Expose
+        @SerializedName("loungePoint")
+        val loungePoint: List<Int>?
+    ) {
+        val eventPointBorders
+            get() = mutableListOf<Int>().apply {
+                addAll(listOf(1, 2, 3))
+                addAll(eventPoint.filter { it <= 50000 })
+            }.joinToString(",")
+    }
+
+    data class IdolPoint(
+        @Expose
+        @SerializedName("borders")
+        val borders: List<Int>,
+        @Expose
+        @SerializedName("idolId")
+        val idolId: Int
+    )
+
+    class EventPoint : ArrayList<EventPointItem>()
+
+    data class EventPointItem(
+        @Expose
+        @SerializedName("data")
+        val `data`: List<PointData>,
+        @Expose
+        @SerializedName("rank")
+        val rank: Int
+    )
+
+    data class PointData(
+        @Expose
+        @SerializedName("count")
+        val count: Int?,
+        @Expose
+        @SerializedName("score")
+        val score: Double,
+        @Expose
+        @SerializedName("summaryTime")
+        val summaryTime: String
+    )
+
+    data class LastEventPointResponse(
+        @Expose
+        @SerializedName("eventPoint")
+        val eventPoint: EventPoint
+    )
+
+
+
+
 }

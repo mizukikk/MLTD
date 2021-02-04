@@ -24,13 +24,27 @@ class EventListFragment :
     override fun initBinding(view: View) = FragmentEventListBinding.bind(view)
 
     override fun init() {
+        initView()
+        initViewModel()
+        viewModel.getEventList()
+    }
+
+    private fun initView() {
         binding.rvEvent.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun initViewModel() {
         viewModel.eventListLiveData.observe(this, Observer {
+            binding.progress.visibility = View.GONE
             if (eventAdapter == null) {
-                eventAdapter = EventAdapter((it))
+                eventAdapter = EventAdapter(it)
+            }
+            eventAdapter?.setListener { id ->
+                viewModel.goToEventPage(id) { data ->
+                    parentActivity?.setEventDetailFragment(data)
+                }
             }
             binding.rvEvent.adapter = eventAdapter
         })
-        viewModel.getEventList()
     }
 }
