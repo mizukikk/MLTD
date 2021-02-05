@@ -1,11 +1,14 @@
 package com.mizukikk.mltd.api.obj
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.mizukikk.mltd.extension.date2Millis
 import com.mizukikk.mltd.extension.millis2Date
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 data class Schedule(
     @Expose
     @SerializedName("beginDate")
@@ -25,7 +28,7 @@ data class Schedule(
     @Expose
     @SerializedName("pageEndDate")
     var pageEndDate: String
-) {
+) : Parcelable {
     val eventDate
         get() :String {
             val start = beginDate.date2Millis().millis2Date("yyyy/MM/dd HH:mm", "GMT+9")

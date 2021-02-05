@@ -11,7 +11,7 @@ import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 class EventAdapter(private val eventList: List<EventResponse>) :
     RecyclerView.Adapter<EventAdapter.EventHolder>() {
 
-    private var listener: ((Int) -> Unit)? = null
+    private var listener: ((eventData: EventResponse) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,14 +24,14 @@ class EventAdapter(private val eventList: List<EventResponse>) :
         holder.bindData(eventList[position])
     }
 
-    fun setListener(listener: (id: Int) -> Unit) {
+    fun setListener(listener: (eventData: EventResponse) -> Unit) {
         this.listener = listener
     }
 
     inner class EventHolder(binding: ViewDataBinding) : BaseViewHolder<ItemEventBinding>(binding) {
         fun bindData(data: EventResponse) {
             itemView.setOnClickListener {
-                listener?.invoke(data.id)
+                listener?.invoke(data)
             }
             setData(data)
         }

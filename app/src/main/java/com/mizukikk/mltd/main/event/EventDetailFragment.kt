@@ -20,11 +20,20 @@ class EventDetailFragment :
         }
     }
 
+    private lateinit var data: EventDetailData
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            data = it.getParcelable(EVENT_DETAIL_DATA)!!
+        }
+    }
+
     override fun viewModelClass() = EventDetailViewModel::class.java
 
     override fun initBinding(view: View) = FragmentEventDetailBinding.bind(view)
 
     override fun init() {
-
+        binding.eventData = data.eventData
     }
 }

@@ -8,9 +8,6 @@
             name="data"
             type="com.mizukikk.mltd.api.response.EventResponse" />
 
-        <variable
-            name="imgUrl"
-            type="java.lang.String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

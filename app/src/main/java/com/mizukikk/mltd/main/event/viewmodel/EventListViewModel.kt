@@ -30,7 +30,7 @@ class EventListViewModel(application: Application) : BaseMainViewModel(applicati
         })
     }
 
-    inline fun goToEventPage(id: Int, action: (EventDetailData) -> Unit) {
-        action.invoke(EventDetailData(id))
+    inline fun goToEventPage(eventData: EventResponse, action: (EventDetailData) -> Unit) {
+        action.invoke(EventDetailData(eventData))
     }
 }

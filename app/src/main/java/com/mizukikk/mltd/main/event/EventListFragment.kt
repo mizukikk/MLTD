@@ -39,8 +39,8 @@ class EventListFragment :
             if (eventAdapter == null) {
                 eventAdapter = EventAdapter(it)
             }
-            eventAdapter?.setListener { id ->
-                viewModel.goToEventPage(id) { data ->
+            eventAdapter?.setListener { eventData ->
+                viewModel.goToEventPage(eventData) { data ->
                     parentActivity?.setEventDetailFragment(data)
                 }
             }
