@@ -44,7 +44,7 @@ class EventDetailFragment :
 
     private fun initViewModel() {
         viewModel.lastPointListLiveData.observe(this, Observer {
-            binding.rvEventBorder.adapter = LastPointAdapter(it)
+            binding.rvEventBorder.adapter = LastPointAdapter(it,data.eventData.schedule.inProgress)
         })
     }
 

@@ -92,6 +92,7 @@
     <string name="item_last_point_score_total_border">分數總和排行榜</string>
     <string name="item_last_point_loung_board">休息室排行榜</string>
     <string name="item_last_point_rank">%d位</string>
+    <string name="item_last_point_update">更新時間：%s</string>
 
     <!--  Dialog  -->
     <string name="dialog_title_card_version">選擇圖鑑版本</string>

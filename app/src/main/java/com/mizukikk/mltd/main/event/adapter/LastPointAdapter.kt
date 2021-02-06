@@ -8,10 +8,16 @@ import com.mizukikk.mltd.R
 import com.mizukikk.mltd.api.obj.LastPointData
 import com.mizukikk.mltd.databinding.ItemLastPointBinding
 import com.mizukikk.mltd.databinding.ItemPointBinding
+import com.mizukikk.mltd.extension.date2Millis
+import com.mizukikk.mltd.extension.millis2Date
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 import java.text.NumberFormat
+import java.util.*
 
-class LastPointAdapter(private val lastPointList: List<LastPointData>) :
+class LastPointAdapter(
+    private val lastPointList: List<LastPointData>,
+    private val inProgress: Boolean
+) :
     RecyclerView.Adapter<LastPointAdapter.LastPointHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastPointHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -44,6 +50,12 @@ class LastPointAdapter(private val lastPointList: List<LastPointData>) :
 
         private fun setTitle(data: LastPointData) {
             binding.tvTitle.text = data.title
+            if (inProgress) {
+                val updateDate = data.summaryTime.date2Millis()
+                    .millis2Date("yyyy/MM/dd HH:mm", TimeZone.getDefault().id)
+                binding.tvUpdate.text =
+                    getString(R.string.item_last_point_update).format(updateDate)
+            }
         }
     }
 
