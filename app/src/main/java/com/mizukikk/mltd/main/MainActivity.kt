@@ -1,5 +1,6 @@
 package com.mizukikk.mltd.main
 
+import android.app.ProgressDialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private val TAG = MainActivity::class.java.simpleName
+    private val progressDialog by lazy { ProgressDialog(this) }
+
     private val idolListFragment by lazy { IdolListFragment.newInstance() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -191,5 +194,17 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
 
     override fun showNavMenu() {
         binding.drawableLayout.openDrawer(GravityCompat.START)
+    }
+
+    override fun showProgressBar() {
+        if (progressDialog.isShowing.not()) {
+            progressDialog.show()
+        }
+    }
+
+    override fun dismissProgressBar() {
+        if (progressDialog.isShowing) {
+            progressDialog.dismiss()
+        }
     }
 }

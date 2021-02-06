@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mizukikk.mltd.main.viewmodel.BaseMainViewModel
 
@@ -43,9 +44,20 @@ abstract class BaseMainFragment<VM : BaseMainViewModel, B : ViewDataBinding>(@La
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
+        init()
+    }
+
+    private fun initViewModel() {
         _viewModel = ViewModelProviders.of(this)
             .get(viewModelClass())
-        init()
+        viewModel.progressEvent.observe(this, Observer { show ->
+            if (show) {
+                parentActivity?.showProgressBar()
+            } else {
+                parentActivity?.dismissProgressBar()
+            }
+        })
     }
 
     override fun onDestroyView() {

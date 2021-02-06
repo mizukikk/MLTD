@@ -15,4 +15,6 @@ interface InteractiveMainActivity {
     )
 
     fun showNavMenu()
+    fun showProgressBar()
+    fun dismissProgressBar()
 }
