@@ -14,5 +14,6 @@ open class BaseViewHolder<B : ViewDataBinding> private constructor(itemView: Vie
         _binding = binding as B
     }
 
+    protected fun getString(id: Int) = itemView.context.getString(id)
 
 }

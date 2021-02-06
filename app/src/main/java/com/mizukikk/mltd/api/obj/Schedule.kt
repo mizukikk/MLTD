@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 import com.mizukikk.mltd.extension.date2Millis
 import com.mizukikk.mltd.extension.millis2Date
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 
 @Parcelize
@@ -31,8 +32,8 @@ data class Schedule(
 ) : Parcelable {
     val eventDate
         get() :String {
-            val start = beginDate.date2Millis().millis2Date("yyyy/MM/dd HH:mm", "GMT+9")
-            val end = endDate.date2Millis().millis2Date("yyyy/MM/dd HH:mm", "GMT+9")
+            val start = beginDate.date2Millis().millis2Date("yyyy/MM/dd HH:mm", TimeZone.getDefault().id)
+            val end = endDate.date2Millis().millis2Date("yyyy/MM/dd HH:mm", TimeZone.getDefault().id)
             return "$start - $end"
         }
     val inProgress get() = System.currentTimeMillis() in beginDate.date2Millis()..endDate.date2Millis()

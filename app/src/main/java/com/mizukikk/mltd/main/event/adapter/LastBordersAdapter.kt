@@ -36,7 +36,7 @@ class LastPointAdapter(private val lastPointList: List<LastPointData>) :
                 val pointBinding =
                     ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
                 pointBinding.tvNo.text =
-                    binding.root.context.getString(R.string.item_last_point_rank).format(it.rank)
+                    getString(R.string.item_last_point_rank).format(it.rank)
                 pointBinding.tvScore.text = NumberFormat.getNumberInstance().format(it.score)
                 binding.llBorders.addView(pointBinding.root)
             }
