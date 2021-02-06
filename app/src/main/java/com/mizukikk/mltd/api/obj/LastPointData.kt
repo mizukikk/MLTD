@@ -12,5 +12,6 @@ data class LastPointData(
     val scores: List<Score>,
     @Expose
     @SerializedName("summaryTime")
-    val summaryTime: String
+    val summaryTime: String,
+    var title: String?
 )

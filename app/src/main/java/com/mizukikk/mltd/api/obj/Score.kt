@@ -9,5 +9,5 @@ data class Score(
     val rank: Int,
     @Expose
     @SerializedName("score")
-    val score: Double
+    val score: Int
 )

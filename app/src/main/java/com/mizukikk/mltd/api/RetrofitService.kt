@@ -32,7 +32,10 @@ interface RetrofitService {
         fun getEventBorders(@Path("id") id: Int): Call<EventBorders>
 
         @GET("events/{id}/rankings/borderPoints")
-        fun getLastEventPoints(@Path("id") id: Int): Call<GetLastPointResponse>
+        fun getLastEventPoints(
+            @Path("id") id: Int,
+            @Query("prettyPrint") prettyPrint: Boolean = false
+        ): Call<GetLastPointResponse>
 
         @GET("events/{id}/rankings/logs/eventPoint/{borders}")
         fun getEventPoint(

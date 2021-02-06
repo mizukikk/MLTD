@@ -85,7 +85,16 @@
     <string name="activity_about_api_by">api by <u>https://api.matsurihi.me/docs/</u></string>
     <string name="activity_about_create_by">app create by 永遠17歳のKK</string>
 
+    <!--  item_last_point  -->
+    <string name="item_last_point_pt_border">pt排行榜</string>
+    <string name="item_last_point_score_border">分數排行榜</string>
+    <string name="item_last_point_score2_border">分數2排行榜</string>
+    <string name="item_last_point_score_total_border">分數總和排行榜</string>
+    <string name="item_last_point_loung_board">休息室排行榜</string>
+    <string name="item_last_point_rank">%d位</string>
+
     <!--  Dialog  -->
     <string name="dialog_title_card_version">選擇圖鑑版本</string>
+    <string name="dialog_progress">讀取中...</string>
 
 </resources>

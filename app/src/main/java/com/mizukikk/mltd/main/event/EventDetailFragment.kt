@@ -2,9 +2,12 @@ package com.mizukikk.mltd.main.event
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentEventDetailBinding
 import com.mizukikk.mltd.main.BaseMainFragment
+import com.mizukikk.mltd.main.event.adapter.LastPointAdapter
 import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.event.viewmodel.EventDetailViewModel
 
@@ -34,6 +37,19 @@ class EventDetailFragment :
     override fun initBinding(view: View) = FragmentEventDetailBinding.bind(view)
 
     override fun init() {
+        initView()
+        initViewModel()
+        viewModel.getLastEventData(data.eventData.id)
+    }
+
+    private fun initViewModel() {
+        viewModel.lastPointListLiveData.observe(this, Observer {
+            binding.rvEventBorder.adapter = LastPointAdapter(it)
+        })
+    }
+
+    private fun initView() {
         binding.eventData = data.eventData
+        binding.rvEventBorder.layoutManager = LinearLayoutManager(requireContext())
     }
 }

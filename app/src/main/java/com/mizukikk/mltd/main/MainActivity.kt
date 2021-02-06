@@ -34,7 +34,12 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private val TAG = MainActivity::class.java.simpleName
-    private val progressDialog by lazy { ProgressDialog(this) }
+    private val progressDialog by lazy {
+        ProgressDialog(this).apply {
+            setMessage(getString(R.string.dialog_progress))
+            setCancelable(false)
+        }
+    }
 
     private val idolListFragment by lazy { IdolListFragment.newInstance() }
     override fun onCreate(savedInstanceState: Bundle?) {

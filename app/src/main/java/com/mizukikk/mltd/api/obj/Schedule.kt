@@ -35,5 +35,6 @@ data class Schedule(
             val end = endDate.date2Millis().millis2Date("yyyy/MM/dd HH:mm", "GMT+9")
             return "$start - $end"
         }
+    val inProgress get() = System.currentTimeMillis() in beginDate.date2Millis()..endDate.date2Millis()
 }
 
