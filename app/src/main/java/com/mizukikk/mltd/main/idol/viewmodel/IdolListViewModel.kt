@@ -99,7 +99,7 @@ class IdolListViewModel(application: Application) : BaseMainViewModel(applicatio
     }
 
     fun downloadAllCard() {
-        repository.downloadAllCard(object : ResponseCallBack<List<CardResponse>>() {
+        repository.downloadAllCard(object : ResponseCallBack<List<CardResponse>> {
             override fun success(response: List<CardResponse>) {
                 idolListEvent.postValue(
                     IdolListResult.downloadResult(

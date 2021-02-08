@@ -15,7 +15,7 @@ class EventListViewModel(application: Application) : BaseMainViewModel(applicati
     private var isCheckApiRunning = false
 
     fun getEventList() {
-        repository.getEventList(object : ResponseCallBack<List<EventResponse>>() {
+        repository.getEventList(object : ResponseCallBack<List<EventResponse>> {
             override fun success(response: List<EventResponse>) {
                 eventListLiveData.postValue(response.sortedBy { it.sort }.reversed())
             }

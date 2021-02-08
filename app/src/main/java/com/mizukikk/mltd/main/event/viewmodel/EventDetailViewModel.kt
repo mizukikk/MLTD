@@ -14,7 +14,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
 
     fun getLastEventData(id: Int) {
         showProgress()
-        repository.getLastEventPoints(id, object : ResponseCallBack<GetLastPointResponse>() {
+        repository.getLastEventPoints(id, object : ResponseCallBack<GetLastPointResponse> {
             override fun success(response: GetLastPointResponse) {
                 dismissProgress()
                 lastPointListLiveData.postValue(response.getLastPointList())

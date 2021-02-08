@@ -87,7 +87,7 @@ class UpdateIdolService : Service() {
 
     private fun downloadData(intent: Intent?) {
         val lastIdolId = intent?.getIntExtra(LAST_IDOL_ID, 0)!!
-        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<CardResponse>>() {
+        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<CardResponse>> {
             override fun success(response: List<CardResponse>) {
                 val update = response.isNotEmpty()
                 if (update) {
@@ -109,7 +109,7 @@ class UpdateIdolService : Service() {
     }
 
     private fun updateDB() {
-        repository.downloadAllCard(object : ResponseCallBack<List<CardResponse>>() {
+        repository.downloadAllCard(object : ResponseCallBack<List<CardResponse>> {
             override fun success(response: List<CardResponse>) {
                 val finishProgress = response.size
                 repository.saveAll({ progress ->
