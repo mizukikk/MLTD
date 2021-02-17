@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private val toast by lazy {
+        Toast(this).apply {
+            duration = Toast.LENGTH_SHORT
+        }
+    }
     private val TAG = MainActivity::class.java.simpleName
     private val progressDialog by lazy {
         ProgressDialog(this).apply {
@@ -100,6 +106,9 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 R.id.eventList -> {
                     EventListFragment.newInstance().beginTransactionStack()
                 }
+                R.id.currentEvent -> {
+                    viewModel.getCurrentEvent()
+                }
             }
         }
         for (i in 0 until binding.functions.llItems.childCount) {
@@ -117,6 +126,7 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     }
 
     private fun initNavigation() {
+        //卡片
         binding.functions.card.tvFunction.text = getString(R.string.nav_main_card)
         binding.functions.card.ivIcon.setImageResource(R.drawable.ic_people)
 
@@ -126,10 +136,13 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
 
         binding.functions.updateCheck.ivIcon.setImageResource(R.drawable.ic_update)
         binding.functions.updateCheck.tvFunction.text = getString(R.string.nav_main_check_update)
-
+        //活動
         binding.functions.eventList.ivIcon.setImageResource(R.drawable.ic_event_rank)
         binding.functions.eventList.tvFunction.text = getString(R.string.nav_main_event)
 
+        binding.functions.currentEvent.ivIcon.setImageResource(R.drawable.ic_event_rank)
+        binding.functions.currentEvent.tvFunction.text = getString(R.string.nav_main_current_event)
+        //設定
         binding.functions.about.ivIcon.setImageResource(R.drawable.ic_setting)
         binding.functions.about.tvFunction.text = getString(R.string.nav_main_about)
     }
@@ -211,5 +224,11 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
         if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
+    }
+
+    override fun showToast(message: String) {
+        toast.cancel()
+        toast.setText(message)
+        toast.show()
     }
 }

@@ -13,6 +13,7 @@ open class BaseMainViewModel(application: Application) : AndroidViewModel(applic
     }
     private val context = application.applicationContext
     val progressEvent = SingleLiveEvent<Boolean>()
+    val toastEvent = SingleLiveEvent<String>()
 
     protected fun getAssetsDataText(fileName: String): String {
         return try {
@@ -33,6 +34,9 @@ open class BaseMainViewModel(application: Application) : AndroidViewModel(applic
         progressEvent.postValue(false)
     }
 
+    protected fun showToast(message: String) {
+        toastEvent.postValue(message)
+    }
 
     protected fun getString(@StringRes id: Int) = context.getString(id)
     protected fun getStringArray(@ArrayRes id: Int) = context.resources.getStringArray(id)
