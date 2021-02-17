@@ -13,10 +13,8 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
     val lastPointListLiveData = MutableLiveData<List<LastPointData>>()
 
     fun getLastEventData(id: Int) {
-        showProgress()
         repository.getLastEventPoints(id, object : ResponseCallBack<GetLastPointResponse> {
             override fun success(response: GetLastPointResponse) {
-                dismissProgress()
                 lastPointListLiveData.postValue(response.getLastPointList())
             }
 
@@ -25,8 +23,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
                 errorCode: Int?,
                 call: Call<GetLastPointResponse>
             ) {
-                dismissProgress()
-
+                lastPointListLiveData.postValue(null)
             }
         })
 

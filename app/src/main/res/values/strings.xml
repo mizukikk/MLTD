@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name_release">MLTD小幫手</string>
     <string name="app_name_dev">MLTD小幫手Dev</string>
-    <string name="service_error">service error</string>
+    <string name="service_error">伺服器錯誤，請稍後再嘗試。</string>
 
     <!--  Card lang  -->
     <string name="lang_ja">日文版</string>
@@ -77,6 +77,7 @@
     <string name="nav_title_function">功能</string>
     <string name="nav_title_event">活動</string>
     <string name="nav_main_event">活動資訊</string>
+    <string name="nav_main_current_event">最新活動資訊</string>
     <string name="nav_title_settings">設定</string>
     <string name="nav_main_check_update">檢查更新</string>
 

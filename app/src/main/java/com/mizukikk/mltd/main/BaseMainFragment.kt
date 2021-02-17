@@ -59,6 +59,7 @@ abstract class BaseMainFragment<VM : BaseMainViewModel, B : ViewDataBinding>(@La
             }
         })
         viewModel.toastEvent.observe(this, Observer { message ->
+            parentActivity?.dismissProgressBar()
             parentActivity?.showToast(message)
         })
     }

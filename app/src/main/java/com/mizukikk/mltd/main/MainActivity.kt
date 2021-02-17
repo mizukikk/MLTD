@@ -78,6 +78,19 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 }
                 .show()
         })
+        viewModel.currentEventEvent.observe(this, Observer {
+            setEventDetailFragment(it)
+        })
+        viewModel.progressEvent.observe(this, Observer { show ->
+            if (show) {
+                showProgressBar()
+            } else {
+                dismissProgressBar()
+            }
+        })
+        viewModel.toastEvent.observe(this, Observer { message ->
+            showToast(message)
+        })
     }
 
     private fun reloadCardData() {

@@ -43,8 +43,12 @@ class EventDetailFragment :
     }
 
     private fun initViewModel() {
-        viewModel.lastPointListLiveData.observe(this, Observer {
-            binding.rvEventBorder.adapter = LastPointAdapter(it,data.eventData.schedule.inProgress)
+        viewModel.lastPointListLiveData.observe(this, Observer { lastPointList ->
+            binding.progressBar.visibility = View.GONE
+            if (lastPointList != null) {
+                binding.rvEventBorder.adapter =
+                    LastPointAdapter(lastPointList, data.eventData.schedule.inProgress)
+            }
         })
     }
 
