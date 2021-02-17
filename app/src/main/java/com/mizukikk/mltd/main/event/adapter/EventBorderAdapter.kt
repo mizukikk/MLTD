@@ -5,40 +5,44 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.mizukikk.mltd.R
-import com.mizukikk.mltd.api.obj.LastPointData
-import com.mizukikk.mltd.databinding.ItemLastPointBinding
+import com.mizukikk.mltd.databinding.ItemEventBorderBinding
 import com.mizukikk.mltd.databinding.ItemPointBinding
-import com.mizukikk.mltd.extension.date2Millis
-import com.mizukikk.mltd.extension.millis2Date
+import com.mizukikk.mltd.main.event.model.EventBorder
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 import java.text.NumberFormat
-import java.util.*
 
-class LastPointAdapter(
-    private val lastPointList: List<LastPointData>,
+class EventBorderAdapter(
+    private var lastPointList: List<EventBorder>,
     private val inProgress: Boolean
 ) :
-    RecyclerView.Adapter<LastPointAdapter.LastPointHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastPointHolder {
+    RecyclerView.Adapter<EventBorderAdapter.EventBorderHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventBorderHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return LastPointHolder(ItemLastPointBinding.inflate(inflater, parent, false))
+        return EventBorderHolder(ItemEventBorderBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: LastPointHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventBorderHolder, position: Int) {
         holder.bindData(lastPointList[position])
     }
 
     override fun getItemCount() = lastPointList.size
 
-    inner class LastPointHolder(binding: ViewDataBinding) :
-        BaseViewHolder<ItemLastPointBinding>(binding) {
-        fun bindData(data: LastPointData) {
+    inner class EventBorderHolder(binding: ViewDataBinding) :
+        BaseViewHolder<ItemEventBorderBinding>(binding) {
+        fun bindData(data: EventBorder) {
             setTitle(data)
             setBorders(data)
+            setIdolData(data)
         }
 
-        private fun setBorders(data: LastPointData) {
-            data.scores.filter { it.rank <= 50000 }.forEach {
+        private fun setIdolData(data: EventBorder) {
+            data.idolData?.let {
+                binding.data = it
+            }
+        }
+
+        private fun setBorders(data: EventBorder) {
+            data.borderList.filter { it.rank <= 50000 }.forEach {
                 val pointBinding =
                     ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
                 pointBinding.tvNo.text =
@@ -48,13 +52,11 @@ class LastPointAdapter(
             }
         }
 
-        private fun setTitle(data: LastPointData) {
+        private fun setTitle(data: EventBorder) {
             binding.tvTitle.text = data.title
             if (inProgress) {
-                val updateDate = data.summaryTime.date2Millis()
-                    .millis2Date("yyyy/MM/dd HH:mm", TimeZone.getDefault().id)
                 binding.tvUpdate.text =
-                    getString(R.string.item_last_point_update).format(updateDate)
+                    getString(R.string.item_last_point_update).format(data.updateDate)
             }
         }
     }

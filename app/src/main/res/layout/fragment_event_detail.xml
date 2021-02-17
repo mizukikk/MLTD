@@ -97,7 +97,7 @@
 
                 <include
                     android:id="@+id/anivEventBorder"
-                    layout="@layout/item_last_point"
+                    layout="@layout/item_event_border"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
