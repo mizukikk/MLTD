@@ -14,4 +14,5 @@ interface RemoteDataSource {
     fun getLastEventPoints(eventId: Int, callBack: ResponseCallBack<GetLastPointResponse>)
     fun getEventBorders(id: Int, callBack: ResponseCallBack<EventBorders>)
     fun getEventPoint(id: Int, borders: String, callBack: ResponseCallBack<EventPoint>)
+    fun getAnivIdolRankPoint(id: Int, idolId: Int, callBack: ResponseCallBack<List<EventPoint>>)
 }

@@ -58,6 +58,14 @@ class MLTDRepository private constructor(
         remoteDataSource.getEventPoint(id, borders, callBack)
     }
 
+    override fun getAnivIdolRankPoint(
+        id: Int,
+        idolId: Int,
+        callBack: ResponseCallBack<List<EventPoint>>
+    ) {
+        remoteDataSource.getAnivIdolRankPoint(id, idolId, callBack)
+    }
+
     override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {
         localDataSource.checkDBData(callBack)
     }
@@ -75,5 +83,13 @@ class MLTDRepository private constructor(
     ) {
         localDataSource.getIdolList(currentId, lang, callBack)
     }
+
+    override fun getAnivIdolIconData(
+        idolId: Int,
+        callBack: DBCallBack<List<IdolItem>>
+    ) {
+        localDataSource.getAnivIdolIconData(idolId, callBack)
+    }
+
     //local end
 }

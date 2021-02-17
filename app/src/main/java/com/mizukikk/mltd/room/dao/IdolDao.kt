@@ -1,6 +1,9 @@
 package com.mizukikk.mltd.room.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.room.entity.*
 import com.mizukikk.mltd.room.query.IdolItem
@@ -22,6 +25,9 @@ interface IdolDao {
 
     @Query("SELECT * FROM idol WHERE idol.lang = :lang ORDER BY idol.cardId DESC")
     fun getAllIdolList(lang: String): List<IdolItem>
+
+    @Query("SELECT * FROM idol WHERE idol.lang = 'ja' AND idol.rarity = 4 AND idol.idolId = :idolId ORDER BY idol.cardId DESC LIMIT 1 ")
+    fun getAnivIdolIconData(idolId: Int): List<IdolItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIdol(idolEntity: IdolEntity)

@@ -8,6 +8,7 @@ object PreferencesHelper {
     private const val MLTD_PREFERNCES_NAME = "mltdPrefernces"
 
     private const val API_LANGUAGE = "apiLanguage"
+    private const val ANIV_IDOL_ID = "anivIdolId"
     private val NEXT_CHECK_DB_TIME get() = "nextCheckDBTime_$apiLanguage"
 
     private val mltdPreferences =
@@ -21,6 +22,14 @@ object PreferencesHelper {
         set(value) {
             mltdPreferences.edit()
                 .putString(API_LANGUAGE, value)
+                .apply()
+        }
+
+    var anivIdolId
+        get() = mltdPreferences.getInt(ANIV_IDOL_ID, 1)
+        set(value) {
+            mltdPreferences.edit()
+                .putInt(ANIV_IDOL_ID, value)
                 .apply()
         }
 

@@ -78,13 +78,20 @@ class MLTDLocalDataSource private constructor(
     ) {
         dbExecutor.dbIOThread.execute {
             try {
-//                val idolList =
-//                    if (currentId >= 0)
-//                        idolDao.getIdolList(currentId, lang)
-//                    else
-//                        idolDao.getFirstIdolList(lang)
                 val idolList = idolDao.getAllIdolList(lang)
                 callBack.success(idolList)
+            } catch (e: Exception) {
+                callBack.fail()
+            }
+        }
+    }
+
+    override fun getAnivIdolIconData(idolId: Int, callBack: DBCallBack<List<IdolItem>>) {
+
+        dbExecutor.dbIOThread.execute {
+            try {
+                val result = idolDao.getAnivIdolIconData(idolId)
+                callBack.success(result)
             } catch (e: Exception) {
                 callBack.fail()
             }

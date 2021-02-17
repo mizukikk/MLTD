@@ -146,4 +146,25 @@ object MLTDRemoteDataSource : RemoteDataSource {
             }
         })
     }
+
+    override fun getAnivIdolRankPoint(
+        id: Int,
+        idolId: Int,
+        callBack: ResponseCallBack<List<EventPoint>>
+    ) {
+        val call = eventService.getAnivIdolRankPoint(id, idolId)
+        call.enqueue(object : ApiCallBack<List<EventPoint>>() {
+            override fun apiSuccess(response: List<EventPoint>, call: Call<List<EventPoint>>) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(
+                errorMessage: String,
+                errorCode: Int?,
+                call: Call<List<EventPoint>>
+            ) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
 }

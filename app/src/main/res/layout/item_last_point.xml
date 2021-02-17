@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.mizukikk.mltd.room.query.IdolItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,6 +19,52 @@
         android:background="@drawable/bg_item_last_point"
         android:padding="8dp">
 
+        <FrameLayout
+            android:id="@+id/flIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="@{data != null ? View.VISIBLE : View.GONE , default= gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivIdolIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:imgUrl="@{data.idol.iconUrl}"
+                tools:srcCompat="@drawable/ic_preview_idol_icon" />
+
+            <ImageView
+                android:id="@+id/ivRarity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rarityBorder="@{data.idol}"
+                tools:srcCompat="@drawable/ic_sr_border" />
+
+            <ImageView
+                android:id="@+id/ivIdolType"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="start|bottom"
+                android:src="@drawable/ic_fairy"
+                app:idolType="@{data.idol.idolType}" />
+
+            <ImageView
+                android:id="@+id/ivExtraType"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="2dp"
+                app:extraType="@{data.idol.extraType}"
+                tools:srcCompat="@drawable/ic_3rdanv" />
+        </FrameLayout>
+
+
         <TextView
             android:id="@+id/tvTitle"
             style="@style/H3B"
@@ -21,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flIcon"
             tools:text="title" />
 
         <TextView

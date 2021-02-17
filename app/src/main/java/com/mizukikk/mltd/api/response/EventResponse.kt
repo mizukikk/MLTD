@@ -12,21 +12,22 @@ import kotlinx.android.parcel.Parcelize
 data class EventResponse(
     @Expose
     @SerializedName("appealType")
-    var appealType: Int,
+    val appealType: Int,
     @Expose
     @SerializedName("id")
-    var id: Int,
+    val id: Int,
     @Expose
     @SerializedName("name")
-    var name: String,
+    val name: String,
     @Expose
     @SerializedName("schedule")
-    var schedule: Schedule,
+    val schedule: Schedule,
     @Expose
     @SerializedName("type")
-    var type: Int
-):Parcelable {
+    val type: Int
+) : Parcelable {
     val bgUrl get() = EventField.EVENT_IMG_URL_FORMAT.format(id.toString().padStart(4, '0'))
     val date get() = schedule.eventDate
     val sort get() = schedule.beginDate.date2Millis()
+    val isAnivEvent get() = type == EventField.Type.ANNIVERSARY
 }

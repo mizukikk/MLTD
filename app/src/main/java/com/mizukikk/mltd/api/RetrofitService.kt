@@ -42,5 +42,12 @@ interface RetrofitService {
             @Path("id") id: Int,
             @Path("borders") borders: String
         ): Call<EventPoint>
+
+        @GET("events/{id}/rankings/logs/idolPoint/{idolId}/1,2,3,10,100,1000")
+        fun getAnivIdolRankPoint(
+            @Path("id") id: Int,
+            @Path("idolId") idolId: Int,
+            @Query("prettyPrint") prettyPrint: Boolean = false
+        ): Call<List<EventPoint>>
     }
 }
