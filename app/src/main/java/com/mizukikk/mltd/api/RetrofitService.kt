@@ -17,10 +17,7 @@ interface RetrofitService {
         fun getAllCard(@Path("lan") lan: String): Call<List<CardResponse>>
 
         @GET("{lan}/cards/{idolId}")
-        fun getCard(
-            @Path("lan") lan: String,
-            @Path("idolId") idolId: Int
-        ): Call<List<CardResponse>>
+        fun getCard(@Path("lan") lan: String, @Path("idolId") idolId: Int): Call<List<CardResponse>>
 
     }
 
@@ -32,22 +29,12 @@ interface RetrofitService {
         fun getEventBorders(@Path("id") id: Int): Call<EventBorders>
 
         @GET("events/{id}/rankings/borderPoints")
-        fun getLastEventPoints(
-            @Path("id") id: Int,
-            @Query("prettyPrint") prettyPrint: Boolean = false
-        ): Call<GetLastPointResponse>
+        fun getLastEventPoints(@Path("id") id: Int, @Query("prettyPrint") prettyPrint: Boolean = false): Call<GetLastPointResponse>
 
         @GET("events/{id}/rankings/logs/eventPoint/{borders}")
-        fun getEventPoint(
-            @Path("id") id: Int,
-            @Path("borders") borders: String
-        ): Call<EventPoint>
+        fun getEventPoint(@Path("id") id: Int, @Path("borders") borders: String): Call<EventPoint>
 
         @GET("events/{id}/rankings/logs/idolPoint/{idolId}/1,2,3,10,100,1000")
-        fun getAnivIdolRankPoint(
-            @Path("id") id: Int,
-            @Path("idolId") idolId: Int,
-            @Query("prettyPrint") prettyPrint: Boolean = false
-        ): Call<List<EventPoint>>
+        fun getAnivIdolRankPoint(@Path("id") id: Int, @Path("idolId") idolId: Int, @Query("prettyPrint") prettyPrint: Boolean = false): Call<List<EventPoint>>
     }
 }
