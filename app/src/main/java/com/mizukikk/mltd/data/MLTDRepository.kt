@@ -91,5 +91,9 @@ class MLTDRepository private constructor(
         localDataSource.getAnivIdolIconData(idolId, callBack)
     }
 
+    override fun getAnivEventIdolList(callBack: DBCallBack<List<IdolItem>>) {
+        localDataSource.getAnivEventIdolList(callBack)
+    }
+
     //local end
 }

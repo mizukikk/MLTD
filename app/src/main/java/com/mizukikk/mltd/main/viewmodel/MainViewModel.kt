@@ -59,7 +59,7 @@ class MainViewModel(application: Application) : BaseMainViewModel(application) {
 
     private fun getLastEventPoint(response: List<EventResponse>) {
         try {
-            val lastEventData = response.maxBy { it.id }!!
+            val lastEventData = response.maxBy { it.sort }!!
             val data = EventDetailData(lastEventData)
             currentEventEvent.postValue(data)
             dismissProgress()

@@ -3,14 +3,11 @@ package com.mizukikk.mltd.room.entity
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.mizukikk.mltd.data.Field
 import com.mizukikk.mltd.data.model.IdolField
 import com.mizukikk.mltd.room.convert.IdolTypeConvert
 import kotlinx.android.parcel.Parcelize
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 @Parcelize
@@ -63,11 +60,14 @@ data class IdolEntity(
     var skillId: Int?,
     var lang: String = Field.API.LANG_JP
 ) : Parcelable {
-    val savePicName
-        get() :String {
-            val format = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.getDefault())
-            return "${name}_${format.format(System.currentTimeMillis())}"
+   val idolName get() =  run {
+        val nameSplitList = name.split("　")
+        if (nameSplitList.size == 2) {
+            nameSplitList[1]
+        } else {
+            name
         }
+    }
     val cardBGUrl
         get() = when (extraType) {
             IdolField.ExtraType.ANVI_1,

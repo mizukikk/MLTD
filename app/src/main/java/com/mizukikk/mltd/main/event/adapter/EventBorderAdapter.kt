@@ -12,27 +12,50 @@ import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 import java.text.NumberFormat
 
 class EventBorderAdapter(
-    private var lastPointList: List<EventBorder>,
-    private val inProgress: Boolean
+        private var eventBorderList: List<EventBorder>,
+        private val inProgress: Boolean
 ) :
-    RecyclerView.Adapter<EventBorderAdapter.EventBorderHolder>() {
+        RecyclerView.Adapter<EventBorderAdapter.EventBorderHolder>() {
+    private var listener: (() -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventBorderHolder {
         val inflater = LayoutInflater.from(parent.context)
         return EventBorderHolder(ItemEventBorderBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: EventBorderHolder, position: Int) {
-        holder.bindData(lastPointList[position])
+        holder.bindData(eventBorderList[position])
     }
 
-    override fun getItemCount() = lastPointList.size
+    override fun getItemCount() = eventBorderList.size
+
+    fun swapData(eventBorderList: List<EventBorder>) {
+        this.eventBorderList = eventBorderList
+        notifyDataSetChanged()
+    }
+
+    fun clear() {
+        eventBorderList = mutableListOf()
+        notifyDataSetChanged()
+    }
+
+    fun setListener(listener: () -> Unit) {
+        this.listener = listener
+    }
 
     inner class EventBorderHolder(binding: ViewDataBinding) :
-        BaseViewHolder<ItemEventBorderBinding>(binding) {
+            BaseViewHolder<ItemEventBorderBinding>(binding) {
         fun bindData(data: EventBorder) {
             setTitle(data)
             setBorders(data)
             setIdolData(data)
+            setListener()
+        }
+
+        private fun setListener() {
+            binding.flIcon.setOnClickListener {
+                listener?.invoke()
+            }
         }
 
         private fun setIdolData(data: EventBorder) {
@@ -42,12 +65,12 @@ class EventBorderAdapter(
         }
 
         private fun setBorders(data: EventBorder) {
-            data.borderList.filter { it.rank <= 50000 }.forEach {
-                val pointBinding =
-                    ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
+            binding.llBorders.removeAllViews()
+            data.borderList.filter { it.rank <= 50000 }.forEachIndexed { index, border ->
+                val pointBinding = ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
                 pointBinding.tvNo.text =
-                    getString(R.string.item_last_point_rank).format(it.rank)
-                pointBinding.tvScore.text = NumberFormat.getNumberInstance().format(it.score)
+                        getString(R.string.item_last_point_rank).format(border.rank)
+                pointBinding.tvScore.text = NumberFormat.getNumberInstance().format(border.score)
                 binding.llBorders.addView(pointBinding.root)
             }
         }
@@ -56,7 +79,7 @@ class EventBorderAdapter(
             binding.tvTitle.text = data.title
             if (inProgress) {
                 binding.tvUpdate.text =
-                    getString(R.string.item_last_point_update).format(data.updateDate)
+                        getString(R.string.item_last_point_update).format(data.updateDate)
             }
         }
     }

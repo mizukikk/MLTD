@@ -10,4 +10,5 @@ interface LocalDataSource {
     fun saveAll(count: (progress: Int) -> Unit, vararg cards: CardResponse)
     fun getIdolList(currentId: Int, lang: String, callBack: DBCallBack<List<IdolItem>>)
     fun getAnivIdolIconData(idolId: Int, callBack: DBCallBack<List<IdolItem>>)
+    fun getAnivEventIdolList(callBack: DBCallBack<List<IdolItem>>)
 }

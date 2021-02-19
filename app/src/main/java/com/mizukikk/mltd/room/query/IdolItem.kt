@@ -38,14 +38,7 @@ data class IdolItem(
             }
         }
     val idolName
-        get() = run {
-            val nameSplitList = idol.name.split("　")
-            if (nameSplitList.size == 2) {
-                nameSplitList[1]
-            } else {
-                idol.name
-            }
-        }
+        get() = idol.idolName
 
     private val langJp get() = PreferencesHelper.apiLanguage == Field.API.LANG_JP
     private val langZh get() = PreferencesHelper.apiLanguage == Field.API.LANG_ZH

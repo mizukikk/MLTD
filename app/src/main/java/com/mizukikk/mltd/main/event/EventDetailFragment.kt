@@ -8,6 +8,7 @@ import com.mizukikk.mltd.R
 import com.mizukikk.mltd.databinding.FragmentEventDetailBinding
 import com.mizukikk.mltd.main.BaseMainFragment
 import com.mizukikk.mltd.main.event.adapter.EventBorderAdapter
+import com.mizukikk.mltd.main.event.dialog.AnivIdolListDialog
 import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.event.viewmodel.EventDetailViewModel
 
@@ -24,6 +25,7 @@ class EventDetailFragment :
     }
 
     private lateinit var data: EventDetailData
+    private var eventBorderAdapter: EventBorderAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +48,28 @@ class EventDetailFragment :
         viewModel.eventBorderLiveData.observe(this, Observer { eventBorderList ->
             binding.progressBar.visibility = View.GONE
             if (eventBorderList != null) {
-                binding.rvEventBorder.adapter =
-                    EventBorderAdapter(
+                if (eventBorderAdapter == null) {
+                    eventBorderAdapter = EventBorderAdapter(
                         eventBorderList,
                         data.eventData.schedule.inProgress
                     )
+                    binding.rvEventBorder.adapter = eventBorderAdapter
+                    eventBorderAdapter!!.setListener {
+                        viewModel.getAnivIdolList()
+                    }
+                } else {
+                    eventBorderAdapter?.swapData(eventBorderList)
+                }
             }
+        })
+        viewModel.anivIdolListLiveData.observe(this, Observer {
+            AnivIdolListDialog(requireFragmentManager())
+                .setAnivIdolListDialogListener { idolId ->
+                    eventBorderAdapter?.clear()
+                    binding.progressBar.visibility = View.VISIBLE
+                    viewModel.changeAnivIDolBorder(data.eventData, idolId)
+                }
+                .show(it)
         })
     }
 

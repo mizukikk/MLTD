@@ -87,12 +87,22 @@ class MLTDLocalDataSource private constructor(
     }
 
     override fun getAnivIdolIconData(idolId: Int, callBack: DBCallBack<List<IdolItem>>) {
-
         dbExecutor.dbIOThread.execute {
             try {
                 val result = idolDao.getAnivIdolIconData(idolId)
                 callBack.success(result)
             } catch (e: Exception) {
+                callBack.fail()
+            }
+        }
+    }
+
+    override fun getAnivEventIdolList(callBack: DBCallBack<List<IdolItem>>) {
+        dbExecutor.dbIOThread.execute {
+            try {
+                val result = idolDao.getAnivEventIdolList()
+                callBack.success(result)
+            } catch (e: java.lang.Exception) {
                 callBack.fail()
             }
         }

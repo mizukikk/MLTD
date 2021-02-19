@@ -17,16 +17,17 @@ import retrofit2.Call
 class EventDetailViewModel(application: Application) : BaseMainViewModel(application) {
 
     val eventBorderLiveData = MutableLiveData<List<EventBorder>>()
+    val anivIdolListLiveData = MutableLiveData<List<IdolItem>>()
 
     fun getEventBorderData(data: EventResponse) {
         repository.getLastEventPoints(data.id, object : ResponseCallBack<GetLastPointResponse> {
             override fun success(response: GetLastPointResponse) {
                 val eventBorderList = response.getEventBorderList()
                 if (data.isAnivEvent) {
-                    getAnivEventData(data) {
-                        if (it != null) {
+                    getAnivEventData(data) { anivEventBorder ->
+                        if (anivEventBorder != null) {
                             eventBorderLiveData.postValue(
-                                listOf(it, *eventBorderList.toTypedArray())
+                                    listOf(anivEventBorder, *eventBorderList.toTypedArray())
                             )
                         } else {
                             eventBorderLiveData.postValue(eventBorderList)
@@ -37,11 +38,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
                 }
             }
 
-            override fun fail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<GetLastPointResponse>
-            ) {
+            override fun fail(errorMessage: String, errorCode: Int?, call: Call<GetLastPointResponse>) {
                 eventBorderLiveData.postValue(null)
             }
         })
@@ -49,54 +46,66 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
     }
 
     private fun getAnivEventData(
-        data: EventResponse,
-        action: (EventBorder?) -> Unit
+            data: EventResponse,
+            action: (EventBorder?) -> Unit
     ) {
-        repository.getAnivIdolRankPoint(
-            data.id, PreferencesHelper.anivIdolId,
-            object : ResponseCallBack<List<EventPoint>> {
-                override fun success(response: List<EventPoint>) {
-                    getAnivIdolData(response, action)
-                }
+        repository.getAnivIdolRankPoint(data.id, PreferencesHelper.anivIdolId, object : ResponseCallBack<List<EventPoint>> {
+            override fun success(response: List<EventPoint>) {
+                getAnivIdolData(response, action)
+            }
 
-                override fun fail(
-                    errorMessage: String,
-                    errorCode: Int?,
-                    call: Call<List<EventPoint>>
-                ) {
-                    action.invoke(null)
-                }
-            })
+            override fun fail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {
+                action.invoke(null)
+            }
+        })
     }
 
-    private fun getAnivIdolData(
-        anivEventPointList: List<EventPoint>,
-        action: (EventBorder?) -> Unit
-    ) {
-        repository.getAnivIdolIconData(
-            PreferencesHelper.anivIdolId,
-            object : DBCallBack<List<IdolItem>> {
-                override fun success(result: List<IdolItem>) {
-                    if (result.isNotEmpty()) {
-                        val idolData = result[0]
-                        val title = idolData.idolName
-                        var updateDate = anivEventPointList[0].data.maxBy { it.score }!!.updateDate
-                        val borderList = anivEventPointList.map {
-                            Border(
+    private fun getAnivIdolData(anivEventPointList: List<EventPoint>, action: (EventBorder?) -> Unit) {
+        repository.getAnivIdolIconData(PreferencesHelper.anivIdolId, object : DBCallBack<List<IdolItem>> {
+            override fun success(result: List<IdolItem>) {
+                if (result.isNotEmpty()) {
+                    val idolData = result[0]
+                    val title = idolData.idolName
+                    var updateDate = anivEventPointList[0].data.maxBy { it.score }!!.updateDate
+                    val borderList = anivEventPointList.map {
+                        Border(
                                 it.rank,
                                 it.data.maxBy { it.score.toInt() }!!.score.toInt()
-                            )
-                        }
-                        action.invoke(EventBorder(title, updateDate, borderList, idolData))
-                    } else {
-                        action.invoke(null)
+                        )
                     }
-                }
-
-                override fun fail() {
+                    action.invoke(EventBorder(title, updateDate, borderList, idolData))
+                } else {
                     action.invoke(null)
                 }
+            }
+
+            override fun fail() {
+                action.invoke(null)
+            }
+        })
+    }
+
+    fun getAnivIdolList() {
+        val anivIdolList = anivIdolListLiveData.value
+        if (anivIdolList == null) {
+            repository.getAnivEventIdolList(object : DBCallBack<List<IdolItem>> {
+                override fun success(result: List<IdolItem>) {
+                    anivIdolListLiveData.postValue(result)
+                }
+
+                override fun fail() {}
             })
+        } else {
+            anivIdolListLiveData.postValue(anivIdolList)
+        }
+    }
+
+    fun changeAnivIDolBorder(data: EventResponse, idolId: Int) {
+        val currentIdolId = PreferencesHelper.anivIdolId
+        if (currentIdolId != idolId) {
+            PreferencesHelper.anivIdolId = idolId
+            getEventBorderData(data)
+        }
     }
 
 }
