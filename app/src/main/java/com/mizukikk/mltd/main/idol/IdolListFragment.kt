@@ -150,7 +150,6 @@ class IdolListFragment :
     }
 
     private fun initView() {
-        binding.edSearch.isFocusable = false
         initDrawableLayout()
         initIdolList()
         initFilterList()
