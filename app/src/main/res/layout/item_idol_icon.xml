@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.mizukikk.mltd.room.query.IdolItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/flIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivIdolIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:imgUrl="@{data.idol.iconUrl}"
+            tools:srcCompat="@drawable/ic_preview_idol_icon" />
+
+        <ImageView
+            android:id="@+id/ivRarity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:rarityBorder="@{data.idol}"
+            tools:srcCompat="@drawable/ic_sr_border" />
+
+
+        <ImageView
+            android:id="@+id/ivIdolType"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:idolType="@{data.idol.idolType}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/guideline33"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/ic_fairy" />
+
+        <ImageView
+            android:id="@+id/ivExtraType"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:extraType="@{data.idol.extraType}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/guideline66"
+            app:layout_constraintStart_toStartOf="@id/guideline33"
+            tools:srcCompat="@drawable/ic_3rdanv" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
