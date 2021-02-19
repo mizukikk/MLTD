@@ -9,7 +9,6 @@ import com.mizukikk.mltd.databinding.ItemEventBorderBinding
 import com.mizukikk.mltd.databinding.ItemPointBinding
 import com.mizukikk.mltd.main.event.model.EventBorder
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
-import java.text.NumberFormat
 
 class EventBorderAdapter(
         private var eventBorderList: List<EventBorder>,
@@ -64,22 +63,21 @@ class EventBorderAdapter(
         }
 
         private fun setBorders(data: EventBorder) {
-            binding.llBorders.removeAllViews()
             data.borderList.filter { it.rank <= 50000 }.forEachIndexed { index, border ->
                 val pointBinding = ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
                 pointBinding.tvNo.text =
                         getString(R.string.item_last_point_rank).format(border.rank)
-                pointBinding.tvScore.text = NumberFormat.getNumberInstance().format(border.score)
+                pointBinding.tvScore.text = border.currentScore
+                pointBinding.tvHalfHourAdd.text = border.halfHour
+                pointBinding.tvOneHourAdd.text = border.oneHour
+                pointBinding.tvOneDayAdd.text = border.oneDay
                 binding.llBorders.addView(pointBinding.root)
             }
         }
 
         private fun setTitle(data: EventBorder) {
             binding.tvTitle.text = data.title
-            if (inProgress) {
-                binding.tvUpdate.text =
-                        getString(R.string.item_last_point_update).format(data.updateDate)
-            }
+            binding.tvUpdate.text = getString(R.string.item_last_point_update).format(data.updateDate)
         }
     }
 

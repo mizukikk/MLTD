@@ -89,7 +89,14 @@
             android:layout_marginTop="4dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUpdate" />
+            app:layout_constraintTop_toBottomOf="@id/tvUpdate">
+
+            <include
+                android:id="@+id/iTitle"
+                layout="@layout/item_point"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

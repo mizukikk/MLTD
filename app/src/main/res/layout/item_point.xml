@@ -4,6 +4,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="inProgress"
+            type="java.lang.Boolean" />
     </data>
 
     <LinearLayout
@@ -18,31 +23,60 @@
 
             <TextView
                 android:id="@+id/tvNo"
-                style="@style/H4B"
+                style="@style/H6B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                tools:text="no" />
+                android:text="@string/item_point_rank" />
 
             <TextView
-                style="@style/H4B"
+                style="@style/H6B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="start"
-                android:text="999999位"
+                android:text="99999位"
                 android:visibility="invisible" />
 
         </FrameLayout>
 
         <TextView
             android:id="@+id/tvScore"
-            style="@style/H4B"
+            style="@style/H6B"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            tools:text="score" />
+            android:text="@string/item_point_score" />
+
+        <TextView
+            android:id="@+id/tvHalfHourAdd"
+            style="@style/H6B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/item_point_half_hour"
+            android:visibility="@{inProgress ? View.VISIBLE : View.GONE , default = gone}" />
+
+        <TextView
+            android:id="@+id/tvOneHourAdd"
+            style="@style/H6B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/item_point_one_hour"
+            android:visibility="@{inProgress ? View.VISIBLE : View.GONE , default = gone}" />
+
+        <TextView
+            android:id="@+id/tvOneDayAdd"
+            style="@style/H6B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/item_point_one_day"
+            android:visibility="@{inProgress ? View.VISIBLE : View.GONE , default = gone}" />
 
     </LinearLayout>
 </layout>

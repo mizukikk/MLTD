@@ -95,6 +95,13 @@
     <string name="item_last_point_rank">%d位</string>
     <string name="item_last_point_update">更新時間：%s</string>
 
+    <!--  item_point  -->
+    <string name="item_point_half_hour">-0.5h</string>
+    <string name="item_point_one_hour">-1h</string>
+    <string name="item_point_one_day">-24h</string>
+    <string name="item_point_score">分數</string>
+    <string name="item_point_rank">排名</string>
+
     <!--  Dialog  -->
     <string name="dialog_title_card_version">選擇圖鑑版本</string>
     <string name="dialog_progress">讀取中...</string>
