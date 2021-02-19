@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mizukikk.mltd.databinding.DialogAnivIdolListBinding
 import com.mizukikk.mltd.main.event.adapter.AnivIdolAdapter
+import com.mizukikk.mltd.main.event.adapter.AnivIdolDecoration
 import com.mizukikk.mltd.room.query.IdolItem
 
 class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFragment() {
@@ -35,9 +36,9 @@ class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFr
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = DialogAnivIdolListBinding.inflate(inflater, container, false)
         return binding.root
@@ -52,6 +53,7 @@ class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFr
     private fun initView() {
         binding.rvAnivIdol.layoutManager = GridLayoutManager(requireContext(), 4)
         binding.rvAnivIdol.adapter = anivIdolAdapter
+        binding.rvAnivIdol.addItemDecoration(AnivIdolDecoration(4))
         anivIdolAdapter.swapData(anivIdolList)
     }
 
@@ -74,8 +76,8 @@ class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFr
         super.onStart()
         dialog?.let {
             it.window?.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
     }

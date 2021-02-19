@@ -1,24 +1,24 @@
 package com.mizukikk.mltd.main.event.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.mizukikk.mltd.MLTDApplication
 import com.mizukikk.mltd.databinding.ItemIdolIconBinding
+import com.mizukikk.mltd.extension.convertDp2Px
 import com.mizukikk.mltd.room.query.IdolItem
 import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 
 class AnivIdolAdapter : RecyclerView.Adapter<AnivIdolAdapter.AnivIdolHolder>() {
 
     private var listener: ((Int) -> Unit)? = null
-    private val itemWH by lazy {
-        val screenW = MLTDApplication.appContext.resources.displayMetrics.widthPixels
-        screenW / 4
-    }
+    private var itemWH = 0
     private var anivIdolList: List<IdolItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnivIdolHolder {
+        if (itemWH == 0)
+            itemWH = (parent.width / 4) - 4f.convertDp2Px().toInt()
         val inflater = LayoutInflater.from(parent.context)
         return AnivIdolHolder(ItemIdolIconBinding.inflate(inflater, parent, false))
     }
@@ -41,7 +41,7 @@ class AnivIdolAdapter : RecyclerView.Adapter<AnivIdolAdapter.AnivIdolHolder>() {
 
 
     inner class AnivIdolHolder(binding: ViewDataBinding) :
-        BaseViewHolder<ItemIdolIconBinding>(binding) {
+            BaseViewHolder<ItemIdolIconBinding>(binding) {
 
         fun bindData(data: IdolItem) {
             checkItemSize()
@@ -58,6 +58,7 @@ class AnivIdolAdapter : RecyclerView.Adapter<AnivIdolAdapter.AnivIdolHolder>() {
 
         private fun checkItemSize() {
             if (binding.root.width != itemWH) {
+                Log.d("TAG", "checkItemSize: aaa3 $itemWH")
                 val lp = binding.root.layoutParams
                 lp.width = itemWH
                 lp.height = itemWH

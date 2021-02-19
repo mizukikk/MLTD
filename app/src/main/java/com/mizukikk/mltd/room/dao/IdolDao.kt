@@ -29,7 +29,7 @@ interface IdolDao {
     @Query("SELECT * FROM idol WHERE idol.lang = 'ja' AND idol.rarity = 4 AND idol.idolId = :idolId ORDER BY idol.cardId DESC LIMIT 1 ")
     fun getAnivIdolIconData(idolId: Int): List<IdolItem>
 
-    @Query("SELECT * FROM idol WHERE idol.lang = 'ja' AND idol.rarity = 4 AND category != 'event3' GROUP BY idol.idolId ORDER BY idol.cardId DESC")
+    @Query("SELECT * FROM idol WHERE idol.lang = 'ja' AND idol.rarity = 4 AND category != 'event3' GROUP BY idol.idolId ORDER BY idolId DESC")
     fun getAnivEventIdolList(): List<IdolItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

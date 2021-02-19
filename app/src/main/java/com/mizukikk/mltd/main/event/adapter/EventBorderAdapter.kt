@@ -43,8 +43,7 @@ class EventBorderAdapter(
         this.listener = listener
     }
 
-    inner class EventBorderHolder(binding: ViewDataBinding) :
-            BaseViewHolder<ItemEventBorderBinding>(binding) {
+    inner class EventBorderHolder(binding: ViewDataBinding) : BaseViewHolder<ItemEventBorderBinding>(binding) {
         fun bindData(data: EventBorder) {
             setTitle(data)
             setBorders(data)
