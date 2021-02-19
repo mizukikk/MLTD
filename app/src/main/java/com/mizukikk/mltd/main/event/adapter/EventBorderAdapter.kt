@@ -63,6 +63,7 @@ class EventBorderAdapter(
         }
 
         private fun setBorders(data: EventBorder) {
+            binding.llBorders.removeAllViews()
             data.borderList.filter { it.rank <= 50000 }.forEachIndexed { index, border ->
                 val pointBinding = ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
                 pointBinding.tvNo.text =

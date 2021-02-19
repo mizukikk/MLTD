@@ -32,7 +32,7 @@
                 android:id="@+id/ivIdolIcon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:imgUrl="@{data.idol.iconUrl}"
+                app:imgUrl="@{data.idol.iconAwakenedUrl}"
                 tools:srcCompat="@drawable/ic_preview_idol_icon" />
 
             <ImageView

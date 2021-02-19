@@ -1,6 +1,5 @@
 package com.mizukikk.mltd.main.event.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
@@ -40,8 +39,7 @@ class AnivIdolAdapter : RecyclerView.Adapter<AnivIdolAdapter.AnivIdolHolder>() {
     }
 
 
-    inner class AnivIdolHolder(binding: ViewDataBinding) :
-            BaseViewHolder<ItemIdolIconBinding>(binding) {
+    inner class AnivIdolHolder(binding: ViewDataBinding) : BaseViewHolder<ItemIdolIconBinding>(binding) {
 
         fun bindData(data: IdolItem) {
             checkItemSize()
@@ -58,7 +56,6 @@ class AnivIdolAdapter : RecyclerView.Adapter<AnivIdolAdapter.AnivIdolHolder>() {
 
         private fun checkItemSize() {
             if (binding.root.width != itemWH) {
-                Log.d("TAG", "checkItemSize: aaa3 $itemWH")
                 val lp = binding.root.layoutParams
                 lp.width = itemWH
                 lp.height = itemWH

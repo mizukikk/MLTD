@@ -13,37 +13,67 @@ import com.mizukikk.mltd.main.viewmodel.BaseMainViewModel
 import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.query.IdolItem
 import retrofit2.Call
+import java.util.*
 
 class EventDetailViewModel(application: Application) : BaseMainViewModel(application) {
 
     val eventBorderLiveData = MutableLiveData<List<EventBorder>>()
     val anivIdolListLiveData = MutableLiveData<List<IdolItem>>()
-
+    private var nextUpdateTime = 0L
+    
     fun getEventBorderData(data: EventResponse) {
-        repository.getLastEventPoints(data.id, object : ResponseCallBack<GetLastPointResponse> {
-            override fun success(response: GetLastPointResponse) {
-                val eventBorderList = response.getEventBorderList()
-                if (data.isAnivEvent) {
-                    getAnivEventData(data) { anivEventBorder ->
-                        if (anivEventBorder != null) {
-                            eventBorderLiveData.postValue(
-                                    listOf(anivEventBorder, *eventBorderList.toTypedArray())
-                            )
-                        } else {
-                            eventBorderLiveData.postValue(eventBorderList)
-                        }
+        if (System.currentTimeMillis() > nextUpdateTime || eventBorderLiveData.value == null) {
+            repository.getLastEventPoints(data.id, object : ResponseCallBack<GetLastPointResponse> {
+                override fun success(response: GetLastPointResponse) {
+                    val eventBorderList = response.getEventBorderList()
+                    if (data.isAnivEvent) {
+                        getAnivBorder(data, eventBorderList)
+                    } else {
+                        postEventBorder(eventBorderList)
                     }
-                } else {
-                    eventBorderLiveData.postValue(eventBorderList)
                 }
-            }
 
-            override fun fail(errorMessage: String, errorCode: Int?, call: Call<GetLastPointResponse>) {
-                eventBorderLiveData.postValue(null)
-            }
-        })
+                override fun fail(errorMessage: String, errorCode: Int?, call: Call<GetLastPointResponse>) {
+                    eventBorderLiveData.postValue(null)
+                }
+            })
+        } else {
+            val data = eventBorderLiveData.value!!
+            postEventBorder(data)
+        }
 
     }
+
+    private fun getAnivBorder(data: EventResponse, eventBorderList: List<EventBorder>) {
+        getAnivEventData(data) { anivEventBorder ->
+            if (anivEventBorder != null) {
+                val borderList = listOf(anivEventBorder, *eventBorderList.toTypedArray())
+                postEventBorder(borderList)
+            } else {
+                postEventBorder(eventBorderList)
+            }
+        }
+    }
+
+    private fun postEventBorder(eventBorderList: List<EventBorder>) {
+        nextUpdateTime = getNextUpdateTime()
+        eventBorderLiveData.postValue(eventBorderList)
+    }
+
+    private fun getNextUpdateTime() = Calendar.getInstance().apply {
+        val min = get(Calendar.MINUTE)
+        when (min) {
+            in 10..39 -> {
+                set(Calendar.MINUTE, 40)
+            }
+            else -> {
+                set(Calendar.MINUTE, 10)
+                add(Calendar.HOUR, 1)
+            }
+        }
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }.timeInMillis
 
     private fun getAnivEventData(
             data: EventResponse,
@@ -103,6 +133,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
     fun changeAnivIDolBorder(data: EventResponse, idolId: Int) {
         val currentIdolId = PreferencesHelper.anivIdolId
         if (currentIdolId != idolId) {
+            nextUpdateTime = 0
             PreferencesHelper.anivIdolId = idolId
             getEventBorderData(data)
         }

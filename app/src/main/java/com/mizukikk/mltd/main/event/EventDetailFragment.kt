@@ -2,6 +2,7 @@ package com.mizukikk.mltd.main.event
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
@@ -40,12 +41,21 @@ class EventDetailFragment : BaseMainFragment<EventDetailViewModel, FragmentEvent
     override fun init() {
         initView()
         initViewModel()
+        setListener()
         viewModel.getEventBorderData(data.eventData)
+    }
+
+    private fun setListener() {
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = true
+            viewModel.getEventBorderData(data.eventData)
+        }
     }
 
     private fun initViewModel() {
         viewModel.eventBorderLiveData.observe(this, Observer { eventBorderList ->
-            binding.progressBar.visibility = View.GONE
+            if (binding.refresh.isRefreshing)
+                binding.refresh.isRefreshing = false
             if (eventBorderList != null) {
                 if (eventBorderAdapter == null) {
                     eventBorderAdapter = EventBorderAdapter(
@@ -64,8 +74,7 @@ class EventDetailFragment : BaseMainFragment<EventDetailViewModel, FragmentEvent
         viewModel.anivIdolListLiveData.observe(this, Observer {
             AnivIdolListDialog(requireFragmentManager())
                     .setAnivIdolListDialogListener { idolId ->
-                        eventBorderAdapter?.clear()
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.refresh.isRefreshing = true
                         viewModel.changeAnivIDolBorder(data.eventData, idolId)
                     }
                     .show(it)
@@ -73,6 +82,8 @@ class EventDetailFragment : BaseMainFragment<EventDetailViewModel, FragmentEvent
     }
 
     private fun initView() {
+        binding.refresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+        binding.refresh.isRefreshing = true
         binding.eventData = data.eventData
         binding.rvEventBorder.layoutManager = LinearLayoutManager(requireContext())
     }
