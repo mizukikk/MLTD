@@ -86,26 +86,27 @@ class UpdateIdolService : Service() {
     }
 
     private fun downloadData(intent: Intent?) {
-        val lastIdolId = intent?.getIntExtra(LAST_IDOL_ID, 0)!!
-        repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<CardResponse>> {
-            override fun success(response: List<CardResponse>) {
-                val update = response.isNotEmpty()
-                if (update) {
-                    updateDB()
-                } else {
-                    saveNextUpdateTimeMillis()
+        intent?.getIntExtra(LAST_IDOL_ID, 0)?.let { lastIdolId ->
+            repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<CardResponse>> {
+                override fun success(response: List<CardResponse>) {
+                    val update = response.isNotEmpty()
+                    if (update) {
+                        updateDB()
+                    } else {
+                        saveNextUpdateTimeMillis()
+                        stopForeground(true)
+                    }
+                }
+
+                override fun fail(
+                    errorMessage: String,
+                    errorCode: Int?,
+                    call: Call<List<CardResponse>>
+                ) {
                     stopForeground(true)
                 }
-            }
-
-            override fun fail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<CardResponse>>
-            ) {
-                stopForeground(true)
-            }
-        })
+            })
+        }
     }
 
     private fun updateDB() {
