@@ -1,10 +1,10 @@
 package com.mizukikk.mltd.main.event.dialog
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,14 +16,23 @@ import com.mizukikk.mltd.databinding.DialogAnivIdolListBinding
 import com.mizukikk.mltd.main.event.adapter.AnivIdolAdapter
 import com.mizukikk.mltd.main.event.adapter.AnivIdolDecoration
 import com.mizukikk.mltd.room.query.IdolItem
+import java.util.*
 
-class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFragment() {
+class AnivIdolListDialog : DialogFragment() {
+
+    companion object {
+        private val TAG = AnivIdolListDialog::class.java.simpleName
+        fun newInstance(anivIdolList: List<IdolItem>) = AnivIdolListDialog().apply {
+            arguments = Bundle().apply {
+                putParcelableArrayList(TAG, anivIdolList as ArrayList<out Parcelable>)
+            }
+        }
+    }
 
     private var listener: ((Int) -> Unit)? = null
     private lateinit var anivIdolList: List<IdolItem>
     private lateinit var binding: DialogAnivIdolListBinding
     private val anivIdolAdapter by lazy { AnivIdolAdapter() }
-    private var isShow = false
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -35,10 +44,17 @@ class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFr
         return dialog
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            anivIdolList = it.getParcelableArrayList(TAG)!!
+        }
+    }
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = DialogAnivIdolListBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,35 +92,21 @@ class AnivIdolListDialog constructor(private val fm: FragmentManager) : DialogFr
         super.onStart()
         dialog?.let {
             it.window?.setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        isShow = false
-    }
 
-    override fun onCancel(dialog: DialogInterface) {
-        super.onCancel(dialog)
-        isShow = false
-    }
-
-    fun show(anivIdolList: List<IdolItem>) {
-        this.anivIdolList = anivIdolList
-        if (isShow.not()) {
-            isShow = true
-            show(fm, AnivIdolListDialog::class.java.simpleName)
-        }
+    fun show(fm: FragmentManager) {
+        fm.executePendingTransactions()
+        if (this.isAdded.not())
+            show(fm, TAG)
     }
 
     fun close() {
-        if (isShow) {
-            isShow = false
-            dismiss()
-        }
+        dismiss()
     }
 
 }
