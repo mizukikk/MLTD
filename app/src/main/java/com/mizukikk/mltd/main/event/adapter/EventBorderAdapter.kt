@@ -13,9 +13,9 @@ import com.mizukikk.mltd.ui.recyclerview.BaseViewHolder
 class EventBorderAdapter(
         private var eventBorderList: List<EventBorder>,
         private val inProgress: Boolean
-) :
-        RecyclerView.Adapter<EventBorderAdapter.EventBorderHolder>() {
-    private var listener: (() -> Unit)? = null
+) : RecyclerView.Adapter<EventBorderAdapter.EventBorderHolder>() {
+
+    private var listener: EventBorderListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventBorderHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,8 +38,13 @@ class EventBorderAdapter(
         notifyDataSetChanged()
     }
 
-    fun setListener(listener: () -> Unit) {
+    fun setListener(listener: EventBorderListener) {
         this.listener = listener
+    }
+
+    interface EventBorderListener {
+        fun selectAnivIdol()
+        fun showEventChart(eventChartType: String, eventChartRanks: String)
     }
 
     inner class EventBorderHolder(binding: ViewDataBinding) : BaseViewHolder<ItemEventBorderBinding>(binding) {
@@ -47,12 +52,15 @@ class EventBorderAdapter(
             setTitle(data)
             setBorders(data)
             setIdolData(data)
-            setListener()
+            setListener(data)
         }
 
-        private fun setListener() {
+        private fun setListener(data: EventBorder) {
             binding.flIcon.setOnClickListener {
-                listener?.invoke()
+                listener?.selectAnivIdol()
+            }
+            binding.root.setOnClickListener {
+                listener?.showEventChart(data.eventChartType, data.eventChartRanks)
             }
         }
 
@@ -65,7 +73,8 @@ class EventBorderAdapter(
         private fun setBorders(data: EventBorder) {
             binding.llBorders.removeAllViews()
             data.borderList.filter { it.rank <= 50000 }.forEachIndexed { index, border ->
-                val pointBinding = ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
+                val pointBinding =
+                        ItemPointBinding.inflate(LayoutInflater.from(binding.root.context))
                 pointBinding.tvNo.text =
                         getString(R.string.item_last_point_rank).format(border.rank)
                 pointBinding.tvScore.text = border.currentScore
@@ -78,7 +87,8 @@ class EventBorderAdapter(
 
         private fun setTitle(data: EventBorder) {
             binding.tvTitle.text = data.title
-            binding.tvUpdate.text = getString(R.string.item_last_point_update).format(data.updateDate)
+            binding.tvUpdate.text =
+                    getString(R.string.item_last_point_update).format(data.updateDate)
         }
     }
 

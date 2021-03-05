@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizukikk.mltd.R
+import com.mizukikk.mltd.chart.EventChartActivity
 import com.mizukikk.mltd.databinding.FragmentEventDetailBinding
 import com.mizukikk.mltd.main.BaseMainFragment
 import com.mizukikk.mltd.main.event.adapter.EventBorderAdapter
@@ -14,7 +15,7 @@ import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.event.viewmodel.EventDetailViewModel
 
 class EventDetailFragment :
-    BaseMainFragment<EventDetailViewModel, FragmentEventDetailBinding>(R.layout.fragment_event_detail) {
+        BaseMainFragment<EventDetailViewModel, FragmentEventDetailBinding>(R.layout.fragment_event_detail) {
 
     companion object {
         private const val EVENT_DETAIL_DATA = "EventDetailData"
@@ -60,14 +61,22 @@ class EventDetailFragment :
             if (eventBorderList != null) {
                 if (eventBorderAdapter == null) {
                     eventBorderAdapter = EventBorderAdapter(
-                        eventBorderList,
-                        data.eventData.schedule.inProgress
+                            eventBorderList,
+                            data.eventData.schedule.inProgress
                     )
                     binding.rvEventBorder.adapter = eventBorderAdapter
-                    eventBorderAdapter!!.setListener(object :
-                        EventBorderAdapter.EventBorderListener {
+                    eventBorderAdapter!!.setListener(object : EventBorderAdapter.EventBorderListener {
                         override fun selectAnivIdol() {
                             viewModel.getAnivIdolList()
+                        }
+
+                        override fun showEventChart(eventChartType: String, eventChartRanks: String) {
+                            viewModel.getEventChartData(data, eventChartType, eventChartRanks) { eventChartData ->
+                                activity?.let {
+                                    val intent = EventChartActivity.newIntent(it, eventChartData)
+                                    startActivity(intent)
+                                }
+                            }
                         }
                     })
                 } else {
@@ -77,20 +86,20 @@ class EventDetailFragment :
         })
         viewModel.anivIdolListLiveData.observe(this, Observer {
             AnivIdolListDialog.newInstance(it)
-                .setAnivIdolListDialogListener { idolId ->
-                    binding.refresh.isRefreshing = true
-                    viewModel.changeAnivIDolBorder(data.eventData, idolId)
-                }
-                .show(requireFragmentManager())
+                    .setAnivIdolListDialogListener { idolId ->
+                        binding.refresh.isRefreshing = true
+                        viewModel.changeAnivIDolBorder(data.eventData, idolId)
+                    }
+                    .show(requireFragmentManager())
         })
     }
 
     private fun initView() {
         binding.refresh.setColorSchemeColors(
-            ContextCompat.getColor(
-                requireContext(),
-                R.color.colorPrimary
-            )
+                ContextCompat.getColor(
+                        requireContext(),
+                        R.color.colorPrimary
+                )
         )
         binding.refresh.isRefreshing = true
         binding.eventData = data.eventData

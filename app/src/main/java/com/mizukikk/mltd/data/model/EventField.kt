@@ -10,6 +10,7 @@ object EventField {
         const val HIGH_SCORE2 = "highScore2"
         const val HIGH_SCORE_TOTAL = "highScoreTotal"
         const val LOUNGE_POINT = "loungePoint"
+        const val IDOL_POINT = "idolPoint"
     }
 
     object Type{

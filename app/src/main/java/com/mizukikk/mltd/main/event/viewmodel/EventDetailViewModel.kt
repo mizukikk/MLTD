@@ -6,9 +6,11 @@ import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.obj.EventPoint
 import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.api.response.GetLastPointResponse
+import com.mizukikk.mltd.chart.model.EventChartData
 import com.mizukikk.mltd.data.source.local.preferences.PreferencesHelper
 import com.mizukikk.mltd.main.event.model.Border
 import com.mizukikk.mltd.main.event.model.EventBorder
+import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.viewmodel.BaseMainViewModel
 import com.mizukikk.mltd.room.DBCallBack
 import com.mizukikk.mltd.room.query.IdolItem
@@ -20,7 +22,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
     val eventBorderLiveData = MutableLiveData<List<EventBorder>>()
     val anivIdolListLiveData = MutableLiveData<List<IdolItem>>()
     private var nextUpdateTime = 0L
-    
+
     fun getEventBorderData(data: EventResponse) {
         if (System.currentTimeMillis() > nextUpdateTime || eventBorderLiveData.value == null) {
             repository.getLastEventPoints(data.id, object : ResponseCallBack<GetLastPointResponse> {
@@ -136,9 +138,13 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
             nextUpdateTime = 0
             PreferencesHelper.anivIdolId = idolId
             getEventBorderData(data)
-        }else{
+        } else {
             eventBorderLiveData.postValue(null)
         }
+    }
+
+    inline fun getEventChartData(data: EventDetailData, eventChartType: String, eventChartRanks: String, action: (EventChartData) -> Unit) {
+        action.invoke(EventChartData(data.eventData.id, eventChartType, eventChartRanks))
     }
 
 }

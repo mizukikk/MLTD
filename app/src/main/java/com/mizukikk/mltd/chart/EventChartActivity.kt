@@ -3,6 +3,7 @@ package com.mizukikk.mltd.chart
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -27,9 +28,14 @@ class EventChartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setFullScreen()
         initView()
         initViewModel()
         checkIntentExtra()
+    }
+
+    private fun setFullScreen() {
+        window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     private fun checkIntentExtra() {

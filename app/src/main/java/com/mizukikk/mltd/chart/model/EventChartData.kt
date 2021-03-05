@@ -6,8 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class EventChartData(
-    val eventId: Int,
-    val type: String?,
-    val ranks: String?,
-    val idolId: Int
+        val eventId: Int,
+        val type: String?,
+        val ranks: String?
 ) : Parcelable
