@@ -13,7 +13,8 @@ import com.mizukikk.mltd.main.event.dialog.AnivIdolListDialog
 import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.event.viewmodel.EventDetailViewModel
 
-class EventDetailFragment : BaseMainFragment<EventDetailViewModel, FragmentEventDetailBinding>(R.layout.fragment_event_detail) {
+class EventDetailFragment :
+    BaseMainFragment<EventDetailViewModel, FragmentEventDetailBinding>(R.layout.fragment_event_detail) {
 
     companion object {
         private const val EVENT_DETAIL_DATA = "EventDetailData"
@@ -59,30 +60,38 @@ class EventDetailFragment : BaseMainFragment<EventDetailViewModel, FragmentEvent
             if (eventBorderList != null) {
                 if (eventBorderAdapter == null) {
                     eventBorderAdapter = EventBorderAdapter(
-                            eventBorderList,
-                            data.eventData.schedule.inProgress
+                        eventBorderList,
+                        data.eventData.schedule.inProgress
                     )
                     binding.rvEventBorder.adapter = eventBorderAdapter
-                    eventBorderAdapter!!.setListener {
-                        viewModel.getAnivIdolList()
-                    }
+                    eventBorderAdapter!!.setListener(object :
+                        EventBorderAdapter.EventBorderListener {
+                        override fun selectAnivIdol() {
+                            viewModel.getAnivIdolList()
+                        }
+                    })
                 } else {
                     eventBorderAdapter?.swapData(eventBorderList)
                 }
             }
         })
         viewModel.anivIdolListLiveData.observe(this, Observer {
-            AnivIdolListDialog(requireFragmentManager())
-                    .setAnivIdolListDialogListener { idolId ->
-                        binding.refresh.isRefreshing = true
-                        viewModel.changeAnivIDolBorder(data.eventData, idolId)
-                    }
-                    .show(it)
+            AnivIdolListDialog.newInstance(it)
+                .setAnivIdolListDialogListener { idolId ->
+                    binding.refresh.isRefreshing = true
+                    viewModel.changeAnivIDolBorder(data.eventData, idolId)
+                }
+                .show(requireFragmentManager())
         })
     }
 
     private fun initView() {
-        binding.refresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+        binding.refresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorPrimary
+            )
+        )
         binding.refresh.isRefreshing = true
         binding.eventData = data.eventData
         binding.rvEventBorder.layoutManager = LinearLayoutManager(requireContext())

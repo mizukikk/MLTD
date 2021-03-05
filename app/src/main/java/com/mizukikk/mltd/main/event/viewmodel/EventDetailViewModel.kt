@@ -136,6 +136,8 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
             nextUpdateTime = 0
             PreferencesHelper.anivIdolId = idolId
             getEventBorderData(data)
+        }else{
+            eventBorderLiveData.postValue(null)
         }
     }
 
