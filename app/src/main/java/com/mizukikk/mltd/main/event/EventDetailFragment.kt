@@ -14,8 +14,7 @@ import com.mizukikk.mltd.main.event.dialog.AnivIdolListDialog
 import com.mizukikk.mltd.main.event.model.EventDetailData
 import com.mizukikk.mltd.main.event.viewmodel.EventDetailViewModel
 
-class EventDetailFragment :
-        BaseMainFragment<EventDetailViewModel, FragmentEventDetailBinding>(R.layout.fragment_event_detail) {
+class EventDetailFragment : BaseMainFragment<EventDetailViewModel, FragmentEventDetailBinding>(R.layout.fragment_event_detail) {
 
     companion object {
         private const val EVENT_DETAIL_DATA = "EventDetailData"
