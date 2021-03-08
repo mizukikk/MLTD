@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mizukikk.mltd.R
 import com.mizukikk.mltd.chart.model.EventChartData
@@ -28,20 +29,16 @@ class EventChartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setFullScreen()
+        window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         initView()
         initViewModel()
         checkIntentExtra()
     }
 
-    private fun setFullScreen() {
-        window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-    }
-
     private fun checkIntentExtra() {
         data = intent?.getParcelableExtra(EVENT_CHART_DATA)
         if (data != null) {
-
+            viewModel.getEventBorders(data!!)
         } else {
             finish()
         }
@@ -54,5 +51,8 @@ class EventChartActivity : AppCompatActivity() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this)
                 .get(EventChartViewModel::class.java)
+        viewModel.eventBordersLiveData.observe(this, Observer {
+
+        })
     }
 }

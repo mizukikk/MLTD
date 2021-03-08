@@ -26,8 +26,8 @@ object MLTDRemoteDataSource : RemoteDataSource {
         val call = cardService.getAllCard(lang)
         call.enqueue(object : ApiCallBack<List<CardResponse>>() {
             override fun apiSuccess(
-                response: List<CardResponse>,
-                call: Call<List<CardResponse>>
+                    response: List<CardResponse>,
+                    call: Call<List<CardResponse>>
             ) {
                 response.forEach {
                     it.lang = lang
@@ -36,9 +36,9 @@ object MLTDRemoteDataSource : RemoteDataSource {
             }
 
             override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<CardResponse>>
+                    errorMessage: String,
+                    errorCode: Int?,
+                    call: Call<List<CardResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
@@ -50,16 +50,16 @@ object MLTDRemoteDataSource : RemoteDataSource {
         val call = cardService.getCard(PreferencesHelper.apiLanguage, nextId)
         call.enqueue(object : ApiCallBack<List<CardResponse>>() {
             override fun apiSuccess(
-                response: List<CardResponse>,
-                call: Call<List<CardResponse>>
+                    response: List<CardResponse>,
+                    call: Call<List<CardResponse>>
             ) {
                 callBack.success(response)
             }
 
             override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<CardResponse>>
+                    errorMessage: String,
+                    errorCode: Int?,
+                    call: Call<List<CardResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
@@ -70,40 +70,30 @@ object MLTDRemoteDataSource : RemoteDataSource {
         val call = eventService.getAllEvent()
         call.enqueue(object : ApiCallBack<List<EventResponse>>() {
             override fun apiSuccess(
-                response: List<EventResponse>,
-                call: Call<List<EventResponse>>
+                    response: List<EventResponse>,
+                    call: Call<List<EventResponse>>
             ) {
                 callBack.success(response)
             }
 
             override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<EventResponse>>
+                    errorMessage: String,
+                    errorCode: Int?,
+                    call: Call<List<EventResponse>>
             ) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })
     }
 
-    override fun getLastEventPoints(
-        eventId: Int,
-        callBack: ResponseCallBack<GetLastPointResponse>
-    ) {
+    override fun getLastEventPoints(eventId: Int, callBack: ResponseCallBack<GetLastPointResponse>) {
         val call = eventService.getLastEventPoints(eventId)
         call.enqueue(object : ApiCallBack<GetLastPointResponse>() {
-            override fun apiSuccess(
-                response: GetLastPointResponse,
-                call: Call<GetLastPointResponse>
-            ) {
+            override fun apiSuccess(response: GetLastPointResponse, call: Call<GetLastPointResponse>) {
                 callBack.success(response)
             }
 
-            override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<GetLastPointResponse>
-            ) {
+            override fun apiFail(errorMessage: String, errorCode: Int?, call: Call<GetLastPointResponse>) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })
@@ -116,53 +106,46 @@ object MLTDRemoteDataSource : RemoteDataSource {
                 callBack.success(response)
             }
 
-            override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<EventBorders>
-            ) {
+            override fun apiFail(errorMessage: String, errorCode: Int?, call: Call<EventBorders>) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })
     }
 
-    override fun getEventPoint(
-        id: Int,
-        borders: String,
-        callBack: ResponseCallBack<EventPoint>
-    ) {
+    override fun getEventPoint(id: Int, borders: String, callBack: ResponseCallBack<EventPoint>) {
         val call = eventService.getEventPoint(id, borders)
         call.enqueue(object : ApiCallBack<EventPoint>() {
             override fun apiSuccess(response: EventPoint, call: Call<EventPoint>) {
                 callBack.success(response)
             }
 
-            override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<EventPoint>
-            ) {
+            override fun apiFail(errorMessage: String, errorCode: Int?, call: Call<EventPoint>) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })
     }
 
-    override fun getAnivIdolRankPoint(
-        id: Int,
-        idolId: Int,
-        callBack: ResponseCallBack<List<EventPoint>>
-    ) {
+    override fun getEventRankLog(id: Int, type: String, ranks: String, callBack: ResponseCallBack<List<EventPoint>>) {
+        val call = eventService.getEventRankLog(id, type, ranks)
+        call.enqueue(object : ApiCallBack<List<EventPoint>>() {
+            override fun apiSuccess(response: List<EventPoint>, call: Call<List<EventPoint>>) {
+                callBack.success(response)
+            }
+
+            override fun apiFail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {
+                callBack.fail(errorMessage, errorCode, call)
+            }
+        })
+    }
+
+    override fun getAnivIdolRankLog(id: Int, idolId: Int, callBack: ResponseCallBack<List<EventPoint>>) {
         val call = eventService.getAnivIdolRankPoint(id, idolId)
         call.enqueue(object : ApiCallBack<List<EventPoint>>() {
             override fun apiSuccess(response: List<EventPoint>, call: Call<List<EventPoint>>) {
                 callBack.success(response)
             }
 
-            override fun apiFail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<EventPoint>>
-            ) {
+            override fun apiFail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {
                 callBack.fail(errorMessage, errorCode, call)
             }
         })

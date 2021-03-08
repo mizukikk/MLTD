@@ -81,7 +81,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
             data: EventResponse,
             action: (EventBorder?) -> Unit
     ) {
-        repository.getAnivIdolRankPoint(data.id, PreferencesHelper.anivIdolId, object : ResponseCallBack<List<EventPoint>> {
+        repository.getAnivIdolRankLog(data.id, PreferencesHelper.anivIdolId, object : ResponseCallBack<List<EventPoint>> {
             override fun success(response: List<EventPoint>) {
                 getAnivIdolData(response, action)
             }

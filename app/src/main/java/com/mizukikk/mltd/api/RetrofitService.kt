@@ -2,7 +2,6 @@ package com.mizukikk.mltd.api
 
 import com.mizukikk.mltd.api.obj.EventBorders
 import com.mizukikk.mltd.api.obj.EventPoint
-import com.mizukikk.mltd.api.obj.Score
 import com.mizukikk.mltd.api.response.CardResponse
 import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.api.response.GetLastPointResponse
@@ -30,34 +29,24 @@ interface RetrofitService {
         fun getEventBorders(@Path("id") id: Int): Call<EventBorders>
 
         @GET("events/{id}/rankings/borderPoints")
-        fun getLastEventPoints(
-            @Path("id") id: Int,
-            @Query("prettyPrint") prettyPrint: Boolean = false
-        ): Call<GetLastPointResponse>
-
-        @GET("events/{id}/rankings/logs/{type}/{ranks}")
-        fun getEventRankLog(
-            @Path("id") id: Int,
-            @Path("type") type: String,
-            @Path("ranks") ranks: String,
-            @Query("prettyPrint") prettyPrint: Boolean = false
-        ): List<Score>
-
-        @GET("events/{id}/rankings/logs/idolPoint/{idolId}/1,2,3,100,1000")
-        fun getAnivIdolEventRankLog(
-            @Path("id") id: Int,
-            @Path("idolId") idolId: Int,
-            @Query("prettyPrint") prettyPrint: Boolean = false
-        ): List<Score>
+        fun getLastEventPoints(@Path("id") id: Int, @Query("prettyPrint") prettyPrint: Boolean = false): Call<GetLastPointResponse>
 
         @GET("events/{id}/rankings/logs/eventPoint/{borders}")
         fun getEventPoint(@Path("id") id: Int, @Path("borders") borders: String): Call<EventPoint>
 
+        @GET("events/{id}/rankings/logs/{type}/{ranks}")
+        fun getEventRankLog(
+                @Path("id") id: Int,
+                @Path("type") type: String,
+                @Path("ranks") ranks: String,
+                @Query("prettyPrint") prettyPrint: Boolean = false
+        ): Call<List<EventPoint>>
+
         @GET("events/{id}/rankings/logs/idolPoint/{idolId}/1,2,3,10,100,1000")
         fun getAnivIdolRankPoint(
-            @Path("id") id: Int,
-            @Path("idolId") idolId: Int,
-            @Query("prettyPrint") prettyPrint: Boolean = false
+                @Path("id") id: Int,
+                @Path("idolId") idolId: Int,
+                @Query("prettyPrint") prettyPrint: Boolean = false
         ): Call<List<EventPoint>>
     }
 }

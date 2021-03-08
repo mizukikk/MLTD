@@ -14,16 +14,16 @@ import com.mizukikk.mltd.room.entity.IdolEntity
 import com.mizukikk.mltd.room.query.IdolItem
 
 class MLTDRepository private constructor(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+        private val localDataSource: LocalDataSource,
+        private val remoteDataSource: RemoteDataSource
 ) : RemoteDataSource, LocalDataSource {
 
     companion object {
         private var INSTANCE: MLTDRepository? = null
         fun newInstance(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) =
-            INSTANCE ?: synchronized(MLTDRemoteDataSource) {
-                MLTDRepository(localDataSource, remoteDataSource)
-            }
+                INSTANCE ?: synchronized(MLTDRemoteDataSource) {
+                    MLTDRepository(localDataSource, remoteDataSource)
+                }
     }
 
     //remote start
@@ -39,10 +39,7 @@ class MLTDRepository private constructor(
         remoteDataSource.getEventList(callBack)
     }
 
-    override fun getLastEventPoints(
-        eventId: Int,
-        callBack: ResponseCallBack<GetLastPointResponse>
-    ) {
+    override fun getLastEventPoints(eventId: Int, callBack: ResponseCallBack<GetLastPointResponse>) {
         remoteDataSource.getLastEventPoints(eventId, callBack)
     }
 
@@ -50,20 +47,16 @@ class MLTDRepository private constructor(
         remoteDataSource.getEventBorders(id, callBack)
     }
 
-    override fun getEventPoint(
-        id: Int,
-        borders: String,
-        callBack: ResponseCallBack<EventPoint>
-    ) {
+    override fun getEventPoint(id: Int, borders: String, callBack: ResponseCallBack<EventPoint>) {
         remoteDataSource.getEventPoint(id, borders, callBack)
     }
 
-    override fun getAnivIdolRankPoint(
-        id: Int,
-        idolId: Int,
-        callBack: ResponseCallBack<List<EventPoint>>
-    ) {
-        remoteDataSource.getAnivIdolRankPoint(id, idolId, callBack)
+    override fun getEventRankLog(id: Int, type: String, ranks: String, callBack: ResponseCallBack<List<EventPoint>>) {
+        remoteDataSource.getEventRankLog(id, type, ranks, callBack)
+    }
+
+    override fun getAnivIdolRankLog(id: Int, idolId: Int, callBack: ResponseCallBack<List<EventPoint>>) {
+        remoteDataSource.getAnivIdolRankLog(id, idolId, callBack)
     }
 
     override fun checkDBData(callBack: DBCallBack<List<IdolEntity>>) {
@@ -76,18 +69,11 @@ class MLTDRepository private constructor(
         localDataSource.saveAll(count, *cards)
     }
 
-    override fun getIdolList(
-        currentId: Int,
-        lang: String,
-        callBack: DBCallBack<List<IdolItem>>
-    ) {
+    override fun getIdolList(currentId: Int, lang: String, callBack: DBCallBack<List<IdolItem>>) {
         localDataSource.getIdolList(currentId, lang, callBack)
     }
 
-    override fun getAnivIdolIconData(
-        idolId: Int,
-        callBack: DBCallBack<List<IdolItem>>
-    ) {
+    override fun getAnivIdolIconData(idolId: Int, callBack: DBCallBack<List<IdolItem>>) {
         localDataSource.getAnivIdolIconData(idolId, callBack)
     }
 
