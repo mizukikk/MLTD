@@ -106,6 +106,9 @@
     <string name="item_point_score">分數</string>
     <string name="item_point_rank">排名</string>
 
+    <!--  EventChart  -->
+    <string name="event_chart_rank_no">%s位</string>
+
     <!--  Dialog  -->
     <string name="dialog_title_card_version">選擇圖鑑版本</string>
     <string name="dialog_progress">讀取中...</string>

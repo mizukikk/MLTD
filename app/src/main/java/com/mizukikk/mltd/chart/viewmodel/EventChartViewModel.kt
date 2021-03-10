@@ -1,7 +1,6 @@
 package com.mizukikk.mltd.chart.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.mizukikk.mltd.Inject
@@ -23,13 +22,15 @@ class EventChartViewModel(application: Application) : AndroidViewModel(applicati
     fun getEventBorders(data: EventChartData) {
         val callBack = object : ResponseCallBack<List<EventPoint>> {
             override fun success(response: List<EventPoint>) {
-                Log.d(TAG, "success: aaa3 $response")
+                eventBordersLiveData.postValue(response)
             }
 
-            override fun fail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {
-                Log.d(TAG, "fail: aaa3 $errorCode")
-            }
+            override fun fail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {}
         }
+        getEventBordersLog(data, callBack)
+    }
+
+    private fun getEventBordersLog(data: EventChartData, callBack: ResponseCallBack<List<EventPoint>>) {
         if (data.isAnivEvent) {
             repository.getAnivIdolRankLog(data.eventId, PreferencesHelper.anivIdolId, callBack)
         } else {

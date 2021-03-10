@@ -7,29 +7,16 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+
+        <com.mizukikk.mltd.chart.ui.EventChart
+            android:id="@+id/eventChart"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/flSelectRank"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:context="com.mizukikk.mltd.chart.EventChartActivity">
+            android:layout_height="match_parent"
+            android:layout_margin="8dp" />
 
-            <com.mizukikk.mltd.chart.ui.EventChart
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/flSelectRank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

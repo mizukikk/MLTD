@@ -29,10 +29,14 @@ class EventChartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        setFullScreen()
         initView()
         initViewModel()
         checkIntentExtra()
+    }
+
+    private fun setFullScreen() {
+        window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     private fun checkIntentExtra() {
@@ -52,7 +56,7 @@ class EventChartActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this)
                 .get(EventChartViewModel::class.java)
         viewModel.eventBordersLiveData.observe(this, Observer {
-
+            binding.eventChart.setBorderLog(it)
         })
     }
 }
