@@ -18,4 +18,28 @@
     <color name="princess">#EB4083</color>
     <color name="fairy">#1957D5</color>
     <color name="angle">#D7A439</color>
+
+    <color name="chartColor1">#EF5350</color>
+    <color name="chartColor2">#EC407A</color>
+    <color name="chartColor3">#AB47BC</color>
+    <color name="chartColor4">#7E57C2</color>
+    <color name="chartColor5">#5C6BC0</color>
+    <color name="chartColor6">#42A5F5</color>
+    <color name="chartColor7">#FF7043</color>
+    <color name="chartColor8">#FFCA28</color>
+    <color name="chartColor9">#26A69A</color>
+    <color name="chartColor10">#BDBDBD</color>
+
+    <array name="chartColorArray">
+        <item>@color/chartColor1</item>
+        <item>@color/chartColor2</item>
+        <item>@color/chartColor3</item>
+        <item>@color/chartColor4</item>
+        <item>@color/chartColor5</item>
+        <item>@color/chartColor6</item>
+        <item>@color/chartColor7</item>
+        <item>@color/chartColor8</item>
+        <item>@color/chartColor9</item>
+        <item>@color/chartColor10</item>
+    </array>
 </resources>

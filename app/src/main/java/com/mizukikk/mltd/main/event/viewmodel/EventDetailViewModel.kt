@@ -144,7 +144,7 @@ class EventDetailViewModel(application: Application) : BaseMainViewModel(applica
     }
 
     inline fun getEventChartData(data: EventDetailData, eventChartType: String, eventChartRanks: String, action: (EventChartData) -> Unit) {
-        action.invoke(EventChartData(data.eventData.id, eventChartType, eventChartRanks))
+        action.invoke(EventChartData(data.eventData.id, eventChartType, eventChartRanks, data.eventData.schedule))
     }
 
 }

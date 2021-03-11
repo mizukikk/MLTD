@@ -56,7 +56,7 @@ class EventChartActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this)
                 .get(EventChartViewModel::class.java)
         viewModel.eventBordersLiveData.observe(this, Observer {
-            binding.eventChart.setBorderLog(it)
+            binding.eventChart.setBorderLog(it, data!!.schedule)
         })
     }
 }
