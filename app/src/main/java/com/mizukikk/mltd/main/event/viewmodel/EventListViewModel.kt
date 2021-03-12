@@ -2,6 +2,7 @@ package com.mizukikk.mltd.main.event.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.mizukikk.mltd.R
 import com.mizukikk.mltd.api.ResponseCallBack
 import com.mizukikk.mltd.api.response.EventResponse
 import com.mizukikk.mltd.main.event.model.EventDetailData
@@ -20,12 +21,9 @@ class EventListViewModel(application: Application) : BaseMainViewModel(applicati
                 eventListLiveData.postValue(response.sortedBy { it.sort }.reversed())
             }
 
-            override fun fail(
-                errorMessage: String,
-                errorCode: Int?,
-                call: Call<List<EventResponse>>
-            ) {
-
+            override fun fail(errorMessage: String, errorCode: Int?, call: Call<List<EventResponse>>) {
+                eventListLiveData.postValue(mutableListOf())
+                showToast(getString(R.string.service_error))
             }
         })
     }
