@@ -3,6 +3,7 @@ package com.mizukikk.mltd.chart
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.mizukikk.mltd.api.obj.EventPoint
 import com.mizukikk.mltd.chart.model.EventChartData
 import com.mizukikk.mltd.chart.viewmodel.EventChartViewModel
 import com.mizukikk.mltd.databinding.ActivityEventChartBinding
+import com.mizukikk.mltd.extension.convertDp2Px
 import com.mizukikk.mltd.extension.setCheckColor
 
 class EventChartActivity : AppCompatActivity() {
@@ -34,6 +36,24 @@ class EventChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setFullScreen()
         initView()
+        binding.eventChart.setHighListener { highlightData ->
+            if (highlightData?.highlightViewVisible == true) {
+                binding.tvBorderDate.text = highlightData.borderDate
+                binding.tvRank.text = highlightData.rankSpanBuilder
+                binding.tvPoint.text = highlightData.pointSpanBuilder
+
+                val highlightViewMargin = 4f.convertDp2Px()
+                if (highlightData.xPx <= binding.clHighLight.width) {
+                    binding.clHighLight.x = highlightData.xPx + highlightViewMargin
+                } else {
+                    binding.clHighLight.x = highlightData.xPx - binding.clHighLight.width - highlightViewMargin
+                }
+
+                binding.clHighLight.visibility = View.VISIBLE
+            } else {
+                binding.clHighLight.visibility = View.INVISIBLE
+            }
+        }
         initViewModel()
         checkIntentExtra()
     }
@@ -78,7 +98,7 @@ class EventChartActivity : AppCompatActivity() {
         it.forEachIndexed { index, eventPoint ->
             CheckBox(this).apply {
                 setCheckColor(colorArray[index])
-                text = getString(R.string.event_chart_rank_no).format(eventPoint.rank.toString())
+                text = getString(R.string.activity_event_chart_rank_no).format(eventPoint.rank.toString())
                 isChecked = viewModel.filterRankMap.containsKey(eventPoint.rank).not()
                 setOnClickListener {
                     if (isChecked) {

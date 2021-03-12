@@ -38,6 +38,17 @@ data class Schedule(
     private val beginDateMillis by lazy { beginDate.date2Millis() }
     private val boostDateMillis by lazy { boostBeginDate.date2Millis() }
 
+    val maximumDrawXAxisCount by lazy {
+        val start = beginDate.date2Millis()
+        val end = endDate.date2Millis()
+        val current = System.currentTimeMillis()
+        val count = if (current > end) {
+            (end - start) / TimeUnit.MINUTES.toMillis(30)
+        } else {
+            (current - start) / TimeUnit.MINUTES.toMillis(30)
+        }
+        count.toFloat()
+    }
     val chartDateCount by lazy {
         val start = beginDate.date2Millis()
         val end = endDate.date2Millis()
@@ -73,10 +84,13 @@ data class Schedule(
         return 0f
     }
 
-    fun getChartXAxisDate(pos: Float): String {
+    fun getChartXAxisDate(pos: Float, showTime: Boolean = false): String {
         val eventCountMillis = (pos * TimeUnit.MINUTES.toMillis(30)).toLong()
         val xAxisMillis = beginDateMillis + eventCountMillis
-        return if(MLTDApplication.appContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        return if (
+                MLTDApplication.appContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+                || showTime
+        )
             xAxisMillis.millis2Date("MM/dd HH:mm", TimeZone.getDefault().id)
         else
             xAxisMillis.millis2Date("MM/dd", TimeZone.getDefault().id)
