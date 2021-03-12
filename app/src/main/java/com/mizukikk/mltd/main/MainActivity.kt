@@ -34,11 +34,7 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private val toast by lazy {
-        Toast(this).apply {
-            duration = Toast.LENGTH_SHORT
-        }
-    }
+    private var toast: Toast? = null
     private val TAG = MainActivity::class.java.simpleName
     private val progressDialog by lazy {
         ProgressDialog(this).apply {
@@ -59,24 +55,24 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this)
-            .get(MainViewModel::class.java)
+                .get(MainViewModel::class.java)
         viewModel.selectLangDialogEvent.observe(this, Observer { langArray ->
             AlertDialog.Builder(this)
-                .setTitle(getString(R.string.dialog_title_card_version))
-                .setAdapter(
-                    ArrayAdapter<String>(
-                        this,
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1,
-                        langArray
-                    )
-                ) { dialog, which ->
-                    val selectLang = langArray[which]
-                    binding.functions.version.tvContent.text = selectLang
-                    if (viewModel.saveSelectLang(selectLang))
-                        reloadCardData()
-                }
-                .show()
+                    .setTitle(getString(R.string.dialog_title_card_version))
+                    .setAdapter(
+                            ArrayAdapter<String>(
+                                    this,
+                                    android.R.layout.simple_list_item_1,
+                                    android.R.id.text1,
+                                    langArray
+                            )
+                    ) { dialog, which ->
+                        val selectLang = langArray[which]
+                        binding.functions.version.tvContent.text = selectLang
+                        if (viewModel.saveSelectLang(selectLang))
+                            reloadCardData()
+                    }
+                    .show()
         })
         viewModel.currentEventEvent.observe(this, Observer {
             setEventDetailFragment(it)
@@ -172,8 +168,8 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     fun Fragment.begineTransaction() {
         if (this.isAdded.not())
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, this)
-                .commit()
+                    .add(R.id.container, this)
+                    .commit()
     }
 
     fun Fragment.beginTransactionStack() {
@@ -183,13 +179,13 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
                 transaction.hide(it)
             }
             transaction
-                .add(R.id.container, this)
-                .addToBackStack(this.javaClass.simpleName)
-                .setCustomAnimations(
-                    android.R.anim.fade_in,
-                    android.R.anim.fade_out
-                )
-                .commit()
+                    .add(R.id.container, this)
+                    .addToBackStack(this.javaClass.simpleName)
+                    .setCustomAnimations(
+                            android.R.anim.fade_in,
+                            android.R.anim.fade_out
+                    )
+                    .commit()
         }
     }
 
@@ -199,13 +195,13 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
 
     override fun setIdolFragment(shareView: View, idolItem: IdolItem) {
         val fragment = IdolFragment
-            .newInstance(idolItem)
+                .newInstance(idolItem)
         val transName = ViewCompat.getTransitionName(shareView) ?: ""
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .addSharedElement(shareView, transName)
-            .addToBackStack(fragment.javaClass.simpleName)
-            .commit()
+                .replace(R.id.container, fragment)
+                .addSharedElement(shareView, transName)
+                .addToBackStack(fragment.javaClass.simpleName)
+                .commit()
     }
 
     override fun setEventDetailFragment(data: EventDetailData) {
@@ -213,13 +209,13 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     }
 
     override fun showPhoto(
-        shareView: View,
-        photoUri: Uri,
-        data: IdolItem
+            shareView: View,
+            photoUri: Uri,
+            data: IdolItem
     ) {
         val transactionName = getString(R.string.activity_picture_transition_name)
         val opt = ActivityOptionsCompat
-            .makeSceneTransitionAnimation(this, shareView, transactionName)
+                .makeSceneTransitionAnimation(this, shareView, transactionName)
         startActivity(PictureActivity.newIntent(this, photoUri, data), opt.toBundle())
     }
 
@@ -240,8 +236,8 @@ class MainActivity : AppCompatActivity(), InteractiveMainActivity {
     }
 
     override fun showToast(message: String) {
-        toast.cancel()
-        toast.setText(message)
-        toast.show()
+        toast?.cancel()
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        toast?.show()
     }
 }
