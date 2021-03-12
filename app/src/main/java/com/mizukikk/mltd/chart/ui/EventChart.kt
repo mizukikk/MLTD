@@ -135,6 +135,7 @@ class EventChart : LineChart, OnChartValueSelectedListener {
             position = XAxis.XAxisPosition.BOTTOM
             axisLineWidth = 1f
             gridLineWidth = 1f
+            labelRotationAngle = 45f
             offsetLeftAndRight(100)
             valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
