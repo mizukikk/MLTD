@@ -32,12 +32,16 @@ class EventChart : LineChart {
         val CHART_COLOR_ARRAY by lazy {
             MLTDApplication.appContext.resources.getIntArray(R.array.chartColorArray)
         }
+        private const val EVENT_ONE_DAY_COUNT = 48f
         private const val DASH_LINE = 10f
         private const val DASH_SPACE = 10f
         private const val DASH_PHASE = 0f
+        private const val CHART_ANIM_DURATION = 300
     }
 
     private var eventSchedule: Schedule? = null
+    private var eventBorderLogList: List<EventPoint>? = null
+    private var filterRankMap: HashMap<Int, Boolean>? = null
 
     private fun cancelZoom() {
         //取消連點兩下放大功能
@@ -50,7 +54,7 @@ class EventChart : LineChart {
         //取消右下角描述文字
         description.isEnabled = false
         //左下文字自動換行
-        legend.isWordWrapEnabled = true
+        legend.isEnabled = false
         //透明背景
         setBackgroundColor(Color.TRANSPARENT)
     }
@@ -61,7 +65,6 @@ class EventChart : LineChart {
             position = XAxis.XAxisPosition.BOTTOM
             axisLineWidth = 1f
             gridLineWidth = 1f
-            axisLineColor = Color.RED
             offsetLeftAndRight(100)
             valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
@@ -83,36 +86,55 @@ class EventChart : LineChart {
 
     fun setBorderLog(borderLogList: List<EventPoint>, schedule: Schedule) {
         eventSchedule = schedule
-        setXAxisInterval(schedule)
-        setBoostLimitLine(schedule)
-        setEventData(borderLogList)
+        eventBorderLogList = borderLogList
+        setXAxisInterval()
+        setBoostLimitLine()
+        setEventData()
+        drawChart()
+    }
+
+    fun filterBorderLog(filterRankMap: HashMap<Int, Boolean>) {
+        this.filterRankMap = filterRankMap
+        setEventData()
+        drawChart()
+    }
+
+    private fun drawChart() {
+        animateX(CHART_ANIM_DURATION)
         invalidate()
     }
 
-    private fun setEventData(borderLogList: List<EventPoint>) {
+    private fun setEventData() {
+        if (eventBorderLogList == null)
+            return
         val lineData = LineData()
-        borderLogList.forEachIndexed { index, eventPoint ->
-            val label = context.getString(R.string.event_chart_rank_no).format(eventPoint.rank.toString())
-            val entryList = mutableListOf<Entry>()
-            eventPoint.data.forEachIndexed { index, pointData ->
-                val yValue = pointData.score.toFloat()
-                val xValue = index.toFloat()
-                entryList.add(Entry(xValue, yValue))
-            }
-            val lineDataSet = LineDataSet(entryList, label).apply {
-                setDrawCircleHole(false)
-                setDrawCircles(false)
-                setDrawHorizontalHighlightIndicator(false)
-                color = CHART_COLOR_ARRAY[index]
-                highLightColor = Color.BLACK
-            }
-            lineData.addDataSet(lineDataSet)
-        }
+        eventBorderLogList!!
+                .forEachIndexed { index, eventPoint ->
+                    if (filterRankMap?.containsKey(eventPoint.rank) != true) {
+                        val label = context.getString(R.string.event_chart_rank_no).format(eventPoint.rank.toString())
+                        val entryList = mutableListOf<Entry>()
+                        eventPoint.data.forEachIndexed { index, pointData ->
+                            val yValue = pointData.score.toFloat()
+                            val xValue = index.toFloat()
+                            entryList.add(Entry(xValue, yValue))
+                        }
+                        val lineDataSet = LineDataSet(entryList, label).apply {
+                            setDrawCircleHole(false)
+                            setDrawCircles(false)
+                            setDrawHorizontalHighlightIndicator(false)
+                            color = CHART_COLOR_ARRAY[index]
+                            highLightColor = Color.BLACK
+                        }
+                        lineData.addDataSet(lineDataSet)
+                    }
+                }
         data = lineData
     }
 
-    private fun setBoostLimitLine(schedule: Schedule) {
-        schedule.chartBoostCount.let { boostCount ->
+    private fun setBoostLimitLine() {
+        if (eventSchedule == null)
+            return
+        eventSchedule!!.chartBoostCount.let { boostCount ->
             if (boostCount > 0)
                 xAxis.addLimitLine(LimitLine(boostCount, "boost").apply {
                     textColor = Color.RED
@@ -123,12 +145,13 @@ class EventChart : LineChart {
         }
     }
 
-    private fun setXAxisInterval(schedule: Schedule) {
+    private fun setXAxisInterval() {
+        if (eventSchedule == null)
+            return
         xAxis.apply {
-            axisMaximum = schedule.chartDateCount
-            labelCount = schedule.chartLabelCount
-            granularity = 48f
+            axisMaximum = eventSchedule!!.chartDateCount
+            labelCount = eventSchedule!!.chartLabelCount
+            granularity = EVENT_ONE_DAY_COUNT
         }
     }
-
 }

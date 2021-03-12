@@ -18,16 +18,19 @@ class EventChartViewModel(application: Application) : AndroidViewModel(applicati
 
     private val repository by lazy { Inject.providerMLTDRepository() }
     val eventBordersLiveData = MutableLiveData<List<EventPoint>>()
+    val filterRankMap = hashMapOf<Int, Boolean>()
 
     fun getEventBorders(data: EventChartData) {
-        val callBack = object : ResponseCallBack<List<EventPoint>> {
-            override fun success(response: List<EventPoint>) {
-                eventBordersLiveData.postValue(response)
-            }
+        if (eventBordersLiveData.value == null) {
+            val callBack = object : ResponseCallBack<List<EventPoint>> {
+                override fun success(response: List<EventPoint>) {
+                    eventBordersLiveData.postValue(response)
+                }
 
-            override fun fail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {}
+                override fun fail(errorMessage: String, errorCode: Int?, call: Call<List<EventPoint>>) {}
+            }
+            getEventBordersLog(data, callBack)
         }
-        getEventBordersLog(data, callBack)
     }
 
     private fun getEventBordersLog(data: EventChartData, callBack: ResponseCallBack<List<EventPoint>>) {

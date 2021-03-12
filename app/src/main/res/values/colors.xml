@@ -19,16 +19,16 @@
     <color name="fairy">#1957D5</color>
     <color name="angle">#D7A439</color>
 
-    <color name="chartColor1">#EF5350</color>
-    <color name="chartColor2">#EC407A</color>
-    <color name="chartColor3">#AB47BC</color>
-    <color name="chartColor4">#7E57C2</color>
-    <color name="chartColor5">#5C6BC0</color>
-    <color name="chartColor6">#42A5F5</color>
-    <color name="chartColor7">#FF7043</color>
-    <color name="chartColor8">#FFCA28</color>
-    <color name="chartColor9">#26A69A</color>
-    <color name="chartColor10">#BDBDBD</color>
+    <color name="chartColor1">#ef5350</color>
+    <color name="chartColor2">#AB47BC</color>
+    <color name="chartColor3">#78909C</color>
+    <color name="chartColor4">#5C6BC0</color>
+    <color name="chartColor5">#29B6F6</color>
+    <color name="chartColor6">#26A69A</color>
+    <color name="chartColor7">#9CCC65</color>
+    <color name="chartColor8">#FFEE58</color>
+    <color name="chartColor9">#FFA726</color>
+    <color name="chartColor10">#8D6E63</color>
 
     <array name="chartColorArray">
         <item>@color/chartColor1</item>
