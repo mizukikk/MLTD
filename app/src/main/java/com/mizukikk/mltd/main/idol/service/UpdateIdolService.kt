@@ -86,7 +86,8 @@ class UpdateIdolService : Service() {
     }
 
     private fun downloadData(intent: Intent?) {
-        intent?.getIntExtra(LAST_IDOL_ID, 0)?.let { lastIdolId ->
+        val lastIdolId = intent?.getIntExtra(LAST_IDOL_ID, 0)
+        if (lastIdolId != null) {
             repository.checkUpdate(lastIdolId, object : ResponseCallBack<List<CardResponse>> {
                 override fun success(response: List<CardResponse>) {
                     val update = response.isNotEmpty()
@@ -106,6 +107,8 @@ class UpdateIdolService : Service() {
                     stopForeground(true)
                 }
             })
+        } else {
+            stopForeground(true)
         }
     }
 
