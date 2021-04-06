@@ -112,8 +112,8 @@ class EventChart : LineChart, OnChartValueSelectedListener {
     }
 
     private fun appendSpanBuilder(spanBuilder: SpannableStringBuilder, text: String, lineDataSet: ILineDataSet) {
-        val startPos = spanBuilder.length + 1
-        if (startPos != 0)
+        val startPos = spanBuilder.length
+        if (spanBuilder.isNotEmpty())
             spanBuilder.append("\n")
         spanBuilder.append(text)
         val endPos = spanBuilder.length
