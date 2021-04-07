@@ -104,7 +104,7 @@ class EventChart : LineChart, OnChartValueSelectedListener {
                 val rank = context.getString(R.string.event_chart_rank_no).format(entry.data.toString())
                 val point = NumberFormat.getInstance().format(entry.y.toInt())
                 appendSpanBuilder(rankSpanBuilder, rank, lineDataSet)
-                appendSpanBuilder(pointSpanBuilder, point, lineDataSet)
+                appendSpanBuilder(pointSpanBuilder, "　$point", lineDataSet)
             }
         }
         highLightData.rankSpanBuilder = rankSpanBuilder
