@@ -207,6 +207,7 @@ class EventChart : LineChart, OnChartValueSelectedListener {
                         val lineDataSet = LineDataSet(entryList, label).apply {
                             setDrawCircleHole(false)
                             setDrawCircles(false)
+                            setDrawValues(false)
                             setDrawHorizontalHighlightIndicator(false)
                             color = CHART_COLOR_ARRAY[index]
                             highLightColor = Color.BLACK
